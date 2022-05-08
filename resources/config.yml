@@ -1,0 +1,21 @@
+# Name from Server
+server-name: "DarkneesNetwork"
+# Ad on entry
+server-description: "puede ser en string o array, siguendo las normas del .yml"
+
+# MOTD From Server
+motd: "&cDarknees&fNetwork &7| &bPractice"
+
+############## Language ###################
+# Default language
+default-language: "en_US"
+
+############## World from Practice ###################
+# Practice lobby name 
+lobby-name: "world"
+
+############## PVP ###################
+# Knockback
+knockback: 0.300
+# Cooldown Attack
+cooldown-attack: 10
