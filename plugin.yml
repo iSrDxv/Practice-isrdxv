@@ -1,0 +1,14 @@
+name: Practice
+load: POSTWORD
+author: iSrDxv
+version: 1.0.0-beta
+main: isrdxv\practice\Loader
+api: 4.0.0
+#depend: [FriendSystem]
+prefix: "DarkneesPractice"
+description: "Practice Plugin for DarkneesHCF"
+website: "https://darkneeshcf.tebex.io"
+permissions:
+  arena.command:
+    description: Use this command for Create the Arena
+    default: op
