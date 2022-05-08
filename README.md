@@ -1,6 +1,7 @@
 # Practice
 PracticeCore for PocketMine-MP 4.0.0
-Created for DarkneesNetwork
+
+## Recommendations
 
 <!--
 ━━━━━━━
