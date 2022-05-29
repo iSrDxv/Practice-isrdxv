@@ -16,9 +16,31 @@ class QueueManager
   
   public function delete(): void;
   
-  public function getQueueById(): ?Queue;
+  public function getQueueById(int $id): ?Queue
+  {
+    $class = null;
+    foreach($this->queues as $queue) {
+      if ($queue instanceof Queue) {
+        if ($queue->getId() === $id) {
+        $class = $queue;
+        }
+      }
+    }
+    return $class;
+  }
   
-  public function getQueueByName(): ?Queue;
+  public function getQueueByName(string $arena_name): ?Queue
+  {
+    $class = null;
+    foreach($this->queues as $queue) {
+      if ($queue instanceof Queue) {
+        if ($queue->getArena()->getName() === $arena_name) {
+        $class = $queue;
+        }
+      }
+    }
+    return $class;
+  }
   
   public function getQueues(): array;
   
