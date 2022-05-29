@@ -12,13 +12,13 @@ class Queue
   
   private array $spectators;
   
-  public function __construct(string $id, Arena $arena)
+  public function __construct(int $id, Arena $arena)
   {
     $this->id = $id;
     $this->arena = $arena;
   }
   
-  public function getId(): string
+  public function getId(): int
   {
     return $this->id;
   }
