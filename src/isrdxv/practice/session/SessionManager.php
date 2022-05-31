@@ -55,7 +55,7 @@ class SessionManager
       "nodebuff" => 0,
       "trapping" => 0
     ]);
-    $config->set("about-me", null);
+    //$config->set("about-me", null);
     $config->set("rank", "Player");
     $config->set("language", $this->getLanguage());
     $config->set("won-events", []);
