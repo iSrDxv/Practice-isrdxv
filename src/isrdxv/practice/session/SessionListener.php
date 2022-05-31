@@ -6,6 +6,7 @@ use pocketmine\event\{
   Listener,
   player\PlayerLoginEvent,
   player\PlayerJoinEvent,
+  player\PlayerRespawnEvent,
   player\PlayerInteractEvent,
   player\PlayerQuitEvent,
   server\QueryRegenerateEvent
@@ -55,7 +56,7 @@ class SessionListener implements Listener
   public function onQuit(PlayerQuitEvent $event): void
   {
     $player = $event->getPlayer();
-    Loader::getInstance()->getProvider()->saveSettings($player->getName(), SessionManager::getInstance()->get($player->getName())->getSettings());
+    Loader::getInstance()->getProvider()->saveDataSession($player->getName(), (SessionManager::getInstance()->get($player->getName()))->__toArray());
     //$event->setQuitMessage();
   }
   

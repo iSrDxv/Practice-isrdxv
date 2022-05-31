@@ -19,7 +19,13 @@ class YAMLProvider
     }
   }
   
-  //public function savePlayer(): void {}
+  public function saveDataSession(string $name, array $data): void 
+  {
+    if ($data === [] || $name === "") return;
+    $config = new Config(Loader::getInstance()->getDataFolder() . "players" . DIRECTORY_SEPARATOR . $name . ".yml", Config::YAML);
+    $config->setAll($data);
+    $config->save();
+  }
   
   public function setLanguage(string $username, string $language): void
   {
@@ -60,6 +66,21 @@ class YAMLProvider
     }
     $config->setNested("won-events", $events);
     $config->save();
+  }
+  
+  public function loadMurders(string $name): array
+  {
+    return (new Config(Loader::getInstance()->getDataFolder() . "players" . DIRECTORY_SEPARATOR . $name . ".yml", Config::YAML))->get("murders");
+  }
+  
+  public function loadDeaths(string $name): array
+  {
+    (new Config(Loader::getInstance()->getDataFolder() . "players" . DIRECTORY_SEPARATOR . $name . ".yml", Config::YAML))->get("deaths");
+  }
+  
+  public function loadPoints(string $name): int
+  {
+    (new Config(Loader::getInstance()->getDataFolder() . "players" . DIRECTORY_SEPARATOR . $name . ".yml", Config::YAML))->get("points");
   }
   
   /*public function isPartner(string $username): bool

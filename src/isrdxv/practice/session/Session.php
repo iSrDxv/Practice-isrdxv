@@ -23,16 +23,36 @@ class Session
   
   private Player $player;
   
+  private string $rank;
+  
+  private string $language;
+  
   /** @var Scoreboard|null **/
   private ?Scoreboard $scoreboard;
   
   private array $settings;
   
+  private array $kills;
+  
+  private array $deaths;
+  
+  private array $wonEvents;
+  
+  private int $elo;
+  
   public function __construct(Player $player) 
   {
     $this->player = $player;
     $this->scoreboard = new LobbyScoreboard($player);
+    // Array
     $this->settings = Loader::getInstance()->getProvider()->loadSettings($player->getName());
+    $this->kills = Loader::getInstance()->getProvider()->loadMurders($player->getName());
+    $this->deaths = Loader::getInstance()->getProvider()->loadDeaths($player->getName());
+    $this->wonEvents = Loader::getInstance()->getProvider()->loadWonEvents($player->getName());
+    // Integer
+    $this->elo = Loader::getInstance()->getProvider()->loadPoints($player->getName());
+    // String
+    //$this->rank = Loader::getInstance()->getRankManager()->getRankByName($player->getName());
   }
   
   public function getPlayer(): Player
@@ -116,6 +136,20 @@ class Session
     $leave->setCustomName(TextFormat::colorize("&l&fLeave Queue"));
     $this->getPlayer()->getInventory()->clearAll();
     $this->getPlayer()->getInventory()->setItem(4, $leave);
+  }
+  
+  public function __toArray(): array
+  {
+    return [
+      "name" => $this->getPlayer()->getNmae(),
+      "points" => $this->getPoints(),
+      "rank" => $this->getRank(),
+      "murders" => $this->getMurders(),
+      "deaths" => $this->getDeaths(),
+      "language" => $this->getPlayer()->getLocale(),
+      "won-events" => $this->getWonEvents(),
+      "settings" => $this->getSettings()
+    ];
   }
   
 }

@@ -42,6 +42,19 @@ class SessionManager
     }
     $config = new Config(Loader::getInstance()->getDataFolder() . "players" . DIRECTORY_SEPARATOR . $username . ".yml", Config::YAML);
     $config->set("name", $username);
+    $config->set("points", 1000);
+    $config->set("murders", [
+      "combo" => 0,
+      "gapple" => 0,
+      "nodebuff" => 0,
+      "trapping" => 0
+    ]);
+    $config->set("deaths", [
+      "combo" => 0,
+      "gapple" => 0,
+      "nodebuff" => 0,
+      "trapping" => 0
+    ]);
     $config->set("about-me", null);
     $config->set("rank", "Player");
     $config->set("language", $this->getLanguage());

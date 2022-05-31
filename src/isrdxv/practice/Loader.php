@@ -34,13 +34,12 @@ class Loader extends PluginBase
   public function onLoad(): void
   {
     self::$instance = $this;
-    //$this->saveResource("config.yml");
     $this->saveDefaultConfig();
-    $this->getServer()->getConfigGroup()->setConfigString("motd", $this->getConfig()->get("server-name");
+    $this->getServer()->getConfigGroup()->setConfigString("motd", $this->getConfig()->get("server-name"));
     /*
     foreach(glob($this->getDataFolder() . "players" . DIRECTORY_SEPARATOR . "*.yml") as $player) {
-      $player = new Config($this->getDataFolder() . "players" . DIRECTORY_SEPARATOR . $player, Config::YAML);
-      SessionManager::getInstancr()->setSession($player->get("name"), ?);
+      $player = new Config($player, Config::YAML);
+      SessionManager::getInstance()->setSession($player->get("name"), ?);
     }
     */
   }
