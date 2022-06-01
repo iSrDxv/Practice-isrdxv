@@ -1,6 +1,8 @@
 name: Practice
-load: POSTWORD
+load: "POSTWORD"
 author: iSrDxv
+#add your name here if you edited to edit a file or add new functionality (only if you fork the repository)
+#authors: []
 version: 1.0.0-beta
 main: isrdxv\practice\Loader
 api: 4.0.0
