@@ -17,6 +17,9 @@ class YAMLProvider
     if (!is_dir($dir = Loader::getInstance()->getDataFolder() . "arenas" . DIRECTORY_SEPARATOR)) {
       @mkdir($dir);
     }
+    if (!is_dir($folder = Loader::getInstance()->getDataFolder() . "kits" . DIRECTORY_SEPARATOR)) {
+      @mkdir($folder);
+    }
   }
   
   public function saveDataSession(string $name, array $data): void 
