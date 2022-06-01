@@ -16,6 +16,10 @@ lobby-name: "world"
 
 ############## PVP ###################
 # Knockback
-knockback: 0.300
+knockback:
+ gapple: 0.300
+ combo: 0.400
+ nodebuff: 0.300
+ trapping: 0.250
 # Cooldown Attack
 cooldown-attack: 10

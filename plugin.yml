@@ -1,15 +1,15 @@
 name: Practice
 load: "POSTWORD"
 author: iSrDxv
-#add your name here if you edited to edit a file or add new functionality (only if you fork the repository)
+#add your name here if you edited a file or added new functionality (only if you fork the repository)
 #authors: []
-version: 1.0.0-beta
+version: 0.0.0-beta
 main: isrdxv\practice\Loader
 api: 4.0.0
 #depend: [FriendSystem]
 prefix: "DarkneesPractice"
-description: "Practice Plugin for DarkneesHCF"
-website: "https://darkneeshcf.tebex.io"
+description: "Practice Plugin for DarkneesNetwork"
+website: "https://github.com/iSrDxv/Practice-isrdxv"
 permissions:
   arena.command:
     description: Use this command for Create the Arena
