@@ -6,6 +6,13 @@ server-description: "puede ser en string o array, siguendo las normas del .yml"
 # MOTD From Server
 motd: "&cDarknees&fNetwork &7| &bPractice"
 
+# Discord Logs
+discord-logs:
+ user:
+  url: ""
+ staff:
+  url: ""
+
 ############## Language ###################
 # Default language
 default-language: "en_US"
