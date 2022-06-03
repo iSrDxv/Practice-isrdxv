@@ -109,6 +109,29 @@ class Session
     $this->settings = $data;
   }
   
+  public function getPoints(): int
+  {
+    return $this->elo;
+  }
+  
+  public function getMurders(): array
+  {
+    return $this->kills;
+  }
+  
+  public function getDeaths(): array
+  {
+    return $this->deaths;
+  }
+  
+  public function getWonEvents(): array
+  {
+    return $this->wonEvents;
+  }
+  
+  /**
+   * Me da una paja acortar el codigo del item
+   **/
   public function giveLobbyItems(): void
   {
     $ranked = new Item(new ItemIdentifier(ItemIds::DIAMOND_SWORD, 0));
@@ -141,7 +164,7 @@ class Session
   public function __toArray(): array
   {
     return [
-      "name" => $this->getPlayer()->getNmae(),
+      "name" => $this->getPlayer()->getName(),
       "points" => $this->getPoints(),
       "rank" => $this->getRank(),
       "murders" => $this->getMurders(),

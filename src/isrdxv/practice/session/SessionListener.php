@@ -53,6 +53,15 @@ class SessionListener implements Listener
     $event->setJoinMessage(TextFormat::colorize(Loader::getInstance()->getTranslation()->addMessage(SessionManager::getInstance()->getLanguagePlayer($player->getName()), "welcome-message", ["%username%" => $player->getName()])));
   }
   
+  public function onRespawn(PlayerRespawnEvent $event): void
+  {
+    $player = $event->getPlayer();
+    $session = SessionManager::getInstance()->get($player->getName());
+    $world = Server::getInstance()->getWorldManager()->getWorldByName(Loader::getInstance()->getConfig()->get("lobby-name"));
+    $player->teleport($world->getSafeSpawn());
+    $session->giveLobbyItems();
+  }
+  
   public function onQuit(PlayerQuitEvent $event): void
   {
     $player = $event->getPlayer();

@@ -49,7 +49,7 @@ class YAMLProvider
   {
     $config = new Config(Loader::getInstance()->getDataFolder() . "players" . DIRECTORY_SEPARATOR . $username . ".yml", Config::YAML);
     if (!$config->exists("settings")) { 
-      $config->set("settings", []);
+      $config->set("settings", ["score" => true, "queue" => false, "cps" => false, "auto-join" => false]);
       $config->save();
       return;
     }
@@ -76,17 +76,17 @@ class YAMLProvider
   
   public function loadMurders(string $name): array
   {
-    return (new Config(Loader::getInstance()->getDataFolder() . "players" . DIRECTORY_SEPARATOR . $name . ".yml", Config::YAML))->get("murders");
+    return (new Config(Loader::getInstance()->getDataFolder() . "players" . DIRECTORY_SEPARATOR . $name . ".yml", Config::YAML))->getNested("murders");
   }
   
   public function loadDeaths(string $name): array
   {
-    (new Config(Loader::getInstance()->getDataFolder() . "players" . DIRECTORY_SEPARATOR . $name . ".yml", Config::YAML))->get("deaths");
+    return (new Config(Loader::getInstance()->getDataFolder() . "players" . DIRECTORY_SEPARATOR . $name . ".yml", Config::YAML))->getNested("deaths");
   }
   
   public function loadPoints(string $name): int
   {
-    (new Config(Loader::getInstance()->getDataFolder() . "players" . DIRECTORY_SEPARATOR . $name . ".yml", Config::YAML))->get("points");
+    return (new Config(Loader::getInstance()->getDataFolder() . "players" . DIRECTORY_SEPARATOR . $name . ".yml", Config::YAML))->getNested("points");
   }
   
   /*public function isPartner(string $username): bool
