@@ -42,7 +42,10 @@ class QueueManager
     return $class;
   }
   
-  public function getQueues(): array;
+  public function getQueues(): array
+  {
+    return $this->queues;
+  }
   
   public function getRandomInt(): int
   {

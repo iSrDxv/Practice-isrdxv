@@ -9,13 +9,8 @@ use pocketmine\event\{
   player\PlayerDeathEvent
 };
 
-use isrdxv\practice\queue\
-{
-  QueueManager
-};
-use isrdxv\practice\session\{
-  SessionManager
-};
+use isrdxv\practice\queue\Queue;
+use isrdxv\practice\session\SessionManager;
 
 class QueueListener implements Listener
 {
