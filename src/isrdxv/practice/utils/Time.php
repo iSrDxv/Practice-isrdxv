@@ -4,7 +4,7 @@ namespace isrdxv\practice\utils;
 
 use function gmdate;
 
-class Utils
+class Time
 {
   
   public function getTimeToSeconds(int $time): int
