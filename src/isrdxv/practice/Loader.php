@@ -23,7 +23,7 @@ use isrdxv\practice\kit\KitManager;
 
 class Loader extends PluginBase
 {
-  public const PREFIX_PRACTICE = "&l&0[&3Practice&0]";
+  public const PREFIX_PRACTICE = "&l&0[&3Practice&0] ";
   
   private Translation $translation;
   
