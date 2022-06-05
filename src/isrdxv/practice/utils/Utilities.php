@@ -4,7 +4,7 @@ namespace isrdxv\practice\utils;
 
 use pocketmine\utils\TextFormat;
 
-class Utils 
+class Utilities
 {
   
   public const PLUGIN_PREFIX = TextFormat::BOLD . TextFormat::BLACK . "[" . TextFormat::ITALIC . TextFormat::AQUA . "Practice" . TextFormat::RESET . TextFormat::BOLD . TextFormat::BLACK . "] ";
