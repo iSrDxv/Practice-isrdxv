@@ -12,9 +12,9 @@ class QueueManager
   
   private array $queues = [];
   
-  public function create(): void;
+  /*public function create(): void;
   
-  public function delete(): void;
+  public function delete(): void;*/
   
   public function getQueueById(int $id): ?Queue
   {
