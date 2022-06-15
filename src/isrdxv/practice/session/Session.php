@@ -145,7 +145,7 @@ class Session
     $party->setCustomName(TextFormat::colorize("&l&fParty"));
     $profile->setCustomName(TextFormat::colorize("&l&fSettings"));
     $this->getPlayer()->getInventory()->clearAll();
-    $this->getPlayer()->getInventoryArmor()->clearAll();
+    $this->getPlayer()->getArmorInventory()->clearAll();
     $this->getPlayer()->getInventory()->setItem(0, $ranked);
     $this->getPlayer()->getInventory()->setItem(1, $unranked);
     $this->getPlayer()->getInventory()->setItem(2, $ffa);
@@ -158,6 +158,7 @@ class Session
     $leave = new Item(new ItemIdentifier(ItemIds::COMPASS, 0));
     $leave->setCustomName(TextFormat::colorize("&l&fLeave Queue"));
     $this->getPlayer()->getInventory()->clearAll();
+    $this->getPlayer()->getArmorInventory()->clearAll();
     $this->getPlayer()->getInventory()->setItem(4, $leave);
   }
   

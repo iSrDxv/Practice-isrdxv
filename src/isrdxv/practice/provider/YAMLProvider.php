@@ -62,7 +62,7 @@ class YAMLProvider
   
   public function loadWonEvents(string $username): array
   {
-    return (new Config(Loader::getInstance()->getDatFolder() . "players" . DIRECTORY_SEPARATOR . $username . ".yml", Config::YAML))->getNested("won-events");
+    return (new Config(Loader::getInstance()->getDataFolder() . "players" . DIRECTORY_SEPARATOR . $username . ".yml", Config::YAML))->getNested("won-events");
   }
   
   public function saveWonEvents(string $username, array $events = []): void
@@ -90,34 +90,6 @@ class YAMLProvider
   public function loadPoints(string $name): int
   {
     return (new Config(Loader::getInstance()->getDataFolder() . "players" . DIRECTORY_SEPARATOR . $name . ".yml", Config::YAML))->getNested("points");
-  }
-  
-  public function getDeathsFile(): Config
-  {
-    return new Config(Loader::getInstance()->getDataFolder() . "leaderboard" . DIRECTORY_SEPARATOR . "deaths.json", Config::JSON);
-  }
-  
-  public function getMurdersFile(): Config
-  {
-    return new Config(Loader::getInstance()->getDataFolder() . "leaderboard" . DIRECTORY_SEPARATOR . "murders.json", Config::JSON);
-  }
-  
-  public function getKDRFile(): Config
-  {
-    return new Config(Loader::getInstance()->getDataFolder() . "leaderboard" . DIRECTORY_SEPARATOR . "kdr.json", Config::JSON);
-  }
-  
-  public function setDefaultLeaderboards(string $name): void
-  {
-    $deaths = $this->getDeathsFile();
-    $murders = $this->getMurdersFile();
-    $kdr = $this->getKDRFile();
-    $deaths->set($name, 0);
-    $murders->set($name, 0);
-    $kdr->set($name, 0.0);
-    $deaths->save();
-    $murders->save();
-    $kdr->save();
   }
   
 }
