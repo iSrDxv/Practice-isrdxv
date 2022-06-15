@@ -16,7 +16,7 @@ use isrdxv\practice\session\{
   SessionManager
 };
 use isrdxv\practice\command\{
-  PracticeCommand,
+  ArenaCommand,
   HubCommand
 };
 use isrdxv\practice\kit\KitManager;
@@ -50,7 +50,7 @@ class Loader extends PluginBase
       InvMenuHandler::register($this);
     }
     ArenaManager::getInstance()->loadArenas();
-    GameManager::getInstance()->loadGames();
+    //GameManager::getInstance()->loadGames();
     //KitManager::getInstance()->init();
     foreach(["languages/es_ES.ini", "languages/en_US.ini"] as $language) {
       $this->saveResource($language);
@@ -69,7 +69,7 @@ class Loader extends PluginBase
       $this->getServer()->getCommandMap()->unregister($this->getServer()->getCommandMap()->getCommand($command));
     }
     $this->getServer()->getCommandMap()->registerAll("practice", [
-      new PracticeCommand(),
+      new ArenaCommand(),
       new HubCommand()
     ]);
     $this->getServer()->getNetwork()->setName(TextFormat::colorize($this->getConfig()->get("motd")));
