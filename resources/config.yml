@@ -2,6 +2,8 @@
 server-name: "DarkneesNetwork"
 # Ad on entry
 server-description: "puede ser en string o array, siguendo las normas del .yml"
+# IP address of your server, for scoreboard and something else
+server-address: "play.wallenetwork.xyz"
 
 # MOTD From Server
 motd: "&cDarknees&fNetwork &7| &bPractice"

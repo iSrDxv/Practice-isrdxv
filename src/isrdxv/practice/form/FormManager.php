@@ -52,6 +52,7 @@ class FormManager
         $session->setSetting("score", $response->getBool("score"));
         $session->setSetting("queue", $response->getBool("queue"));
         $session->setSetting("auto-join", $response->getBool("auto-join"));
+        $player->sendMessage("");
       }
     );
   }
@@ -67,7 +68,14 @@ class FormManager
         new MenuOption(Loader::getInstance()->getTranslation()->addMessage(SessionManager::getInstance()->getLanguagePlayer($player->getName()), "party-public-form"))
       ],
       function(Player $player, int $selectedOption): void {
-        $player->sendMessage("Option number: " . $selectedOption);
+        switch($selectedOption){
+          case 0:
+          break;
+          case 1:
+          break;
+          case 2:
+          break;
+        }
       }
     );
   }
@@ -104,11 +112,11 @@ class FormManager
   {
     return new MenuForm(
       Loader::getInstance()->getTranslation()->addMessage(SessionManager::getInstance()->getLanguagePlayer($player->getName()), "ffa-title-form"),
-      Loader::getInstance()->getTranslation()->addMessage(SessionManager::getInstance()->getLanguagePlayer($player->getName()), "unranked-text-form"),
+      Loader::getInstance()->getTranslation()->addMessage(SessionManager::getInstance()->getLanguagePlayer($player->getName()), "ffa-text-form"),
       [
         new MenuOption("NoDebuffMap \n FFA - Players: 0")
       ],
-      function(Player $player, int $selected): void {
+      function(Player $player, int $selectedOption): void {
         //
       }
     );

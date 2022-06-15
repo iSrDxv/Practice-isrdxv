@@ -22,19 +22,19 @@ class LobbyScoreboard extends Scoreboard
   
   public function show(): void
   {
-    $this->title = TextFormat::colorize("&l&bPractice &r&f| " . Loader::getInstance()->getConfig()->getNested("server-name"));
+    $this->title = TextFormat::colorize(Loader::getInstance()->getConfig()->getNested("server-name") . " &r&f| &l&bPractice");
     parent::init();
   }
   
   public function showLines(): void
   {
-    parent::setLine(1, TextFormat::colorize("§f§f"));
+    parent::setLine(1, TextFormat::colorize(""));
     parent::setLine(2, TextFormat::colorize(" &bOnline: &f" . count(Server::getInstance()->getOnlinePlayers())));
     //parent::getPlayer()->getNetworkSession()->getPing();
     parent::setLine(3, TextFormat::colorize(" &bIn Game: &f10"));
     parent::setLine(4, TextFormat::colorize(" &bQueued: &f5"));
-    parent::setLine(5, TextFormat::colorize(" &o&7play.darkneesmcpe.cf"));
-    parent::setLine(6, TextFormat::colorize("§f§f"));
+    parent::setLine(5, TextFormat::colorize(" &o&7" . Loader::getInstance()->getConfig()->getNested("server-address")));
+    parent::setLine(6, TextFormat::colorize("§f"));
   }
   
 }
