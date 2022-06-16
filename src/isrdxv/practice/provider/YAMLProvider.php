@@ -23,9 +23,6 @@ class YAMLProvider
     if (!is_dir($folder = Loader::getInstance()->getDataFolder() . "bans" . DIRECTORY_SEPARATOR)) {
       @mkdir($folder);
     }
-    if (!is_dir($folder = Loader::getInstance()->getDataFolder() . "leaderboard" . DIRECTORY_SEPARATOR)) {
-      @mkdir($folder);
-    }
   }
   
   public function saveDataSession(string $name, array $data): void 
