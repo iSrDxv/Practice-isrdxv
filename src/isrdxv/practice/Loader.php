@@ -65,7 +65,7 @@ class Loader extends PluginBase
         $session->changeScoreboard();
       }
     }), 20);
-    foreach(["ban", "kick", "me", "plugins", "pardon", "pardon-ip", "tell", "about", "list"] as $command) {
+    foreach(["ban", "kick", "me", "plugins", "pardon", "pardon-ip", "tell", "about", "list", "kill"] as $command) {
       $this->getServer()->getCommandMap()->unregister($this->getServer()->getCommandMap()->getCommand($command));
     }
     $this->getServer()->getCommandMap()->registerAll("practice", [
