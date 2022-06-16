@@ -6,7 +6,7 @@ server-description: "it can be in string or array, following the rules of .yml"
 server-address: "play.wallenetwork.xyz"
 
 # MOTD From Server
-motd: "&cDarknees&fNetwork &7| &bPractice"
+motd: "&o&cDarknees&fNetwork &l&7» &r&bPractice"
 
 # Discord Logs
 discord-logs:
@@ -26,8 +26,8 @@ lobby-name: "world"
 ############## PVP ###################
 # Knockback
 knockback:
- gapple: 0.300
  combo: 0.400
+ gapple: 0.300
  nodebuff: 0.300
  trapping: 0.250
 # Cooldown Attack
