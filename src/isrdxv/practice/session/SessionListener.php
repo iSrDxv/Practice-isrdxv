@@ -28,6 +28,8 @@ class SessionListener implements Listener
   public function preLogin(PlayerLoginEvent $event): void
   {
     $player = $event->getPlayer();
+    $query = $player->getServer()->getQueryInformation();
+    $player->getServer()->getConfigGroup()->setConfigInt("max-players", $query->setMaxPlayerCount($query->getPlayerCount() + 1));
     if (!$player->hasPlayedBefore()) {
       SessionManager::getInstance()->set($player->getName());
     }
@@ -81,7 +83,7 @@ class SessionListener implements Listener
       $query->setPlugins([Loader::getInstance()]);
     }
     $query->setWorld(Loader::getInstance()->getConfig()->get("lobby-name"));
-    $query->setMaxPlayerCount($query->getPlayerCount() + 1);
+    //$query->setMaxPlayerCount($query->getPlayerCount() + 1);
   }
   
   /**
