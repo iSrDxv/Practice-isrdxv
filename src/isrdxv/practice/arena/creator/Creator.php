@@ -64,9 +64,7 @@ class Creator
   public function save(): void
   {
     $arena = new Config(Loader::getInstance()->getDataFolder() . "arenas" . DIRECTORY_SEPARATOR . $this->getArena()->getName() . ".yml", Config::YAML);
-    foreach($this->getArena()->__toArray() as $value => $data) {
-      $arena->set($value, $data);
-    }
+      $arena->setAll($this->getArena()->__toArray());
     $arena->save();
   }
   

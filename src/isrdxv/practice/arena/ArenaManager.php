@@ -37,7 +37,7 @@ class ArenaManager
     return $arenas[array_rand($arenas, 1)];
   }
   
-  /** @return Arena **/
+  /** @return Arena|null **/
   public function getArenaByName(string $arenaName): ?Arena
   {
     return $this->arenas[$arenaName] ?? null;
@@ -46,9 +46,9 @@ class ArenaManager
  /**
   * It is used for the arena editing system, just change the parameter for an array
   */
-  public function setArena(array $config): void
+  public function setArena(array $data): void
   {
-    $this->arenas[$config["world"]] = ($arena = new Arena($config["world"], $config["slots"], $config["mode"], $config["type"], $config["ranked"], $config["type-mode"], $config["spawns"]));
+    $this->arenas[$data["world"]] = ($arena = new Arena($data["world"], $data["slots"], $data["mode"], $data["type"], $data["ranked"], $data["type-mode"], $data["spawns"]));
     (new ArenaCreationEvent($arena))->call();
   }
   

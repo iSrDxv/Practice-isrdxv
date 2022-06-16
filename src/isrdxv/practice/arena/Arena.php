@@ -18,7 +18,7 @@ class Arena
   private string $type;
   
   /**
-   * true = si, false = no
+   * true = yes, false = no
    **/
   private bool $ranked;
   
