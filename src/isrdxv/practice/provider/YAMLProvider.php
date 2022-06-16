@@ -33,11 +33,21 @@ class YAMLProvider
     $config->save();
   }
   
-  public function setLanguage(string $username, string $language): void
+  public function setLanguage(string $username, string $language = "en_US"): void
   {
     $config = new Config(Loader::getInstance()->getDataFolder() . "players" . DIRECTORY_SEPARATOR . $username . ".yml", Config::YAML);
     $config->setNested("language", $language);
     $config->save();
+  }
+  
+  public function getLanguage(string $username): string
+  {
+    return (new Config(Loader::getInstance()->getDataFolder() . "players" . DIRECTORY_SEPARATOR . $username . ".yml", Config::YAML))->get("language");
+  }
+  
+  public function getDefaultLanguage(): string
+  {
+    return Loader::getInstance()->getConfig()->getNested("default-language");
   }
   
   public function loadSettings(string $username): array

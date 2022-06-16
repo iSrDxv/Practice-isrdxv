@@ -25,7 +25,7 @@ class SessionListener implements Listener
   /**
    * @priority HIGH
    */
-  public function preLogin(PlayerLoginEvent $event): void
+  public function onLogin(PlayerLoginEvent $event): void
   {
     $player = $event->getPlayer();
     $query = $player->getServer()->getQueryInformation();
@@ -52,7 +52,7 @@ class SessionListener implements Listener
       $player->sendMessage(TextFormat::colorize($desc));
     }
     
-    $event->setJoinMessage(TextFormat::colorize(Loader::getInstance()->getTranslation()->addMessage(SessionManager::getInstance()->getLanguagePlayer($player->getName()), "welcome-message", ["%username%" => $player->getName()])));
+    $event->setJoinMessage(TextFormat::colorize(Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($player->getName()), "welcome-message", ["%username%" => $player->getName()])));
   }
   
   public function onRespawn(PlayerRespawnEvent $event): void

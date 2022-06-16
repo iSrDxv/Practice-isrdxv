@@ -55,9 +55,8 @@ class SessionManager
       "nodebuff" => 0,
       "trapping" => 0
     ]);
-    //$config->set("about-me", null);
     $config->set("rank", "Player");
-    $config->set("language", $this->getLanguage());
+    $config->set("language", Loader::getInstance()->getProvider()->getDefaultLanguage());
     $config->set("won-events", []);
     $config->set("settings", ["score" => true, "queue" => false, "cps" => false, "auto-join" => false]);
     $config->save();
@@ -71,16 +70,6 @@ class SessionManager
   public function isSession(string $username): bool
   {
     return (isset($this->sessions[$username])) ? true : false;
-  }
-  
-  public function getLanguage(): string
-  {
-    return Loader::getInstance()->getConfig()->getNested("default-language");
-  }
-  
-  public function getLanguagePlayer(string $username): string
-  {
-    return (new Config(Loader::getInstance()->getDataFolder() . "players" . DIRECTORY_SEPARATOR . $username . ".yml", Config::YAML))->get("language");
   }
 
 }
