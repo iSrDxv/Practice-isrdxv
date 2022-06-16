@@ -20,11 +20,9 @@ class QueueManager
   {
     $class = null;
     foreach($this->queues as $queue) {
-      if ($queue instanceof Queue) {
         if ($queue->getId() === $id) {
         $class = $queue;
         }
-      }
     }
     return $class;
   }
@@ -33,11 +31,9 @@ class QueueManager
   {
     $class = null;
     foreach($this->queues as $queue) {
-      if ($queue instanceof Queue) {
         if ($queue->getArena()->getName() === $arena_name) {
         $class = $queue;
         }
-      }
     }
     return $class;
   }
