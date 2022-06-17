@@ -4,8 +4,11 @@ namespace isrdxv\practice\party;
 
 use isrdxv\practice\party\Party;
 
+use pocketmine\utils\SingletonTrait;
+
 class PartyManager 
 {
+  use SingletonTrait;
   
   private array $parties = [];
   
