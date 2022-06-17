@@ -14,3 +14,6 @@ permissions:
   arena.command:
     description: Use this command for Create the Arena
     default: op
+  staffmode.command:
+    description: Authorized personal only
+    default: false

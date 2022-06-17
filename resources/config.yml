@@ -3,11 +3,11 @@ server-name: "DarkneesNetwork"
 # Ad on entry
 # It can be in string or array, following the rules of .yml
 server-description: 
- - "&f⸻⸻⸻⸻⸻"
- - "&bTwitter: &fhttps://twitter.com/YourServerNetwork"
- - "&7Discord: &fhttps://discord.gg/yourservernetwork"
- - "&4Shop: &fhttps://shop.yourservernetwork.com"
- - "&f⸻⸻⸻⸻⸻"
+  - "&f⸻⸻⸻⸻⸻"
+  - "&bTwitter: &fhttps://twitter.com/YourServerNetwork"
+  - "&7Discord: &fhttps://discord.gg/yourservernetwork"
+  - "&4Shop: &fhttps://shop.yourservernetwork.com"
+  - "&f⸻⸻⸻⸻⸻"
 # IP address of your server, for scoreboard and something else
 server-address: "play.wallenetwork.xyz"
 
