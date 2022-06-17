@@ -14,6 +14,7 @@ use pocketmine\item\{
 
 use isrdxv\practice\Loader;
 use isrdxv\practice\provider\YAMLProvider;
+use isrdxv\practice\queue\Queue;
 
 use libs\scoreboard\type\LobbyScoreboard;
 use libs\scoreboard\Scoreboard;
@@ -29,6 +30,10 @@ class Session
   
   /** @var Scoreboard|null **/
   private ?Scoreboard $scoreboard;
+  code
+  
+  /** @var Queue|null **/
+  private ?Queue $queue;
   
   private array $settings;
   
@@ -87,6 +92,25 @@ class Session
       return;
     }
     $this->setScoreboard($this->scoreboard);
+  }
+  
+  public function getQueue(): ?Queue
+  {
+    return $this->queue ?? null;
+  }
+  
+  public function hasQueue(): bool
+  {
+    return isset($this->queue);
+  }
+  
+  public function setQueue(?Queue $queue = null): void
+  {
+    if ($this->hasQueue()) {
+      $this->getPlayer()->sendMessage("a");
+      return;
+    }
+    $this->queue = $queue;
   }
   
   public function getSettings(): array
