@@ -11,6 +11,7 @@ use libs\invmenu\InvMenuHandler;
 use isrdxv\practice\translation\Translation;
 use isrdxv\practice\provider\YAMLProvider;
 use isrdxv\practice\arena\ArenaManager;
+use isrdxv\practice\queue\QueueListener;
 use isrdxv\practice\session\{
   SessionListener,
   SessionManager
@@ -59,7 +60,7 @@ class Loader extends PluginBase
     $this->provider = new YAMLProvider();
     $this->getServer()->getPluginManager()->registerEvents(new SessionListener(), $this);
     //$this->getServer()->getPluginManager()->registerEvents(new GameListener(), $this);
-    //$this->getServer()->getPluginManager()->registerEvents(new QueueListener(), $this);
+    $this->getServer()->getPluginManager()->registerEvents(new QueueListener(), $this);
     $this->getScheduler()->scheduleRepeatingTask(new ClosureTask(function(): void {
       foreach(SessionManager::getInstance()->getSessions() as $session) {
         $session->changeScoreboard();

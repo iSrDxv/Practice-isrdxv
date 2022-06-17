@@ -24,4 +24,9 @@ class QueueListener implements Listener
     }
   }
   
+  public function onDeath(PlayerDeathEvent $event): void
+  {
+    $player = $event->getPlayer();
+  }
+  
 }
