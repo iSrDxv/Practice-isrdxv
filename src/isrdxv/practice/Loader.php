@@ -51,7 +51,7 @@ class Loader extends PluginBase
       InvMenuHandler::register($this);
     }
     ArenaManager::getInstance()->loadArenas();
-    //GameManager::getInstance()->loadGames();
+    GameManager::getInstance()->loadGames();
     //KitManager::getInstance()->init();
     foreach(["languages/es_ES.ini", "languages/en_US.ini"] as $language) {
       $this->saveResource($language);
