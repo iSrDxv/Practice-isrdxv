@@ -180,7 +180,7 @@ class Session
   public function giveQueueItems(): void
   {
     $leave = new Item(new ItemIdentifier(ItemIds::COMPASS, 0));
-    $leave->setCustomName(TextFormat::colorize("&l&fLeave Queue"));
+    $leave->setCustomName(TextFormat::colorize("&l&o&fLeave Queue"));
     $this->getPlayer()->getInventory()->clearAll();
     $this->getPlayer()->getArmorInventory()->clearAll();
     $this->getPlayer()->getInventory()->setItem(4, $leave);

@@ -25,10 +25,11 @@ use pocketmine\network\mcpe\protocol\types\ScorePacketEntry;
 class Scoreboard
 {
   
-  public static function create(Player $player, string $title): Scoreboard
+  public static function create(Player $player, string $title): self
   {
-    $self = new Scoreboard($player);
-    $self->title = $title;
+    $self = new self($player);
+    $self->title = $title; 
+    //$self->init();
     return $self;
   }
   
@@ -39,7 +40,7 @@ class Scoreboard
   
   public bool $spawned = false;
   
-  /** @var Array int **/
+  /** @var ScorePacketEntry[] **/
   public array $lines = [];
   
   public function __construct(Player $player)
@@ -57,7 +58,7 @@ class Scoreboard
     return $this->spawned;
   }
   
-  public function init(): void 
+  public function spawn(): void 
   {
     if (!$this->spawned) {
       $pk = SetDisplayObjectivePacket::create(SetDisplayObjectivePacket::DISPLAY_SLOT_SIDEBAR, $this->getPlayer()->getName(), $this->title, "dummy", SetDisplayObjectivePacket::SORT_ORDER_ASCENDING);
@@ -79,62 +80,71 @@ class Scoreboard
   
   public function setLine(int $line, string $description = ""): void
   {
-    /*if (isset($this->line[$line])) {
+    if (isset($this->line[$line])) {
       $pk = new SetScorePacket(SetScorePacket::TYPE_REMOVE, [$this->lines[$line]]);
       $this->getPlayer()->getNetworkSession()->sendDataPacket($pk);
       unset($this->lines[$line]);
       return;
-    }*/
+    }
     $entry = new ScorePacketEntry();
-    $entry->type = ScorePacketEntry::TYPE_FAKE_PLAYER;
+    $entry->type = ScorePacketEntry::TYPE_PLAYER;
     
-    $entry->score = $line;
     $entry->scoreboardId = $line;
+    $entry->score = $line;
     $entry->customName = $description;
     $entry->objectiveName = $this->getPlayer()->getName();
     $this->lines[$line] = $entry;
     
-    $pk = new SetScorePacket();
-    $pk->type = SetScorePacket::TYPE_CHANGE;   
-    $pk->entries[] = $entry;
+    $entries = [];
+    $entries[] = $entry;
+    
+    $pk = SetScorePacket::create(SetScorePacket::TYPE_CHANGE, $entries);
     $this->getPlayer()->getNetworkSession()->sendDataPacket($pk);
   }
   
   public function setAllLine(array $lines): void
   {
     $entries = [];
-    for ($i = 0; $i < 15; $i++) {
-    $entry = new ScorePacketEntry();
-    $entry->type = ScorePacketEntry::TYPE_FAKE_PLAYER;
-    $entry->scoreboardId = $i; $entry->score = $i;
-    $entry->customName = $lines[$i];
-    $entry->objectiveName = $this->getPlayer()->getName();
-    $this->lines = $lines;
-    $entries[] = $entry;
+    for ($i = count($lines); $i < 15; $i++) {
+      $entry = new ScorePacketEntry();
+      $entry->type = ScorePacketEntry::TYPE_PLAYER;
+      
+      $entry->scoreboardId = $i; $entry->score = $i;
+      $entry->customName = $lines[$i];
+      $entry->objectiveName = $this->getPlayer()->getName();
+      
+      $this->lines[$i] = $entry;
+      $entries[] = $entry;
     }
     
     $pk = SetScorePacket::create(SetScorePacket::TYPE_CHANGE, $entries);
     $this->getPlayer()->getNetworkSession()->sendDataPacket($pk);
   }
   
-  public function removeLine(int $id): void
+  public function removeLine(int $id = 0): void
   {
     $line = $this->lines[$id];
     if (isset($line)) {
-      $pk = SetScorePacket::create(SetScorePacket::TYPE_REMOVE, [$line]);
-      $this->getPlayer()->getNetworkSession()->sendDataPacket();
+      $pk = new SetScorePacket();
+      $pk->type = SetScorePacket::TYPE_REMOVE; 
+      $pk->entries[] = $line;
+      $this->getPlayer()->getNetworkSession()->sendDataPacket($pk);
       unset($line);
     }
   }
   
   public function removeAllLine(): void
   {
-    if (empty($this->lines) && ($this->spawned !== true)) {
+    if (empty($this->lines) & ($this->spawned !== false)) {
       return;
     }
-    $pk = SetScorePacket::create(SetScorePacket::TYPE_REMOVE, $this->lines);
-    $this->getPlayer()->getNetworkSession()->sendDataPacket($pk);
-    $this->lines = [];
+    foreach($this->lines as $line) {
+      $pk = new SetScorePacket();
+      $pk->type = SetScorePacket::TYPE_REMOVE;
+      $pk->entries[] = $line;
+      $this->getPlayer()->getNetworkSession()->sendDataPacket($pk);
+      $this->lines = [];
+    }
   }
   
 }

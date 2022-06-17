@@ -68,7 +68,7 @@ class SessionListener implements Listener
   {
     $player = $event->getPlayer();
     Loader::getInstance()->getProvider()->saveDataSession($player->getName(), (SessionManager::getInstance()->get($player->getName()))->__toArray());
-    //$event->setQuitMessage();
+    $event->setQuitMessage(Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($player->getName()), "leave-message", ["%username%" => $player->getName()]));
   }
   
   /**
