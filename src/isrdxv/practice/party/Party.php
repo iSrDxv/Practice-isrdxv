@@ -9,6 +9,8 @@ class Party
   
   private string $name;
   
+  private string $customName;
+  
   private Session $leader;
  
   private array $members = [];
@@ -18,6 +20,7 @@ class Party
   public function __construct(string $name, Session $session)
   {
     $this->name = $name;
+    $this->customName = $name . "'s ";
     $this->leader = $session;
   }
   
