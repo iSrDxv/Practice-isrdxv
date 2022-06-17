@@ -46,12 +46,14 @@ class FormManager
         new Toggle("queue", Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($session->getPlayer()->getName()), "settings-queue-form"), $session->getSetting("queue")),
         new Toggle("auto-join", Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($session->getPlayer()->getName()), "settings-join-form"), $session->getSetting("auto-join"))
       ],
-      function(Player $player, CustomFormResponse $response) use ($session): void {
+      function(Player $player, CustomFormResponse $response): void {
         Loader::getInstance()->getProvider()->setLanguage($player->getName(), Loader::getInstance()->getTranslation()->getLanguageByNumber($response->getInt("language")));
-        $session->setSetting("cps", $response->getBool("cps"));
-        $session->setSetting("score", $response->getBool("score"));
-        $session->setSetting("queue", $response->getBool("queue"));
-        $session->setSetting("auto-join", $response->getBool("auto-join"));
+        Loader::getInstance()->getProvider()->saveSettings($player->getName(), [
+          "cps" => $response->getBool("cps"), 
+          "score" => $response->getBool("score"),
+          "queue" => $response->getBool("queue"),
+          "auto-join" => $response->getBool("auto-join")
+          ]);
         $player->sendMessage("");
       }
     );
