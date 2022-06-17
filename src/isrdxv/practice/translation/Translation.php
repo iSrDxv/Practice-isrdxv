@@ -48,12 +48,12 @@ class Translation
   public function addMessage(string $language, string $message, array $args = null): string
   {
     if ($language === null && $message === null) {
-      throw new LanguageException("[Practice: Translation] el mensaje no puede estar vacio, y el lenguaje tampoco");
+      throw new LanguageException("[Practice: Translation] the message cannot be empty, and neither can the language");
     }
     if (!is_file(Loader::getInstance()->getDataFolder() . "languages" . DIRECTORY_SEPARATOR . $language . ".ini")) {
-      throw new LanguageException("[Practice: Translation] Lo siento, no hay un archivo con ese lenguaje, este mensaje es para que agrege el archivo de este lenguaje");
+      throw new LanguageException("[Practice: Translation] Sorry, there is no file with that language, this message is for you to add the file of this language");
     }
-    $messages = parse_ini_file(Loader::getInstance()->getDataFolder() . "languages" . DIRECTORY_SEPARATOR . (($language === "es_MX") ? "es_ES" : $language) . ".ini");
+    $messages = parse_ini_file(Loader::getInstance()->getDataFolder() . "languages" . DIRECTORY_SEPARATOR . $language . ".ini");
     if ($args !== null) {
       foreach($args as $arg => $data) {
         $text = str_replace($arg, $data, $messages[$message]);
