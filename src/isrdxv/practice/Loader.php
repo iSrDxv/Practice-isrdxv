@@ -43,6 +43,7 @@ class Loader extends PluginBase
       SessionManager::getInstance()->setSession($player->get("name"), ?);
     }
     */
+    $this->saveResource("arenas/world.yml");
   }
   
   public function onEnable(): void

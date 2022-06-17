@@ -1,0 +1,19 @@
+name: "world"
+slots: 2
+mode: "nodebuff"
+type: "solo"
+ranked: false
+type-mode: 1
+spawns: 
+ spawn-1: 
+  x: 100
+  y: 5
+  z: 100
+  yaw: 0.0
+  pitch: 0.0
+  spawn-2: 
+  x: 200
+  y: 5
+  z: 200
+  yaw: 0.0
+  pitch: 0.0

@@ -25,7 +25,7 @@ class Arena
   /** @var Int
    * 0 = FFA | 1 = Duel
    */
-  private int $mode_type;
+  private int $type_mode;
   
   /** @var Array **/
   private array $spawns;
