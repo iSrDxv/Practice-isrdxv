@@ -87,7 +87,7 @@ class Scoreboard
       return;
     }
     $entry = new ScorePacketEntry();
-    $entry->type = ScorePacketEntry::TYPE_PLAYER;
+    $entry->type = ScorePacketEntry::TYPE_FAKE_PLAYER;
     
     $entry->scoreboardId = $line;
     $entry->score = $line;
@@ -107,7 +107,7 @@ class Scoreboard
     $entries = [];
     for ($i = count($lines); $i < 15; $i++) {
       $entry = new ScorePacketEntry();
-      $entry->type = ScorePacketEntry::TYPE_PLAYER;
+      $entry->type = ScorePacketEntry::TYPE_FAKE_PLAYER;
       
       $entry->scoreboardId = $i; $entry->score = $i;
       $entry->customName = $lines[$i];

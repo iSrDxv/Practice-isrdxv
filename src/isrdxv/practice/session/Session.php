@@ -30,7 +30,6 @@ class Session
   
   /** @var Scoreboard|null **/
   private ?Scoreboard $scoreboard;
-  code
   
   /** @var Queue|null **/
   private ?Queue $queue;
