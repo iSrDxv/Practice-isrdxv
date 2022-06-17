@@ -130,7 +130,7 @@ class Session
   }
   
   /**
-   * Me da una paja acortar el codigo del item
+   * I'm lazy to shorten the item code
    **/
   public function giveLobbyItems(): void
   {
