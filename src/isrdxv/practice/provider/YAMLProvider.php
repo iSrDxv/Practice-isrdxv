@@ -5,6 +5,7 @@ namespace isrdxv\practice\provider;
 use isrdxv\practice\Loader;
 
 use pocketmine\utils\Config;
+use pocketmine\network\mcpe\protocol\types\DeviceOS;
 
 class YAMLProvider
 {
@@ -31,6 +32,33 @@ class YAMLProvider
     $config = new Config(Loader::getInstance()->getDataFolder() . "players" . DIRECTORY_SEPARATOR . $name . ".yml", Config::YAML);
     $config->setAll($data);
     $config->save();
+  }
+  
+  public function getPlatform(array $extraData): string
+  {
+    if ($extraData["DeviceOS"] === DeviceOS::ANDROID && $extraData["DeviceModel"] === "") {
+      return "Linux";
+    }
+
+    return match ($extraData["DeviceOS"])
+    {
+      DeviceOS::UNKNOWN => "Unknown",
+      DeviceOS::ANDROID => "Android",
+      DeviceOS::IOS => "iOS",
+      DeviceOS::OSX => "macOS",
+      DeviceOS::AMAZON => "FireOS",
+      DeviceOS::GEAR_VR => "Gear VR",
+      DeviceOS::HOLOLENS => "Hololens",
+      DeviceOS::WINDOWS_10 => "Windows 10",
+      DeviceOS::WIN32 => "Windows 7",
+      DeviceOS::DEDICATED => "Dedicated",
+      DeviceOS::TVOS => "TV OS",
+      DeviceOS::PLAYSTATION => "PlayStation",
+      DeviceOS::NINTENDO => "Nintendo Switch",
+      DeviceOS::XBOX => "Xbox",
+      DeviceOS::WINDOWS_PHONE => "Windows Phone",
+      default => "Unknown"
+    };
   }
   
   public function setLanguage(string $username, string $language = "en_US"): void
