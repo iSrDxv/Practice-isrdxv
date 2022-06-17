@@ -190,12 +190,11 @@ class Session
     return [
       "name" => $this->getPlayer()->getName(),
       "points" => $this->getPoints(),
-      "rank" => $this->getRank(),
+      //"rank" => $this->getRank(),
       "murders" => $this->getMurders(),
       "deaths" => $this->getDeaths(),
       "language" => $this->getPlayer()->getLocale(),
       "won-events" => $this->getWonEvents(),
-      "settings" => $this->getSettings()
     ];
   }
   

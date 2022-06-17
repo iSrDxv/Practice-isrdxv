@@ -40,7 +40,7 @@ class FormManager
           "es_ES",
           "es_MX",
           "en_US"
-        ], Loader::getInstance()->getTranslation()->getNumberByLanguage(Loader::getInstance()->getProvider()->getLanguage($session->getPlayer()->getName())),
+        ], Loader::getInstance()->getTranslation()->getNumberByLanguage(Loader::getInstance()->getProvider()->getLanguage($session->getPlayer()->getName()))),
         new Toggle("cps", Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($session->getPlayer()->getName()), "settings-cps-form"), $session->getSetting("cps")),
         new Toggle("score", Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($session->getPlayer()->getName()), "settings-scoreboard-form"), $session->getSetting("score")),
         new Toggle("queue", Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($session->getPlayer()->getName()), "settings-queue-form"), $session->getSetting("queue")),
