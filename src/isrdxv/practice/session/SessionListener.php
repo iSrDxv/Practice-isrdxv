@@ -39,6 +39,7 @@ class SessionListener implements Listener
   public function onJoin(PlayerJoinEvent $event): void
   {
     $player = $event->getPlayer();
+    var_dump($player->get)
     $session = SessionManager::getInstance()->get($player->getName());
     $world = Server::getInstance()->getWorldManager()->getWorldByName(Loader::getInstance()->getConfig()->get("lobby-name"));
     $player->teleport($world->getSafeSpawn());

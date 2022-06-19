@@ -31,6 +31,11 @@ class Creator
     return $this->arena;
   }
   
+  /**
+   * solo = 2
+   * duo = 4
+   * squad = 6
+   */
   public function setSlots(int $slot): void
   {
     $this->getArena()->slots = $slot;

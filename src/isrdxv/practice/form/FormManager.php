@@ -14,8 +14,9 @@ use libs\formapi\{
   CustomFormResponse,
   ModalForm,
   element\Label,
+  element\Input,
   element\Dropdown,
-  element\Toggle,
+  element\Toggle
 };
 
 use isrdxv\practice\{
@@ -80,6 +81,32 @@ class FormManager
         }
       }
     );
+  }
+  
+  public function arena(Player $player): CustomForm
+  {
+    return new CustomForm("Arena Creator", "create the arenas for practice c:", 
+    [
+      new Input("arena_name", "Name from Arena", "world"),
+      new Dropdown("arena_slots", "Slots for the Arena", [
+        "2",
+        "4",
+        "6"
+      ]),
+      new Input("arena_mode", "Mode for your Arena", "nodebuff"),
+      new Input("arena_type", "Mode for your Arena", "solo"),
+      new Toggle("arena_ranked", "Classified Arena or not?", false),
+      new Dropdown("arena_type_mode", "Mode Type for Your Server", ["Duel", "FFA"])
+    ],
+    function(Player $player, CustomFormResponse $response): void {
+      $arena_name = $response->getString("arena_name");
+      $arena_slots = $response->getInt("arena_slots");
+      $arena_mode = $response->getString("arena_mode");
+      $arena_type = $response->getString("arena_type");
+      $arena_ranked = $response->getBool("arena_ranked");
+      $arena_type_mode = $response->getString("arena_type_mode");
+      var_dump($arena_name, $arena_slots, $arena_mode, $arena_type, $arena_ranked, $arena_type_mode);
+    });
   }
   
   public function ranked($player): MenuForm
