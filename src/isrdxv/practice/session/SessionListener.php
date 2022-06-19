@@ -9,7 +9,9 @@ use pocketmine\event\{
   player\PlayerRespawnEvent,
   player\PlayerInteractEvent,
   player\PlayerQuitEvent,
-  server\QueryRegenerateEvent
+  server\QueryRegenerateEvent,
+  block\BlockBreakEvent,
+  block\BlockPlaceEvent
 };
 use pocketmine\utils\TextFormat;
 use pocketmine\player\Player;
@@ -39,7 +41,7 @@ class SessionListener implements Listener
   public function onJoin(PlayerJoinEvent $event): void
   {
     $player = $event->getPlayer();
-    var_dump($player->get)
+    var_dump($player->getPlayerInfo()->getExtraData());
     $session = SessionManager::getInstance()->get($player->getName());
     $world = Server::getInstance()->getWorldManager()->getWorldByName(Loader::getInstance()->getConfig()->get("lobby-name"));
     $player->teleport($world->getSafeSpawn());
@@ -105,6 +107,32 @@ class SessionListener implements Listener
     }elseif ($item->getCustomName() === TextFormat::colorize("&l&fFFA &cQueue")) {
       $player->sendForm(FormManager::getInstance()->ffa($player));
     }
+  }
+  
+  public function onBreak(BlockBreakEvent $event): void
+  {
+    $player = $event->getPlayer();
+    if ($player->getWorld()->getFolderName() === Loader::getInstance()->getConfig()->get("lobby-name")) {
+      if (Server::getInstance()->isOp($player->getName()) || $player->hasPermission("lobby.block.break")) {
+        if ($event->isCancelled() === true) {
+          $event->uncancel();
+        }
+      }
+    }
+    $event->cancel();
+  }
+
+  public function onPlace(BlockPlaceEvent $event): void
+  {
+    $player = $event->getPlayer();
+    if ($player->getWorld()->getFolderName() === Loader::getInstance()->getConfig()->get("lobby-name")) {
+      if (Server::getInstance()->isOp($player->getName()) || $player->hasPermission("lobby.block.place")) {
+        if ($event->isCancelled() === true) {
+          $event->uncancel();
+        }
+      }
+    }
+    $event->cancel();
   }
   
 }
