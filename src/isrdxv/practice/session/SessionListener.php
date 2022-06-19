@@ -11,7 +11,9 @@ use pocketmine\event\{
   player\PlayerQuitEvent,
   server\QueryRegenerateEvent,
   block\BlockBreakEvent,
-  block\BlockPlaceEvent
+  block\BlockPlaceEvent,
+  entity\EntityDamageEvent,
+  entity\EntityDamageByEntityEvent
 };
 use pocketmine\utils\TextFormat;
 use pocketmine\player\Player;
