@@ -41,7 +41,7 @@ class GameManager
   
   public function getGameByName(string $name): ?Game
   {
-    if ($name === "" or $name === null) return null;
+    if (empty($name)) return null;
     if (empty($this->games[$name])) return null;
     return $this->games[$name];
   }
