@@ -11,6 +11,7 @@ use libs\invmenu\InvMenuHandler;
 use isrdxv\practice\translation\Translation;
 use isrdxv\practice\provider\YAMLProvider;
 use isrdxv\practice\arena\ArenaManager;
+use isrdxv\practice\game\GameManager;
 use isrdxv\practice\queue\QueueListener;
 use isrdxv\practice\session\{
   SessionListener,

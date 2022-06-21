@@ -1,4 +1,4 @@
-name: "world"
+world: "world"
 slots: 2
 mode: "nodebuff"
 type: "solo"
