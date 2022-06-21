@@ -137,4 +137,16 @@ class SessionListener implements Listener
     $event->cancel();
   }
   
+  public function onDamage(EntityDamageEvent $event): void
+  {
+    $entity = $event->getEntity();
+    if ($event instanceof EntityDamageByEntityEvent) {
+      $damager = $event->getDamager();
+      if ($damager->getWorld()->getFolderName() === Loader::getInstance()->getConfig()->get("lobby-name")) {//I could check if the entity is in the lobby, but I'm lazy xd
+      if ($entity instanceof Player && $damager instanceof Player) {
+        $event->cancel();
+      }
+    }
+  }
+  
 }
