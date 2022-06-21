@@ -142,9 +142,10 @@ class SessionListener implements Listener
     $entity = $event->getEntity();
     if ($event instanceof EntityDamageByEntityEvent) {
       $damager = $event->getDamager();
-      if ($damager->getWorld()->getFolderName() === Loader::getInstance()->getConfig()->get("lobby-name")) {//I could check if the entity is in the lobby, but I'm lazy xd
-      if ($entity instanceof Player && $damager instanceof Player) {
+      if ($damager->getWorld()->getFolderName() === Loader::getInstance()->getConfig()->get("lobby-name")) {
+        if ($entity instanceof Player && $damager instanceof Player) {
         $event->cancel();
+        }
       }
     }
   }

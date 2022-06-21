@@ -10,7 +10,7 @@ use libs\scoreboard\Scoreboard;
 
 use isrdxv\practice\Loader;
 use isrdxv\practice\queue\QueueManager;
-use isrdxv\practice\game\GameManagaer;
+use isrdxv\practice\game\GameManager;
 
 class LobbyScoreboard extends Scoreboard
 {
@@ -23,7 +23,7 @@ class LobbyScoreboard extends Scoreboard
   public function show(): void
   {
     $this->title = TextFormat::colorize(Loader::getInstance()->getConfig()->getNested("server-name") . " &r&f| &l&bPractice");
-    parent::init();
+    parent::spawn();
   }
   
   public function showLines(): void
