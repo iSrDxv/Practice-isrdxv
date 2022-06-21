@@ -5,7 +5,10 @@ namespace isrdxv\practice\game;
 use pocketmine\utils\SingletonTrait;
 
 use isrdxv\practice\game\Game;
-use isrdxv\practice\arena\ArenaManager;
+use isrdxv\practice\arena\{
+  Arena,
+  ArenaManager
+};
 
 class GameManager
 {
