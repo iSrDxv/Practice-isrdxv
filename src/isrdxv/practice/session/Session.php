@@ -100,7 +100,7 @@ class Session
   
   public function hasQueue(): bool
   {
-    return isset($this->queue);
+    return isset($this->queue) ? true : false;
   }
   
   public function setQueue(?Queue $queue = null): void
