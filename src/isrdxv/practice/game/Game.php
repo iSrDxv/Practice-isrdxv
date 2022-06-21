@@ -3,6 +3,7 @@
 namespace isrdxv\practice\game;
 
 use isrdxv\practice\arena\Arena;
+use isrdxv\practice\game\GameException;
 
 use pocketmine\utils\TextFormat;
 
@@ -29,12 +30,29 @@ class Game
   
   public function __construct(?Arena $arena = null)
   {
+    if (empty($arena)) {
+      throw new GameException("I can't be empty :c");
+    }
     $this->arena = $arena;
+    $this->mode = $arena->getMode();
+    $this->type_mode = $arena->getTypeMode();
+    //$this->kit = KitManager::getInstance()->getKitByName($arena->getMode());
+    $this->phase = "waiting";
   }
   
-  public function getArena(): ?Arena
+  public function getArena(): Arena
   {
     return $this->arena;
+  }
+  
+  public function getArenaMode(): string
+  {
+    return $this->mode;
+  }
+  
+  public function getArenaTypeMode(): int
+  {
+    return $this->type_mode;
   }
   
   public function getPlayers(): array
@@ -49,16 +67,21 @@ class Game
   
   public function addPlayer(Session $session): void
   {
-    if ($this->isGamePlaying()) {
+    if ($this->isGamePlaying($session)) {
       return;
     }
-    $this->players[] = $player;
+    $this->players[] = $session;
     $session->setGame($this);
   }
   
-  public function deletePlayer(string $username): void
+  public function isGamePlaying(Session $session): bool
   {
-    //unset($this->players);
+    return array_key_exists($session, $this->players);
+  }
+  
+  public function deletePlayer(Session $session): void
+  {
+    unset($this->players[array_search($session, $this->players, true)]);
   }
   
   public function getPlayerCount(): int
@@ -66,4 +89,10 @@ class Game
     return count($this->players);
   }
   
+  public function toReset(): void
+  {
+    $this->players = [];
+    //$this->spectators = [];
+    $this->phase = "waiting";
+  }
 }
