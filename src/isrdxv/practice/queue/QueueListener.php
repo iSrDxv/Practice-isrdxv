@@ -6,7 +6,6 @@ use pocketmine\player\Player;
 use pocketmine\event\{
   Listener,
   player\PlayerQuitEvent
-  //player\PlayerDeathEvent
 };
 
 use isrdxv\practice\queue\Queue;
@@ -23,10 +22,5 @@ class QueueListener implements Listener
       $session->setQueue(null);
     }
   }
-  
-  /*public function onDeath(PlayerDeathEvent $event): void
-  {
-    $player = $event->getPlayer();
-  }*/
   
 }

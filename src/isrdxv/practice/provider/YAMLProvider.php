@@ -61,6 +61,11 @@ class YAMLProvider
     };
   }
   
+  public function getDeviceMode(): string
+  {
+    return "SM-67688SD";
+  }
+  
   public function setLanguage(string $username, string $language = "en_US"): void
   {
     $config = new Config(Loader::getInstance()->getDataFolder() . "players" . DIRECTORY_SEPARATOR . $username . ".yml", Config::YAML);
