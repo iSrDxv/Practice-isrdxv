@@ -5,6 +5,7 @@ namespace isrdxv\practice\queue;
 use isrdxv\practice\session\Session;
 use isrdxv\practice\arena\ArenaManager;
 use isrdxv\practice\game\GameManager;
+use isrdxv\practice\Loader;
 
 use pocketmine\entity\Location;
 use pocketmine\Server;
@@ -70,6 +71,18 @@ class Queue
   {
     if (count($this->players) === 2) {
       $game = $this->getGameAvailable(strtolower($this->getName()), $this->getModeType());
+      foreach($this->players as $session) {
+        if (isset($game)) {
+          $game->addPlayer($session);
+        } else {
+          $session->getPlayer()->sendMessage("no hay arenas LMAFAO");
+          $world = $session->getPlayer()->getServer()->getWorldManager()->getWorldByName(Loader::getInstance()->getConfig()->get("lobby-name"));
+          $session->getPlayer()->teleport($world->getSafeSpawn());
+          $session->giveLobbyItems();
+          $this->deletePlayer($session);
+          $session->setQueue(null);
+        }
+      }
     }
   }
   
