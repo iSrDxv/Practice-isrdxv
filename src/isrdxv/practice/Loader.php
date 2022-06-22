@@ -11,8 +11,14 @@ use libs\invmenu\InvMenuHandler;
 use isrdxv\practice\translation\Translation;
 use isrdxv\practice\provider\YAMLProvider;
 use isrdxv\practice\arena\ArenaManager;
-use isrdxv\practice\game\GameManager;
-use isrdxv\practice\queue\QueueListener;
+use isrdxv\practice\game\{
+  GameManager,
+  GameListener
+};
+use isrdxv\practice\queue\{
+  QueueManager,
+  QueueListener
+};
 use isrdxv\practice\session\{
   SessionListener,
   SessionManager
@@ -31,6 +37,12 @@ class Loader extends PluginBase
   
   private YAMLProvider $provider;
   
+  private ArenaManager $arenaManager;
+  
+  private GameManager $gameManager;
+  
+  private QueueManager $queueManager;
+  
   protected static $instance;
   
   public function onLoad(): void
@@ -38,12 +50,6 @@ class Loader extends PluginBase
     self::$instance = $this;
     $this->saveDefaultConfig();
     $this->getServer()->getConfigGroup()->setConfigString("motd", $this->getConfig()->get("server-name"));
-    /*
-    foreach(glob($this->getDataFolder() . "players" . DIRECTORY_SEPARATOR . "*.yml") as $player) {
-      $player = new Config($player, Config::YAML);
-      SessionManager::getInstance()->setSession($player->get("name"), ?);
-    }
-    */
     $this->saveResource("arenas/world.yml");
   }
   
@@ -52,8 +58,9 @@ class Loader extends PluginBase
     /*if (!InvMenuHandler::isRegistered()) {
       InvMenuHandler::register($this);
     }*/
-    ArenaManager::getInstance()->loadArenas();
-    GameManager::getInstance()->loadGames();
+    $this->arenaManager = new ArenaManager($this);
+    $this->gameManager = new GameManager($this);
+    $this->queueManager = new QueueManager();
     //KitManager::getInstance()->init();
     foreach(["languages/es_ES.ini", "languages/en_US.ini"] as $language) {
       $this->saveResource($language);
@@ -90,6 +97,21 @@ class Loader extends PluginBase
   public function getProvider(): YAMLProvider
   {
     return $this->provider;
+  }
+  
+  public function getArenaManager(): ArenaManager
+  {
+    return $this->arenaManager;
+  }
+  
+  public function getGameManager(): GameManager
+  {
+    return $this->gameManager;
+  }
+  
+  public function getQueueManager(): QueueManager
+  {
+    return $this->queueManager;
   }
   
   public static function getInstance(): Loader

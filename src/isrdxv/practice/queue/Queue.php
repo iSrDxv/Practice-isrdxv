@@ -16,9 +16,10 @@ class Queue
   private string $name;
   
   private int $modeType;
-  private array $players;
   
-  private array $spectators;
+  private array $players = [];
+  
+  private array $spectators = [];
   
   public function __construct(int $id, string $name, int $modeType = ArebaManager::TYPE_DUEL)
   {
@@ -68,7 +69,7 @@ class Queue
   public function joinGame(): void
   {
     if (count($this->players) === 2) {
-      $game = $this->getGameAvailable($this->getName(), $this->getModeType());
+      $game = $this->getGameAvailable(strtolower($this->getName()), $this->getModeType());
     }
   }
   

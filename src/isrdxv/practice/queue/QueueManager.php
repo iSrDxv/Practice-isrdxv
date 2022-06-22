@@ -1,25 +1,40 @@
 <?php
-//TODO: Terminar el sistema XD
+
 namespace isrdxv\practice\queue;
 
-use pocketmine\utils\SingletonTrait;
-
 use isrdxv\practice\queue\Queue;
+use isrdxv\practice\arena\ArenaManager;
 
 class QueueManager
 {
-  use SingletonTrait;
-  
   private array $queues = [];
   
-  /*public function __construct()
+  public function __construct()
   {
-    //TODO: this will be a construct very soon XD
-  }*/
+    //NoDebuff
+    $this->create(new Queue($this->getRandomInt(), "NoDebuff", ArenaManager::TYPE_DUEL));
+    $this->create(new Queue($this->getRandomInt(), "NoDebuff", ArenaManager::TYPE_FFA));
+    
+    //Gapple
+    $this->create(new Queue($this->getRandomInt(), "Gapple", ArenaManager::TYPE_DUEL));
+    $this->create(new Queue($this->getRandomInt(), "Gapple", ArenaManager::TYPE_FFA));
+    
+    //Combo
+    $this->create(new Queue($this->getRandomInt(), "Combo", ArenaManager::TYPE_DUEL));
+    $this->create(new Queue($this->getRandomInt(), "Combo", ArenaManager::TYPE_FFA));
+  }
   
-  /*public function create(): void;
+  public function create(Queue $queue): void
+  {
+    $this->queues[$queue->getId()] = $queue;
+  }
   
-  public function delete(): void;*/
+  public function delete(int $id): void
+  {
+    if (isset($queue = $this->queues[$id])) {
+      unset($queue);
+    }
+  }
   
   public function getQueueById(int $id): ?Queue
   {

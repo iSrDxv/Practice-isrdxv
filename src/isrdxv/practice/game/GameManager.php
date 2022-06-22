@@ -5,10 +5,8 @@ namespace isrdxv\practice\game;
 use pocketmine\utils\SingletonTrait;
 
 use isrdxv\practice\game\Game;
-use isrdxv\practice\arena\{
-  Arena,
-  ArenaManager
-};
+use isrdxv\practice\arena\Arena;
+use isrdxv\practice\Loader;
 
 class GameManager
 {
@@ -23,12 +21,12 @@ class GameManager
   private array $games = [];
   
   //TODO: this will be a construct very soon XD
-  public function loadGames(): void
+  public function __construct(Loader $loader)
   {
-    if (ArenaManager::getInstance()->getArenas() === []) {
+    if ($loader->getArenaManager()->getArenas() === []) {
       return;
     }
-    foreach(ArenaManager::getInstance()->getArenas() as $arena) {
+    foreach($loader->getArenaManager()->getArenas() as $arena) {
       $this->createGame($arena);
     }
   }

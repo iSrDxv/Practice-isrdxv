@@ -24,6 +24,19 @@ class ArenaManager
   /** @var Arena[] **/
   private array $arenas = [];
   
+  public function __construct(Loader $loader)
+  {
+    foreach(glob($loader->getDataFolder() . "arenas" . DIRECTORY_SEPARATOR . "*.yml") as $file) {
+      if (!is_file($file)) {
+        $loader->getLogger()->warning("No hay arenas");
+        return;
+      }
+      $config = new Config($file, Config::YAML);
+      $this->setArena($config->getAll());
+      $loader->getLogger()->warning("Todas las arenas han sido cargadas");
+    }
+  }
+  
   public function getRandomArena(string $mode, int $type): ?Arena
   {
     $arenas = [];
@@ -77,20 +90,6 @@ class ArenaManager
     if ($arena === null) return;
     $this->arenas[$arena->getName()] = $arena;
     (new ArenaCreationEvent($arena))->call();
-  }
-  
-  //TODO: this will be a construct very soon XD
-  public function loadArenas(): void
-  {
-    foreach(glob(Loader::getInstance()->getDataFolder() . "arenas" . DIRECTORY_SEPARATOR . "*.yml") as $file) {
-      if (!is_file($file)) {
-        Loader::getInstance()->getLogger()->warning("No hay arenas");
-        return;
-      }
-      $config = new Config($file, Config::YAML);
-      $this->setArena($config->getAll());
-      Loader::getInstance()->getLogger()->warning("Todas las arenas han sido cargadas");
-    }
   }
   
 }
