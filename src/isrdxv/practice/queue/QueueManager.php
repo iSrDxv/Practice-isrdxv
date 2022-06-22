@@ -11,17 +11,18 @@ class QueueManager
   
   public function __construct()
   {
+    $id = bin2hex(random_bytes(3));
     //NoDebuff
-    $this->create(new Queue($this->getRandomInt(), "NoDebuff", ArenaManager::TYPE_DUEL));
-    $this->create(new Queue($this->getRandomInt(), "NoDebuff", ArenaManager::TYPE_FFA));
+    $this->create(new Queue($id, "NoDebuff", ArenaManager::TYPE_DUEL));
+    $this->create(new Queue($id, "NoDebuff", ArenaManager::TYPE_FFA));
     
     //Gapple
-    $this->create(new Queue($this->getRandomInt(), "Gapple", ArenaManager::TYPE_DUEL));
-    $this->create(new Queue($this->getRandomInt(), "Gapple", ArenaManager::TYPE_FFA));
+    $this->create(new Queue($id, "Gapple", ArenaManager::TYPE_DUEL));
+    $this->create(new Queue($id, "Gapple", ArenaManager::TYPE_FFA));
     
     //Combo
-    $this->create(new Queue($this->getRandomInt(), "Combo", ArenaManager::TYPE_DUEL));
-    $this->create(new Queue($this->getRandomInt(), "Combo", ArenaManager::TYPE_FFA));
+    $this->create(new Queue($id, "Combo", ArenaManager::TYPE_DUEL));
+    $this->create(new Queue($id, "Combo", ArenaManager::TYPE_FFA));
   }
   
   public function create(Queue $queue): void
@@ -29,14 +30,14 @@ class QueueManager
     $this->queues[$queue->getId()] = $queue;
   }
   
-  public function delete(int $id): void
+  public function delete(string $id): void
   {
     if (isset($queue = $this->queues[$id])) {
       unset($queue);
     }
   }
   
-  public function getQueueById(int $id): ?Queue
+  public function getQueueById(string $id): ?Queue
   {
     $class = null;
     foreach($this->queues as $queue) {
@@ -61,16 +62,6 @@ class QueueManager
   public function getQueues(): array
   {
     return $this->queues;
-  }
-  
-  public function getRandomInt(): int
-  {
-    return random_int(0, 999);
-  }
-  
-  public function getRandomString(): string
-  {
-    return bin2hex(random_bytes(3));
   }
   
 }
