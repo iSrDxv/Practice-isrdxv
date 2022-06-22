@@ -28,7 +28,7 @@ class Queue
     $this->name = $name;
     $this->modeType = $modeType;
   }
-  xd
+  
   public function getId(): string
   {
     return $this->id;
