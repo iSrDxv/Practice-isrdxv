@@ -3,7 +3,10 @@
 namespace isrdxv\practice\game;
 
 use isrdxv\practice\arena\Arena;
-use isrdxv\practice\game\GameException;
+use isrdxv\practice\game\{
+  GameManager,
+  GameException
+};
 
 use pocketmine\utils\TextFormat;
 
@@ -37,7 +40,7 @@ class Game
     $this->mode = $arena->getMode();
     $this->type_mode = $arena->getTypeMode();
     //$this->kit = KitManager::getInstance()->getKitByName($arena->getMode());
-    $this->phase = "waiting";
+    $this->phase = GameManager::PHASE_WAITING;
   }
   
   public function getArena(): Arena
@@ -53,6 +56,11 @@ class Game
   public function getArenaTypeMode(): int
   {
     return $this->type_mode;
+  }
+  
+  public function getPhase(): string
+  {
+    return $this->phase;
   }
   
   public function getPlayers(): array
@@ -93,6 +101,7 @@ class Game
   {
     $this->players = [];
     //$this->spectators = [];
-    $this->phase = "waiting";
+    $this->phase = GameManager::PHASE_WAITING;
   }
+  
 }

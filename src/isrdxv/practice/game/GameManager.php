@@ -14,6 +14,11 @@ class GameManager
 {
   use SingletonTrait;
   
+  public const PHASE_WAITING = "waiting";
+  public const PHASE_STARTING = "starting";
+  public const PHASE_PLAYING = "playing";
+  public const PHASE_ENDING = "ending";
+  
   /** @var Game[] **/
   private array $games = [];
   
@@ -44,6 +49,17 @@ class GameManager
     if (empty($name)) return null;
     if (empty($this->games[$name])) return null;
     return $this->games[$name];
+  }
+  
+  public function isOcuppied(): int
+  {
+    $count = 0;
+    foreach($this->getGames() as $game) {
+      if ($game->getPhase() === self::PHASE_PLAYING) {
+        $count++;
+      }
+    }
+    return $count;
   }
   
   public function getGames(): array
