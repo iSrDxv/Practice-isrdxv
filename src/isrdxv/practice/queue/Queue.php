@@ -22,13 +22,13 @@ class Queue
   
   private array $spectators = [];
   
-  public function __construct(is_string() $id, string $name, int $modeType = ArebaManager::TYPE_DUEL)
+  public function __construct(string $id, string $name, int $modeType = ArebaManager::TYPE_DUEL)
   {
     $this->id = $id;
     $this->name = $name;
     $this->modeType = $modeType;
   }
-  
+  xd
   public function getId(): string
   {
     return $this->id;
