@@ -12,6 +12,11 @@ class QueueManager
   
   private array $queues = [];
   
+  /*public function __construct()
+  {
+    //TODO: this will be a construct very soon XD
+  }*/
+  
   /*public function create(): void;
   
   public function delete(): void;*/

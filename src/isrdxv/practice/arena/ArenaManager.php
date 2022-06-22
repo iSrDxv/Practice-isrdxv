@@ -79,6 +79,7 @@ class ArenaManager
     (new ArenaCreationEvent($arena))->call();
   }
   
+  //TODO: this will be a construct very soon XD
   public function loadArenas(): void
   {
     foreach(glob(Loader::getInstance()->getDataFolder() . "arenas" . DIRECTORY_SEPARATOR . "*.yml") as $file) {

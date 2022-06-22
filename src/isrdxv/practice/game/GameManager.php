@@ -22,6 +22,7 @@ class GameManager
   /** @var Game[] **/
   private array $games = [];
   
+  //TODO: this will be a construct very soon XD
   public function loadGames(): void
   {
     if (ArenaManager::getInstance()->getArenas() === []) {
