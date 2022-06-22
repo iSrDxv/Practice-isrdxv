@@ -2,6 +2,8 @@
 
 namespace isrdxv\practice\arena;
 
+use isrdxv\practice\arena\ArenaManager;
+
 class Arena
 {
   
@@ -25,19 +27,19 @@ class Arena
   /** @var Int
    * 0 = FFA | 1 = Duel
    */
-  private int $type_mode;
+  private int $mode_type;
   
   /** @var Array **/
   private array $spawns;
   
-  public function __construct(string $name, int $slots, string $mode, string $type, bool $ranked, int $type_mode, array $spawns = []) 
+  public function __construct(string $name, int $slots, string $mode, string $type, bool $ranked, int $mode_type, array $spawns = []) 
   {
     $this->name = $name;
     $this->slots = isset($slots) ? $slots : 2;
     $this->mode = empty($mode) ? "nodebuff" : $mode;
     $this->type = empty($type) ? "solo" : $type;
     $this->ranked = empty($ranked) ? false : $ranked; 
-    $this->type_mode = empty($type_mode) ? 0 : $type_mode;
+    $this->mode_type = empty($mode_type) ? ArenaManager::TYPE_FFA : $mode_type;
     $this->spawns = ($spawns === []) ? ["spawn-1" => [], "spawn-2" => []] : $spawns;
   }
   

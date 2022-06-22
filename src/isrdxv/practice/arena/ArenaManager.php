@@ -18,6 +18,9 @@ class ArenaManager
 {
   use SingletonTrait;
   
+  public const TYPE_DUEL = 1;
+  public const TYPE_FFA = 0;
+  
   /** @var Arena[] **/
   private array $arenas = [];
   

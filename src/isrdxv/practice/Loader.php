@@ -49,9 +49,9 @@ class Loader extends PluginBase
   
   public function onEnable(): void
   {
-    if (!InvMenuHandler::isRegistered()) {
+    /*if (!InvMenuHandler::isRegistered()) {
       InvMenuHandler::register($this);
-    }
+    }*/
     ArenaManager::getInstance()->loadArenas();
     GameManager::getInstance()->loadGames();
     //KitManager::getInstance()->init();

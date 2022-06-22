@@ -23,9 +23,9 @@ class Game
   /** @var Session[] **/
   private array $players = [];
   
-  //private array $spectators = [];
+  private array $spectators = [];
   
-  private int $type_mode;
+  private int $mode_type;
   
   private int $time = 0;
   
@@ -38,7 +38,7 @@ class Game
     }
     $this->arena = $arena;
     $this->mode = $arena->getMode();
-    $this->type_mode = $arena->getTypeMode();
+    $this->mode_type = $arena->getModeType();
     //$this->kit = KitManager::getInstance()->getKitByName($arena->getMode());
     $this->phase = GameManager::PHASE_WAITING;
   }
@@ -53,9 +53,9 @@ class Game
     return $this->mode;
   }
   
-  public function getArenaTypeMode(): int
+  public function getArenaModeType(): int
   {
-    return $this->type_mode;
+    return $this->mode_type;
   }
   
   public function getPhase(): string
@@ -100,7 +100,7 @@ class Game
   public function toReset(): void
   {
     $this->players = [];
-    //$this->spectators = [];
+    $this->spectators = [];
     $this->phase = GameManager::PHASE_WAITING;
   }
   

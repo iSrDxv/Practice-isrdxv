@@ -5,8 +5,8 @@ namespace isrdxv\practice\queue;
 use pocketmine\player\Player;
 use pocketmine\event\{
   Listener,
-  player\PlayerQuitEvent,
-  player\PlayerDeathEvent
+  player\PlayerQuitEvent
+  //player\PlayerDeathEvent
 };
 
 use isrdxv\practice\queue\Queue;
@@ -24,9 +24,9 @@ class QueueListener implements Listener
     }
   }
   
-  public function onDeath(PlayerDeathEvent $event): void
+  /*public function onDeath(PlayerDeathEvent $event): void
   {
     $player = $event->getPlayer();
-  }
+  }*/
   
 }
