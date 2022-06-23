@@ -57,6 +57,7 @@ class Session
     $this->elo = Loader::getInstance()->getProvider()->loadPoints($player->getName());
     // String
     //$this->rank = Loader::getInstance()->getRankManager()->getRankByName($player->getName());
+    $this->language = Loader::getInstance()->getProvider()->getLanguage($player->getName());
   }
   
   public function getPlayer(): Player
@@ -150,6 +151,17 @@ class Session
   public function getWonEvents(): array
   {
     return $this->wonEvents;
+  }
+  
+  public function getLanguage(): string
+  {
+    return $this->language;
+  }
+  
+  public function sendMessage(string $message = "", array $parameters = null): void
+  {
+    $language = Loader::getInstance()->getTranslation()->addMessage($this->getLanguage(), $message, $parameters);
+    $this->getPlayer()->sendMessage($language);
   }
   
   /**

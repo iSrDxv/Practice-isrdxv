@@ -47,7 +47,7 @@ class Translation
   
   public function addMessage(string $language, string $message, array $args = null): string
   {
-    if ($language === null && $message === null) {
+    if (empty($language) && empty($message)) {
       throw new LanguageException("[Practice: Translation] the message cannot be empty, and neither can the language");
     }
     if (!is_file(Loader::getInstance()->getDataFolder() . "languages" . DIRECTORY_SEPARATOR . $language . ".ini")) {
