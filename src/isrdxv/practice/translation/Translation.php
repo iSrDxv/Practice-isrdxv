@@ -22,9 +22,9 @@ class Translation
     case 2:
       $language = "en_US";
     break;
-    /*default: 
+    default: 
       $language = "en_US";
-    break;*/
+    break;
     }
     return $language;
   }
@@ -41,11 +41,14 @@ class Translation
     case "en_US":
       $language = 2;
     break;
+    default:
+      $language = 2;
+    break;
     }
     return $language;
   }
   
-  public function addMessage(string $language, string $message, array $args = null): string
+  public function sendTranslation(string $language, string $message, array $args = null): string
   {
     if (empty($language) && empty($message)) {
       throw new LanguageException("[Practice: Translation] the message cannot be empty, and neither can the language");
