@@ -54,12 +54,16 @@ class Translation
       throw new LanguageException("[Practice: Translation] Sorry, there is no file with that language, this message is for you to add the file of this language");
     }
     $messages = parse_ini_file(Loader::getInstance()->getDataFolder() . "languages" . DIRECTORY_SEPARATOR . $language . ".ini");
-    if ($args !== null) {
+    if (!isset($messages[$message])) {
+      throw new TranslationException("The message i add does not exist in the language folders")
+    }
+    $message = $messages[$message];
+    if (is_array($args)) {
       foreach($args as $arg => $data) {
-        $text = str_replace($arg, $data, $messages[$message]);
+        $message = str_replace("%" . $arg . "%", $data, $message);
       }
     }
-    return ($args === null) ? $messages[$message] : $text;
+    return $message;
   }
   
 }

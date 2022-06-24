@@ -13,8 +13,10 @@ use pocketmine\item\{
 };
 
 use isrdxv\practice\Loader;
+use isrdxv\practice\translation\TranslationMessage;
 use isrdxv\practice\provider\YAMLProvider;
 use isrdxv\practice\queue\Queue;
+//use isrdxv\practice\game\Game;
 
 use libs\scoreboard\type\LobbyScoreboard;
 use libs\scoreboard\Scoreboard;
@@ -158,10 +160,12 @@ class Session
     return $this->language;
   }
   
-  public function sendMessage(string $message = "", array $parameters = null): void
+  public function sendMessage(TranslationMessage|string $message): void
   {
-    $language = Loader::getInstance()->getTranslation()->addMessage($this->getLanguage(), $message, $parameters);
-    $this->getPlayer()->sendMessage($language);
+    if ($message instanceof TranslationMessage) {
+      $message = Loader::getInstance()->getTranslation()->addMessage($this->getLanguage(), $message->getText(), $message->getParameters());
+    }
+    $this->getPlayer()->sendMessage($message);
   }
   
   /**
