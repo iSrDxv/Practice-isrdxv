@@ -73,6 +73,14 @@ class Game
     return $this->time;
   }
   
+  public function setPhase(string $phase): void
+  {
+    if (!in_array($phase, [GameManager::PHASE_WAITING, GameManager::PHASE_STARTING, GameManager::PHASE_PLAYING, GameManager::PHASE_ENDING], true)) {
+      return;
+    }
+    $this->phase = $phase;
+  }
+  
   public function addPlayer(Session $session): void
   {
     if ($this->isGamePlaying($session)) {

@@ -168,7 +168,7 @@ class Session
     if ($message instanceof TranslationMessage) {
       $message = Loader::getInstance()->getTranslation()->addMessage($this->getLanguage(), $message->getText(), $message->getParameters());
     }
-    $this->getPlayer()->sendMessage($message);
+    $this->getPlayer()->sendMessage(TextFormat::colorize($message));
   }
   
   /**

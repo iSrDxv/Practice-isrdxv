@@ -2,16 +2,12 @@
 
 namespace isrdxv\practice\game;
 
-use pocketmine\utils\SingletonTrait;
-
 use isrdxv\practice\game\Game;
 use isrdxv\practice\arena\Arena;
 use isrdxv\practice\Loader;
 
 class GameManager
 {
-  use SingletonTrait;
-  
   public const PHASE_WAITING = "waiting";
   public const PHASE_STARTING = "starting";
   public const PHASE_PLAYING = "playing";

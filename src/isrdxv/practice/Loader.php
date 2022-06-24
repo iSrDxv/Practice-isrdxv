@@ -13,7 +13,8 @@ use isrdxv\practice\provider\YAMLProvider;
 use isrdxv\practice\arena\ArenaManager;
 use isrdxv\practice\game\{
   GameManager,
-  GameListener
+  GameListener,
+  GameTask
 };
 use isrdxv\practice\queue\{
   QueueManager,
@@ -75,6 +76,7 @@ class Loader extends PluginBase
         $session->changeScoreboard();
       }
     }), 20);
+    $this->getScheduler()->scheduleRepeatingTask(new GameTask($this), 30);
     foreach(["ban", "kick", "me", "plugins", "pardon", "pardon-ip", "tell", "about", "list", "kill"] as $command) {
       $this->getServer()->getCommandMap()->unregister($this->getServer()->getCommandMap()->getCommand($command));
     }

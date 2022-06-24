@@ -5,6 +5,7 @@ namespace isrdxv\practice\queue;
 use isrdxv\practice\session\Session;
 use isrdxv\practice\arena\ArenaManager;
 use isrdxv\practice\game\GameManager;
+use isrdxv\practice\translation\TranslationMessage;
 use isrdxv\practice\Loader;
 
 use pocketmine\entity\Location;
@@ -64,7 +65,7 @@ class Queue
   public function addSpectator(Session $session): void
   {
     if ($session->hasQueue()) {
-      $session->getPlayer()->sendMessage("You already are in a Queue");
+      $session->sendMessage("You already are in a Queue");
       return;
     }
     $this->spectators[] = $session;
@@ -79,8 +80,9 @@ class Queue
       foreach($this->players as $session) {
         if (isset($game)) {
           $game->addPlayer($session);
+          $session->sendMessage(new TranslationMessage("queue-join-arena"));
         } else {
-          $session->sendMessage("no hay arenas LMAFAO");
+          $session->sendMessage(new TranslationMessage("queue-no-arenas"));
           $world = $session->getPlayer()->getServer()->getWorldManager()->getWorldByName(Loader::getInstance()->getConfig()->get("lobby-name"));
           $session->getPlayer()->teleport($world->getSafeSpawn());
           $session->giveLobbyItems();
