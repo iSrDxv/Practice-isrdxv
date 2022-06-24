@@ -80,7 +80,7 @@ class Queue
         if (isset($game)) {
           $game->addPlayer($session);
         } else {
-          $session->getPlayer()->sendMessage("no hay arenas LMAFAO");
+          $session->sendMessage("no hay arenas LMAFAO");
           $world = $session->getPlayer()->getServer()->getWorldManager()->getWorldByName(Loader::getInstance()->getConfig()->get("lobby-name"));
           $session->getPlayer()->teleport($world->getSafeSpawn());
           $session->giveLobbyItems();
@@ -91,10 +91,15 @@ class Queue
     }
   }
   
-  public function deleteAllPlayers(): void
+  public function resetPlayers(): void
   {
     $this->spectators = [];
     $this->players = [];
+  }
+  
+  public function deletePlayer(Session $session): void
+  {
+    unset($this->players[array_search($session, $this->players, true)]);
   }
   
   public function getGameAvailable(string $mode, int $modeType): ?Game
