@@ -101,13 +101,13 @@ class SessionListener implements Listener
     if ($item->getCustomName() === TextFormat::colorize("&l&fSettings")) {
       $player->sendForm(FormManager::getInstance()->settings(SessionManager::getInstance()->get($player->getName())));
     }elseif ($item->getCustomName() === TextFormat::colorize("&l&fParty")) {
-      $player->sendForm(FormManager::getInstance()->party($player));
+      $player->sendForm(FormManager::getInstance()->party(SessionManager::getInstance()->get($player->getName())));
     }elseif ($item->getCustomName() === TextFormat::colorize("&l&fRanked &cQueue")) {
-      $player->sendForm(FormManager::getInstance()->ranked($player));
+      $player->sendForm(FormManager::getInstance()->ranked(SessionManager::getInstance()->get($player->getName())));
     }elseif ($item->getCustomName() === TextFormat::colorize("&l&fUnRanked &cQueue")) {
-      $player->sendForm(FormManager::getInstance()->unranked($player));
+      $player->sendForm(FormManager::getInstance()->unranked(SessionManager::getInstance()->get($player->getName())));
     }elseif ($item->getCustomName() === TextFormat::colorize("&l&fFFA &cQueue")) {
-      $player->sendForm(FormManager::getInstance()->ffa($player));
+      $player->sendForm(FormManager::getInstance()->ffa(SessionManager::getInstance()->get($player->getName())));
     }
   }
   
