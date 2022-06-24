@@ -16,11 +16,11 @@ final class TranslationMessage
     if (empty($text)) {
       throw new TranslationException("$text variable is null or empty string");
     }
-    if (empty($params)) {
-      throw new TranslationException("The variable $params is an empty array or is null");
+    if ($params === null) {
+      throw new TranslationException("The variable $params is null");
     }
     $this->text = $text;
-    foreach($this->params as $key => $value) {
+    foreach($params ?? [] as $key => $value) {
       $this->params[$key] = $value;
     }
   }
@@ -31,14 +31,14 @@ final class TranslationMessage
   }
   
   /** 
-   * @return String[]
+   * @return mixed[]
    */
   public function getParameters(): array
   {
     return $this->params;
   }
   
-  public function getParameter(string $key): string|null
+  public function getParameter(string $key): ?string
   {
     return $this->params[$key] ?? null;
   }
