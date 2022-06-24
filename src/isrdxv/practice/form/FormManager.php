@@ -60,7 +60,7 @@ class FormManager
     );
   }
   
-  public function party(Player $player): MenuForm
+  public function party(Session $session): MenuForm
   {
     return new MenuForm(
       Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($player->getName()), "party-title-form"),
@@ -109,7 +109,7 @@ class FormManager
     });
   }
   
-  public function ranked($player): MenuForm
+  public function ranked(Session $session): MenuForm
   {
     return new MenuForm(
       Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($player->getName()), "ranked-title-form"),
@@ -123,7 +123,7 @@ class FormManager
     );
   }
   
-  public function unranked($player): MenuForm
+  public function unranked(Session $session): MenuForm
   {
     return new MenuForm(
       Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($player->getName()), "unranked-title-form"),
@@ -137,7 +137,7 @@ class FormManager
     );
   }
   
-  public function ffa($player): MenuForm
+  public function ffa(Session $session): MenuForm
   {
     return new MenuForm(
       Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($player->getName()), "ffa-title-form"),

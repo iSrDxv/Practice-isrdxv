@@ -59,7 +59,10 @@ class Session
     $this->elo = Loader::getInstance()->getProvider()->loadPoints($player->getName());
     // String
     //$this->rank = Loader::getInstance()->getRankManager()->getRankByName($player->getName());
+    $this->device = Loader::getInstance()->getProvider->getDevice($player->getPlayerInfo()->getExtraData());
     $this->language = Loader::getInstance()->getProvider()->getLanguage($player->getName());
+    $player->setNameTag(TextFormat::AQUA . $player->getName());
+    $player->setScoreTag($this->device);
   }
   
   public function getPlayer(): Player

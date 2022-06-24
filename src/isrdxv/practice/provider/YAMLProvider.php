@@ -34,7 +34,7 @@ class YAMLProvider
     $config->save();
   }
   
-  public function getPlatform(array $extraData): string
+  public function getDevice(array $extraData): string
   {
     if ($extraData["DeviceOS"] === DeviceOS::ANDROID && $extraData["DeviceModel"] === "") {
       return "Linux";
