@@ -32,7 +32,7 @@ class LobbyScoreboard extends Scoreboard
     parent::setLine(2, TextFormat::colorize(" &bOnline: &f" . count(Server::getInstance()->getOnlinePlayers())));
     parent::setLine(3, TextFormat::colorize(" &bPing: &f" . parent::getPlayer()->getNetworkSession()->getPing()));
     parent::setLine(4, TextFormat::colorize(" &bIn Game: &f" . GameManager::getInstance()->isOcuppied()));
-    parent::setLine(5, TextFormat::colorize(" &bQueued: &f" . count(QueueManager::getInstance()->getQueues())));
+    parent::setLine(5, TextFormat::colorize(" &bQueued: &f" . QueueManager::getInstance()->getQueueCount()));
     parent::setLine(6, TextFormat::colorize(" &o&7" . Loader::getInstance()->getConfig()->getNested("server-address")));
     parent::setLine(7, TextFormat::colorize("§f"));
   }

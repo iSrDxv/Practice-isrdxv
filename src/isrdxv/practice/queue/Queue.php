@@ -44,6 +44,11 @@ class Queue
     return $this->modeType;
   }
   
+  public function getPlayers(): array
+  {
+    return $this->players;
+  }
+  
   public function addPlayer(Session $session): void
   {
     if ($session->hasQueue()) {

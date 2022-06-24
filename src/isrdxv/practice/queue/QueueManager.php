@@ -64,4 +64,15 @@ class QueueManager
     return $this->queues;
   }
   
+  public function getQueueCount(): int
+  {
+    $count = 0;
+    foreach($this->queues as $queue) {
+      if (count($queue->getPlayers()) === 2) {
+        $count++;
+      }
+    }
+    return $count;
+  }
+  
 }
