@@ -46,7 +46,7 @@ class GameManager
     return $this->games[$name];
   }
   
-  public function isOcuppied(): int
+  public function getGameCount(): int
   {
     $count = 0;
     foreach($this->getGames() as $game) {

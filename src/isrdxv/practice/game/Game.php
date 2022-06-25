@@ -81,16 +81,28 @@ class Game
     $this->phase = $phase;
   }
   
+  public function getAllPlayers(): array
+  {
+    return array_merge($this->players, $this->spectators);
+  }
+  
   public function addPlayer(Session $session): void
   {
-    if ($this->isGamePlaying($session)) {
+    if ($this->isPlaying($session)) {
       return;
     }
     $this->players[] = $session;
     $session->setGame($this);
   }
   
-  public function isGamePlaying(Session $session): bool
+  public function sendAction(\Closure $closure): void
+  {
+    foreach($this->players as $player) {
+      $closure($player);
+    }
+  }
+  
+  public function isPlaying(Session $session): bool
   {
     return array_key_exists($session, $this->players);
   }
