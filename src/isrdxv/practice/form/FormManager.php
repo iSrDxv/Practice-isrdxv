@@ -73,10 +73,13 @@ class FormManager
       function(Player $player, int $selectedOption): void {
         switch($selectedOption){
           case 0:
+            $player->sendMessage("coming soon...");
           break;
           case 1:
+            $player->sendMessage("coming soon...");
           break;
           case 2:
+            $player->sendMessage("coming soon...");
           break;
         }
       }
