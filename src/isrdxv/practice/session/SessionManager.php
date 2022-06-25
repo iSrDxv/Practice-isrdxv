@@ -42,7 +42,7 @@ class SessionManager
     }
     $config = new Config(Loader::getInstance()->getDataFolder() . "players" . DIRECTORY_SEPARATOR . $username . ".yml", Config::YAML);
     $config->set("name", $username);
-    $config->set("points", 0);
+    $config->set("points", 1000);
     $config->set("murders", [
       "combo" => 0,
       "gapple" => 0,
