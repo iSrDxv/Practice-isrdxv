@@ -34,18 +34,18 @@ class FormManager
   public function settings(Session $session): CustomForm
   {
     return new CustomForm(
-      Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($session->getPlayer()->getName()), "settings-title-form"),
+      Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "settings-title-form"),
       [
-        new Label("text", Loader::getinstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($session->getPlayer()->getName()), "settings-text-form")),
-        new Dropdown("language", Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($session->getPlayer()->getName()), "settings-language-form"), [
+        new Label("text", Loader::getinstance()->getTranslation()->sendTranslation($session->getLanguage(), "settings-text-form")),
+        new Dropdown("language", Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "settings-language-form"), [
           "es_ES",
           "es_MX",
           "en_US"
-        ], Loader::getInstance()->getTranslation()->getNumberByLanguage(Loader::getInstance()->getProvider()->getLanguage($session->getPlayer()->getName()))),
-        new Toggle("cps", Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($session->getPlayer()->getName()), "settings-cps-form"), $session->getSetting("cps")),
-        new Toggle("score", Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($session->getPlayer()->getName()), "settings-scoreboard-form"), $session->getSetting("score")),
-        new Toggle("queue", Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($session->getPlayer()->getName()), "settings-queue-form"), $session->getSetting("queue")),
-        new Toggle("auto-join", Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($session->getPlayer()->getName()), "settings-join-form"), $session->getSetting("auto-join"))
+        ], Loader::getInstance()->getTranslation()->getNumberByLanguage($session->getLanguage())),
+        new Toggle("cps", Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "settings-cps-form"), $session->getSetting("cps")),
+        new Toggle("score", Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "settings-scoreboard-form"), $session->getSetting("score")),
+        new Toggle("queue", Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "settings-queue-form"), $session->getSetting("queue")),
+        new Toggle("auto-join", Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "settings-join-form"), $session->getSetting("auto-join"))
       ],
       function(Player $player, CustomFormResponse $response): void {
         Loader::getInstance()->getProvider()->setLanguage($player->getName(), Loader::getInstance()->getTranslation()->getLanguageByNumber($response->getInt("language")));
@@ -63,12 +63,12 @@ class FormManager
   public function party(Session $session): MenuForm
   {
     return new MenuForm(
-      Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($player->getName()), "party-title-form"),
-      Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($player->getName()), "party-text-form"),
+      Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "party-title-form"),
+      Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "party-text-form"),
       [
-        new MenuOption(Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($player->getName()), "party-create-form")),
-        new MenuOption(Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($player->getName()), "party-invite-form")),
-        new MenuOption(Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($player->getName()), "party-public-form"))
+        new MenuOption(Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "party-create-form")),
+        new MenuOption(Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "party-invite-form")),
+        new MenuOption(Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "party-public-form"))
       ],
       function(Player $player, int $selectedOption): void {
         switch($selectedOption){
@@ -112,8 +112,8 @@ class FormManager
   public function ranked(Session $session): MenuForm
   {
     return new MenuForm(
-      Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($player->getName()), "ranked-title-form"),
-      Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($player->getName()), "ranked-text-form"),
+      Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "ranked-title-form"),
+      Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "ranked-text-form"),
       [
         new MenuOption("Duel \n nodebuff - Players: 0")
       ],
@@ -126,8 +126,8 @@ class FormManager
   public function unranked(Session $session): MenuForm
   {
     return new MenuForm(
-      Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($player->getName()), "unranked-title-form"),
-      Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($player->getName()), "unranked-text-form"),
+      Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "unranked-title-form"),
+      Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "unranked-text-form"),
       [
         new MenuOption("Duel - nodebuff \n Players: 0")
       ],
@@ -140,8 +140,8 @@ class FormManager
   public function ffa(Session $session): MenuForm
   {
     return new MenuForm(
-      Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($player->getName()), "ffa-title-form"),
-      Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($player->getName()), "ffa-text-form"),
+      Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "ffa-title-form"),
+      Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "ffa-text-form"),
       [
         new MenuOption("NoDebuffMap \n FFA - Players: 0")
       ],
