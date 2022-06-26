@@ -17,6 +17,9 @@ permissions:
   staffmode.command:
     description: Authorized personal only
     default: false
+  ban.command:
+    description: Ban a specific user
+    default: false
   lobby.block.break:
     description: Break blocks in the lobby
     default: false
