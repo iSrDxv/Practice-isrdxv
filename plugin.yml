@@ -6,7 +6,6 @@ author: iSrDxv
 version: 1.3.25-alpha
 main: isrdxv\practice\Loader
 api: 4.0.0
-#depend: [FriendSystem]
 prefix: "PracticeCore"
 description: "Practice Plugin for DarkneesNetwork"
 website: "https://github.com/iSrDxv/Practice-isrdxv"
