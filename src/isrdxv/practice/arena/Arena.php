@@ -68,7 +68,7 @@ class Arena
     return $this->ranked;
   }
   
-  public function getTypeMode(): int
+  public function getModeType(): int
   {
     return $this->mode_type;
   }
