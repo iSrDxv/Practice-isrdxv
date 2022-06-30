@@ -6,10 +6,10 @@ server-description:
   - "&f⸻⸻⸻⸻⸻"
   - "&bTwitter: &fhttps://twitter.com/YourServerNetwork"
   - "&7Discord: &fhttps://discord.gg/yourservernetwork"
-  - "&4Shop: &fhttps://shop.yourservernetwork.com"
+  - "&4Store: &fhttps://store.yourservernetwork.com"
   - "&f⸻⸻⸻⸻⸻"
 # IP address of your server, for scoreboard and something else
-server-address: "play.wallenetwork.xyz"
+server-address: "play.darkneesnetwork.xyz"
 
 # MOTD From Server
 motd: "&o&cDarknees&fNetwork &l&7» &r&bPractice"
