@@ -51,7 +51,7 @@ class Kit
     }
   }
   
-  public function addEnchantment(Item $item, array $enchantments = null): void
+  public function addEnchantment(Item $item, array|EnchantmentInstance $enchantments = null): void
   {
     if ($enchantments !== null) {
       if (!is_array($enchantments)) {
