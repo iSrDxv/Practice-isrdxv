@@ -19,15 +19,18 @@ class Queue
   
   private int $modeType;
   
+  private bool $ranked;
+  
   private array $players = [];
   
   private array $spectators = [];
   
-  public function __construct(string $id, string $name, int $modeType = ArenaManager::TYPE_DUEL)
+  public function __construct(string $id, string $name, int $modeType = ArenaManager::TYPE_DUEL, bool $ranked = false)
   {
     $this->id = $id;
     $this->name = $name;
     $this->modeType = $modeType;
+    $this->ranked = $ranked;
   }
   
   public function getId(): string
@@ -43,6 +46,11 @@ class Queue
   public function getModeType(): int
   {
     return $this->modeType;
+  }
+  
+  public function getRanked(): bool
+  {
+    return $this->ranked;
   }
   
   public function getPlayers(): array
@@ -76,7 +84,7 @@ class Queue
   public function joinGame(): void
   {
     if (count($this->players) === 2) {
-      $game = $this->getGameAvailable(strtolower($this->getName()), $this->getModeType());
+      $game = GameManager::getInstance()->getGameAvailable(strtolower($this->getName()), $this->getModeType(), $this->getRanked());
       foreach($this->players as $session) {
         if (isset($game)) {
           $game->addPlayer($session);
@@ -102,20 +110,6 @@ class Queue
   public function deletePlayer(Session $session): void
   {
     unset($this->players[array_search($session, $this->players, true)]);
-  }
-  
-  public function getGameAvailable(string $mode, int $modeType): ?Game
-  {
-    foreach(GameManager::getInstance()->getGames() as $game) {
-      if ($game->getPhase() === GameManager::PHASE_WAITING) {
-        if ($game->getArenaMode() === $mode) {
-          if ($game->getArenaModeType() === $modeType) {
-            return $game;
-          }
-        }
-      }
-    }
-    return null;
   }
   
   /*public function teleportArena(Player $player): void

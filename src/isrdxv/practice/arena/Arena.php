@@ -63,9 +63,14 @@ class Arena
     return $this->type;
   }
   
+  public function getRanked(): bool
+  {
+    return $this->ranked;
+  }
+  
   public function getTypeMode(): int
   {
-    return $this->type_mode;
+    return $this->mode_type;
   }
   
   public function getSpawns(): array

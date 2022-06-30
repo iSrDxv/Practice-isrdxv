@@ -32,6 +32,22 @@ class GameManager
     $this->games[$arena->getName()] = new Game($arena);
   }
   
+  public function getGameAvailable(string $mode, int $modeType, bool $ranked = false): ?Game
+  {
+    foreach($this->getGames() as $game) {
+      if ($game->getPhase() === self::PHASE_WAITING) {
+        if ($game->getArenaMode() === $mode) {
+          if ($game->getArenaModeType() === $modeType) {
+            if ($game->getArena()->getRanked() === $ranked) {
+              return $game;
+            }
+          }
+        }
+      }
+    }
+    return null;
+  }
+  
   public function deleteGame(string $name): void
   {
     if (!empty($game = $this->games[$name])) {
