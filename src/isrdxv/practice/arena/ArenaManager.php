@@ -9,15 +9,10 @@ use isrdxv\practice\arena\event\{
   ArenaDeleteEvent
 };
 
-use pocketmine\utils\{
-  Config,
-  Singletontrait
-};
+use pocketmine\utils\Config;
 
 class ArenaManager
 {
-  use SingletonTrait;
-  
   public const TYPE_DUEL = 1;
   public const TYPE_FFA = 0;
   
@@ -37,16 +32,15 @@ class ArenaManager
     }
   }
   
-  public function getRandomArena(string $mode, int $type): ?Arena
+  public function getRandomArena(string $mode, int $type, bool $ranked = false): ?Arena
   {
     $arenas = [];
     if (count($this->arenas) === 0) return null;
     
     foreach($this->arenas as $name => $class) {
-      if ($class->getMode() === $mode) {
-        if ($class->getTypeMode() === $type) {
-          array_push($arenas, $class);
-        }
+      if ($class->getMode() === $mode && $class->getModeType() === $type && $class->getRanked() === $ranked)
+      {
+        array_push($arenas, $class);
       }
     }
     if (count($arenas) === 0) return null;

@@ -58,7 +58,7 @@ class Translation
     }
     $messages = parse_ini_file(Loader::getInstance()->getDataFolder() . "languages" . DIRECTORY_SEPARATOR . $language . ".ini");
     if (!isset($messages[$message])) {
-      throw new TranslationException("The message i add does not exist in the language folders")
+      throw new TranslationException("The message i add does not exist in the language folders");
     }
     $message = $messages[$message];
     if (is_array($args)) {

@@ -5,6 +5,8 @@ namespace isrdxv\practice\game;
 use isrdxv\practice\Loader;
 use isrdxv\practice\translation\TranslationMessage;
 
+use pocketmine\scheduler\Task;
+
 class GameTask extends Task
 {
   /** @var Loader **/
@@ -24,7 +26,8 @@ class GameTask extends Task
       if ($game->getPhase() === $this->loader->getGameManager()::PHASE_WAITING) {
         if ($game->getPlayerCount() === 2) {
           $game->setPhase($this->loader->getGameManager()::PHASE_STARTING);
-        }elseif ($game->getPhase() === $this->loader->getGameManager()::PHASE_STARTING) {
+        }
+      }elseif ($game->getPhase() === $this->loader->getGameManager()::PHASE_STARTING) {
           $this->time--;
           if ($this->time <= 0) {
             $game->sendAction(function(Session $session) {
@@ -39,7 +42,7 @@ class GameTask extends Task
             });
           }
         }elseif ($game->getPhase() === $this->loader->getGameManager()::PHASE_PLAYING) {
-          $game->getTime()++;
+          $game->setTime();
         }elseif ($game->getPhase() === $this->loader->getGameManager()::PHASE_ENDING) {
           $this->time = 20;
           $this->time--;
@@ -51,6 +54,4 @@ class GameTask extends Task
         }
       }
     }
-  }
-  
 }

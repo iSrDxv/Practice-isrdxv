@@ -31,6 +31,22 @@ class GameManager
   {
     $this->games[$arena->getName()] = new Game($arena);
   }
+
+  public function getRandomGame(string $mode, int $type, bool $ranked = false): ?Game
+  {
+    $games = [];
+    if (count($this->games) === 0) return null;
+    
+    foreach($this->games as $class) {
+      if ($class->getArenaMode() === $mode && $class->getArenaModeType() === $type && $class->getRanked() === $ranked)
+      {
+        array_push($games, $class);
+      }
+    }
+    
+    if (count($games) === 0) return null;
+    return $games[array_rand($games, 1)];
+  }
   
   public function getGameAvailable(string $mode, int $modeType, bool $ranked = false): ?Game
   {

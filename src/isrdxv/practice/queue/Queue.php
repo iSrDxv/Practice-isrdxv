@@ -13,11 +13,11 @@ use pocketmine\Server;
 
 class Queue
 {
-  private int $id;
+  private string $id;
   
   private string $name;
   
-  private int $modeType;
+  private int $mode_type;
   
   private bool $ranked;
   
@@ -25,11 +25,11 @@ class Queue
   
   private array $spectators = [];
   
-  public function __construct(string $id, string $name, int $modeType = ArenaManager::TYPE_DUEL, bool $ranked = false)
+  public function __construct(string $id, string $name, int $mode_type = ArenaManager::TYPE_DUEL, bool $ranked = false)
   {
     $this->id = $id;
     $this->name = $name;
-    $this->modeType = $modeType;
+    $this->mode_type = $mode_type;
     $this->ranked = $ranked;
   }
   
@@ -45,7 +45,7 @@ class Queue
   
   public function getModeType(): int
   {
-    return $this->modeType;
+    return $this->mode_type;
   }
   
   public function getRanked(): bool
