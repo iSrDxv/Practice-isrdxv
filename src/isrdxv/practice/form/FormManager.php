@@ -114,16 +114,19 @@ class FormManager
   
   public function ranked(Session $session): MenuForm
   {
-    return new MenuForm(
-      Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "ranked-title-form"),
-      Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "ranked-text-form"),
-      [
-        new MenuOption("Duel \n nodebuff - Players: 0")
-      ],
-      function(Player $player, int $selected): void {
-        //
-      }
-    );
+    $buttons = [];
+    foreach(QueueManager::getInstance()->getQueues() as $queue) {
+      if ($queue->getModeType() === 1) {
+        $buttons[] = new MenuOption(Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "ranked-button-form"), ["arena_name" => $queue->getName(), "line" => "\n", "type_mode" => "Duel", "queue_players" => count($queue->getPlayers())]);
+        }
+        return new MenuForm(
+        Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "ranked-title-form"),
+        Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "ranked-text-form"),
+        $buttons,
+        function(Player $player, int $selected): void {
+          $queue->addPlayer($session);
+        });
+    }
   }
   
   public function unranked(Session $session): MenuForm

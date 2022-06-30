@@ -23,7 +23,7 @@ class Queue
   
   private array $spectators = [];
   
-  public function __construct(string $id, string $name, int $modeType = ArebaManager::TYPE_DUEL)
+  public function __construct(string $id, string $name, int $modeType = ArenaManager::TYPE_DUEL)
   {
     $this->id = $id;
     $this->name = $name;
