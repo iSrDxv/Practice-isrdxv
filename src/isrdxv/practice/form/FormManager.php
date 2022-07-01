@@ -155,7 +155,7 @@ class FormManager
         new MenuOption("NoDebuffMap \n FFA - Players: 0")
       ],
       function(Player $player, int $selectedOption): void {
-        //
+        $player->kick("Por gei", "se fue clau");
       }
     );
   }
