@@ -123,7 +123,7 @@ class FormManager
         Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "ranked-title-form"),
         Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "ranked-text-form"),
         $buttons,
-        function(Player $player, int $selected): void {
+        function(Player $player, int $selected) use($queue): void{
           $queue->addPlayer($session);
         });
     }
@@ -131,14 +131,19 @@ class FormManager
   
   public function unranked(Session $session): MenuForm
   {
-    return new MenuForm(
+    $buttons = [];
+    foreach(Loader::getInstance()->getQueueManager()->getQueues() as $queue) {
+      if ($queue->getModeType() === 1 && $queue->getRanked() === false) {
+        $buttons[] = new MenuOption(Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "unranked-button-form", ["line" => "\n", "arena_name" => $queue->getName(), "type_mode" => "Duel", "queue_players" => count($queue->getPlayers())]));
+      }
+      return new MenuForm(
       Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "unranked-title-form"),
       Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "unranked-text-form"),
-      [],
+      $buttons,
       function(Player $player, int $selected): void {
         //
-      }
-    );
+      });
+    }
   }
   
   public function ffa(Session $session): MenuForm
