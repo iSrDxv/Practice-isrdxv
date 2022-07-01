@@ -7,7 +7,7 @@ use pocketmine\utils\TextFormat;
 class Utilities
 {
   
-  public const PLUGIN_PREFIX = TextFormat::BOLD . TextFormat::BLACK . "[" . TextFormat::ITALIC . TextFormat::AQUA . "Practice" . TextFormat::RESET . TextFormat::BOLD . TextFormat::BLACK . "]" . TextFormat::RESET . TextFormat::BOLD . TextFormat::WHITE " »" . TextFormat::GRAY;
+  //public const PLUGIN_PREFIX = TextFormat::BOLD . TextFormat::BLACK . "[" . TextFormat::ITALIC . TextFormat::AQUA . "Practice" . TextFormat::RESET . TextFormat::BOLD . TextFormat::BLACK . "]" . TextFormat::RESET . TextFormat::BOLD . TextFormat::WHITE " »";
   
   public static function getModeToString(string $mode): string
   {
@@ -26,6 +26,11 @@ class Utilities
     break;
     }
     return $mode;
+  }
+  
+  public static function getRandomBin(): string
+  {
+    return bin2hex(random_bytes(3));
   }
   
 }

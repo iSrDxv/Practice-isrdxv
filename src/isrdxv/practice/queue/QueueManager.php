@@ -4,6 +4,7 @@ namespace isrdxv\practice\queue;
 
 use isrdxv\practice\queue\Queue;
 use isrdxv\practice\arena\ArenaManager;
+use isrdxv\practice\utils\Utilities;
 
 class QueueManager
 {
@@ -11,21 +12,20 @@ class QueueManager
   
   public function __construct()
   {
-    $id = bin2hex(random_bytes(3));
     //NoDebuff
-    $this->create(new Queue($id, "NoDebuff", ArenaManager::TYPE_DUEL, true));
-    $this->create(new Queue($id, "NoDebuff", ArenaManager::TYPE_DUEL));
-    $this->create(new Queue($id, "NoDebuff", ArenaManager::TYPE_FFA));
+    $this->create(new Queue(Utilities::getRandomBin(), "NoDebuff", ArenaManager::TYPE_DUEL, true));
+    $this->create(new Queue(Utilities::getRandomBin(), "NoDebuff", ArenaManager::TYPE_DUEL));
+    $this->create(new Queue(Utilities::getRandomBin(), "NoDebuff", ArenaManager::TYPE_FFA));
     
     //Gapple
-    $this->create(new Queue($id, "Gapple", ArenaManager::TYPE_DUEL, true));
-    $this->create(new Queue($id, "Gapple", ArenaManager::TYPE_DUEL));
-    $this->create(new Queue($id, "Gapple", ArenaManager::TYPE_FFA));
+    $this->create(new Queue(Utilities::getRandomBin(), "Gapple", ArenaManager::TYPE_DUEL, true));
+    $this->create(new Queue(Utilities::getRandomBin(), "Gapple", ArenaManager::TYPE_DUEL));
+    $this->create(new Queue(Utilities::getRandomBin(), "Gapple", ArenaManager::TYPE_FFA));
     
     //Combo
-    $this->create(new Queue($id, "Combo", ArenaManager::TYPE_DUEL, true));
-    $this->create(new Queue($id, "Combo", ArenaManager::TYPE_DUEL));
-    $this->create(new Queue($id, "Combo", ArenaManager::TYPE_FFA));
+    $this->create(new Queue(Utilities::getRandomBin(), "Combo", ArenaManager::TYPE_DUEL, true));
+    $this->create(new Queue(Utilities::getRandomBin(), "Combo", ArenaManager::TYPE_DUEL));
+    $this->create(new Queue(Utilities::getRandomBin(), "Combo", ArenaManager::TYPE_FFA));
   }
   
   public function create(Queue $queue): void
