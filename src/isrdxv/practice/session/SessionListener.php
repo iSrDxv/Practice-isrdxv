@@ -57,7 +57,7 @@ class SessionListener implements Listener
       $player->sendMessage(TextFormat::colorize($desc));
     }
     
-    $event->setJoinMessage(TextFormat::colorize(Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($player->getName()), "welcome-message", ["%username%" => $player->getName()])));
+    $event->setJoinMessage(TextFormat::colorize(Loader::getInstance()->getTranslation()->sendTranslation(Loader::getInstance()->getProvider()->getLanguage($player->getName()), "welcome-message", ["%username%" => $player->getName()])));
   }
   
   public function onRespawn(PlayerRespawnEvent $event): void
@@ -73,7 +73,7 @@ class SessionListener implements Listener
   {
     $player = $event->getPlayer();
     Loader::getInstance()->getProvider()->saveDataSession($player->getName(), (SessionManager::getInstance()->get($player->getName()))->__toArray());
-    $event->setQuitMessage(Loader::getInstance()->getTranslation()->addMessage(Loader::getInstance()->getProvider()->getLanguage($player->getName()), "leave-message", ["%username%" => $player->getName()]));
+    $event->setQuitMessage(Loader::getInstance()->getTranslation()->sendTranslation(Loader::getInstance()->getProvider()->getLanguage($player->getName()), "leave-message", ["%username%" => $player->getName()]));
   }
   
   /**
