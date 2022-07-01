@@ -2,7 +2,7 @@ world: "world"
 slots: 2
 mode: "nodebuff"
 type: "solo"
-ranked: false
+ranked: true
 type-mode: 1
 spawns: 
  spawn-1: 
