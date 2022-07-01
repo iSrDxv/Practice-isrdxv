@@ -34,7 +34,7 @@ class Session
   private ?Scoreboard $scoreboard;
   
   /** @var Queue|null **/
-  private ?Queue $queue;
+  private ?Queue $queue = null;
   
   private array $settings;
   

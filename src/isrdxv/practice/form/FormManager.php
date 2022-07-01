@@ -117,7 +117,7 @@ class FormManager
     $buttons = [];
     foreach(Loader::getInstance()->getQueueManager()->getQueues() as $queue) {
       if ($queue->getModeType() === 1 && $queue->getRanked() === true) {
-        $buttons[] = new MenuOption(Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "ranked-button-form"), ["arena_name" => $queue->getName(), "line" => "\n", "type_mode" => "Duel", "queue_players" => count($queue->getPlayers())]);
+        $buttons[] = new MenuOption(Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "ranked-button-form", ["arena_name" => $queue->getName(), "line" => "\n", "type_mode" => "Duel", "queue_players" => count($queue->getPlayers())]));
         }
         return new MenuForm(
         Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "ranked-title-form"),
