@@ -71,7 +71,7 @@ class QueueManager
   {
     $count = 0;
     foreach($this->queues as $queue) {
-      if (count($queue->getPlayers()) === 2) {
+      if (count($queue->getPlayers()) === 2 || 1) {
         $count++;
       }
     }
