@@ -16,8 +16,8 @@ This is a beta version, it is very likely a drop in TPS or performance and clear
  - [ ] Game System
  - [x] Session System
  - [ ] Leaderboards System
- - [ ] Events System
- - [ ] System Kits
+ - [ ] Events System (Premium)
+ - [ ] System Kits (Premium)
 
 <!--
 ━━━━━━━
