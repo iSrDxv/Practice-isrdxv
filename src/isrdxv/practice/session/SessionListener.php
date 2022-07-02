@@ -116,9 +116,7 @@ class SessionListener implements Listener
     $player = $event->getPlayer();
     if ($player->getWorld()->getFolderName() === Loader::getInstance()->getConfig()->get("lobby-name")) {
       if (Server::getInstance()->isOp($player->getName()) || $player->hasPermission("lobby.block.break")) {
-        if ($event->isCancelled() === true) {
           $event->uncancel();
-        }
       }
     }
     $event->cancel();
@@ -129,9 +127,7 @@ class SessionListener implements Listener
     $player = $event->getPlayer();
     if ($player->getWorld()->getFolderName() === Loader::getInstance()->getConfig()->get("lobby-name")) {
       if (Server::getInstance()->isOp($player->getName()) || $player->hasPermission("lobby.block.place")) {
-        if ($event->isCancelled() === true) {
           $event->uncancel();
-        }
       }
     }
     $event->cancel();

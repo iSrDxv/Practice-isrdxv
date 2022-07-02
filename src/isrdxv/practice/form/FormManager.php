@@ -55,7 +55,7 @@ class FormManager
           "queue" => $response->getBool("queue"),
           "auto-join" => $response->getBool("auto-join")
           ]);
-        $player->sendMessage("");
+        $player->sendMessage("§asuccesfully");
       }
     );
   }

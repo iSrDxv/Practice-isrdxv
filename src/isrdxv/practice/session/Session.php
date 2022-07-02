@@ -74,6 +74,11 @@ class Session
     return $this->player;
   }
   
+  public function getDevice(): string
+  {
+    return $this->device;
+  }
+  
   public function getScoreboard(): Scoreboard
   {
     return $this->scoreboard;
@@ -164,6 +169,16 @@ class Session
     return $this->elo;
   }
   
+  public function addPoint(int $amount = 0): void
+  {
+    $this->elo += $amount;
+  }
+  
+  public function subtractPoint(int $amount= 0): void
+  {
+    $this->elo -= $amount;
+  }
+  
   public function getMurders(): array
   {
     return $this->kills;
@@ -225,25 +240,27 @@ class Session
     $this->getPlayer()->getInventory()->setItem(4, $leave);
   }
   
-  public function __toArray(): array
-  {
-    return [
-      "name" => $this->getPlayer()->getName(),
-      "points" => $this->getPoints(),
-      //"rank" => $this->getRank(),
-      "murders" => $this->getMurders(),
-      "deaths" => $this->getDeaths(),
-      "language" => $this->getPlayer()->getLocale(),
-      "won-events" => $this->getWonEvents(),
-    ];
-  }
-  
   public function addPermission(string $permission = "", string $description = null): void
   {
     if ($permission !== "") {
       $permission = new Permission($permission, $description);
     }
     PermissionManager::getInstance()->addPermission($permission);
+  }
+  
+  public function __toArray(): array
+  {
+    return [
+      "name" => $this->getPlayer()->getName(),
+      "elo" => $this->getPoints(),
+      "device" => $this->getDevice(),
+      "points" => $this->getPoints(),
+      //"rank" => $this->getRank(),
+      "murders" => $this->getMurders(),
+      "deaths" => $this->getDeaths(),
+      //"language" => $this->getPlayer()->getLocale(),
+      "won-events" => $this->getWonEvents(),
+    ];
   }
   
 }
