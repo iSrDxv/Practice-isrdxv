@@ -10,7 +10,10 @@ This is a beta version, it is very likely a drop in TPS or performance and clear
 - this plugin supports up to 150 or 100 simultaneous players (in theory, remember that it is a beta)
 
 ### Implements
-
+ - [?] Party System
+ - [x] Arena System
+ - [x] Queue System
+ 
 <!--
 ━━━━━━━
 Plugin Information:
