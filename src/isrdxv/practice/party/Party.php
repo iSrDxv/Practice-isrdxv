@@ -51,12 +51,12 @@ class Party
   
   public function isFull(): bool
   {
-    return ($this->getCountMembers() >= $this->getSlots());
+    return $this->getCountMembers() >= $this->getSlots();
   }
   
   public function setSlots(int $slot): void
   {
-    $this->slots = ($slot === null) ? $this->slots : $slot;
+    $this->slots = $slot === null ? $this->slots : $slot;
   }
   
   public function set(Session $session): void
@@ -66,10 +66,10 @@ class Party
     $this->sendMembers("has joined the party");
   }
   
-  public function unset(Session $session): void
+  public function deselect(Session $session): void
   {
     if ($this->isMember($session)) {
-      //unset();
+      unset($this->members[array_search($session, $this->members, true)]);
     }
     $session->setParty(null);
     $this->sendMembers("has left the party!");
