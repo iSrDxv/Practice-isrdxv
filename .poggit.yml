@@ -1,7 +1,7 @@
 --- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/iSrDxv/Practice-isrdxv
 build-by-default: true
 branches:
-- main
+- stable
 projects:
   Practice-isrdxv:
     path: ""
