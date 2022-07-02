@@ -96,7 +96,7 @@ class Session
   
   public function changeScoreboard(): void
   {
-    if ($this->getSetting("score") !== true) {
+    if ($this->getSetting("score") === false) {
       $this->getScoreboard()->remove();
       return;
     }
