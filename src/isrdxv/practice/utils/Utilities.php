@@ -7,7 +7,7 @@ use pocketmine\utils\TextFormat;
 class Utilities
 {
   
-  //public const PLUGIN_PREFIX = TextFormat::BOLD . TextFormat::BLACK . "[" . TextFormat::ITALIC . TextFormat::AQUA . "Practice" . TextFormat::RESET . TextFormat::BOLD . TextFormat::BLACK . "]" . TextFormat::RESET . TextFormat::BOLD . TextFormat::WHITE " »";
+  public const PLUGIN_PREFIX = TextFormat::BOLD . TextFormat::BLACK . "[" . TextFormat::ITALIC . TextFormat::AQUA . "Practice" . TextFormat::RESET . TextFormat::BOLD . TextFormat::BLACK . "]" . TextFormat::RESET . TextFormat::BOLD . TextFormat::WHITE . " » " . TextFormat::GRAY;
   
   public static function getModeToString(string $mode): string
   {

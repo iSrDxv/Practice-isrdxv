@@ -148,6 +148,7 @@ class FormManager
   
   public function ffa(Session $session): MenuForm
   {
+    //$buttons = [];
     return new MenuForm(
       Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "ffa-title-form"),
       Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "ffa-text-form"),
