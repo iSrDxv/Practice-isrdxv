@@ -21,7 +21,7 @@ permissions:
     default: false
   lobby.block.break:
     description: Break blocks in the lobby
-    default: op
+    default: false
   lobby.block.place:
     description: Place blocks in the lobby
-    default: op
+    default: false
