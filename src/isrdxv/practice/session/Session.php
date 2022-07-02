@@ -4,8 +4,10 @@ namespace isrdxv\practice\session;
 
 use pocketmine\utils\TextFormat;
 use pocketmine\player\Player;
-
-// Items
+use pocketmine\permission\{
+  Permission,
+  PermissionManager
+};
 use pocketmine\item\{
   Item,
   ItemIds,
@@ -215,6 +217,14 @@ class Session
       "language" => $this->getPlayer()->getLocale(),
       "won-events" => $this->getWonEvents(),
     ];
+  }
+  
+  public function addPermission(string $permission = "", string $description = null): void
+  {
+    if ($permission !== "") {
+      $permission = new Permission($permission, $description);
+    }
+    PermissionManager::getInstance()->addPermission($permission);
   }
   
 }
