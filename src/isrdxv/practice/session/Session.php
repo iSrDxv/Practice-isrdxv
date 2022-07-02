@@ -18,7 +18,7 @@ use isrdxv\practice\Loader;
 use isrdxv\practice\translation\TranslationMessage;
 use isrdxv\practice\provider\YAMLProvider;
 use isrdxv\practice\queue\Queue;
-//use isrdxv\practice\game\Game;
+use isrdxv\practice\game\Game;
 
 use libs\scoreboard\type\LobbyScoreboard;
 use libs\scoreboard\Scoreboard;
@@ -37,6 +37,8 @@ class Session
   
   /** @var Queue|null **/
   private ?Queue $queue = null;
+  
+  private ?Game $game = null;
   
   private array $settings;
   
@@ -108,16 +110,33 @@ class Session
   
   public function hasQueue(): bool
   {
-    return isset($this->queue) ? true : false;
+    return $this->queue !== null ? true : false;
   }
   
   public function setQueue(?Queue $queue = null): void
   {
     if ($this->hasQueue()) {
-      $this->getPlayer()->sendMessage("a");
       return;
     }
     $this->queue = $queue;
+  }
+  
+  public function getGame(): ?Game
+  {
+    return $this->game ?? null;
+  }
+  
+  public function isGame(): bool
+  {
+    return $this->queue !== null ? true : false;
+  }
+  
+  public function setGame(?Game $game = null): void
+  {
+    if ($this->isGame()) {
+      return;
+    }
+    $this->game = $game;
   }
   
   public function getSettings(): array
