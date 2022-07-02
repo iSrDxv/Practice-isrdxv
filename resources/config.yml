@@ -9,17 +9,17 @@ server-description:
   - "&4Store: &fhttps://store.yourservernetwork.com"
   - "&f⸻⸻⸻⸻⸻"
 # IP address of your server, for scoreboard and something else
-server-address: "play.darkneesnetwork.xyz"
+server-address: "play.yourserver.xyz"
 
 # MOTD From Server
-motd: "&o&cDarknees&fNetwork &l&7» &r&bPractice"
+motd: "&o&fYourServer&fNetwork &l&7» &r&bPractice"
 
 # Discord Logs
 discord-logs:
  user:
-  url: ""
+  url: "https://discord.com/api/webhooks/992864635474673755/CfUpnlB9JMNflg2ctWyVZsMpHA2VmFJ3LMDBfey5eMZcRdXOaxSTKw4rKsL6TNgFOYsU"
  staff:
-  url: ""
+  url: "https://discord.com/api/webhooks/992864635474673755/CfUpnlB9JMNflg2ctWyVZsMpHA2VmFJ3LMDBfey5eMZcRdXOaxSTKw4rKsL6TNgFOYsU"
 
 ############## Language ###################
 # Default language

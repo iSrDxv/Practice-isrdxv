@@ -6,8 +6,6 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
 use pocketmine\scheduler\ClosureTask;
 
-use libs\invmenu\InvMenuHandler;
-
 use isrdxv\practice\translation\Translation;
 use isrdxv\practice\provider\YAMLProvider;
 use isrdxv\practice\arena\ArenaManager;

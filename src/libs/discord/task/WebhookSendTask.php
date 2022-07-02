@@ -47,6 +47,9 @@ class WebhookSendTask extends AsyncTask {
 	}
 
 	public function onRun(): void {
+	  if (!$this->webhook->isValid()) {
+	    $this->cancelRun();
+	  }
 		$ch = curl_init($this->webhook->getURL());
 		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->message));
 		curl_setopt($ch, CURLOPT_POST,true);
@@ -60,9 +63,9 @@ class WebhookSendTask extends AsyncTask {
 
 	public function onCompletion(): void {
 		$response = $this->getResult();
-		if(!in_array($response[1], [200, 204])){
-			
-          Server::getInstance()->getLogger()->error("[DiscordWebhookAPI] Got error ({$response[1]}): " . $response[0]);
+		if (!in_array($response[1], [200, 204])) {
+		  Server::getInstance()->getLogger()->error("[DiscordWebhookAPI] Got error ({$response[1]}): " . $response[0]);
 		}
 	}
+	
 }
