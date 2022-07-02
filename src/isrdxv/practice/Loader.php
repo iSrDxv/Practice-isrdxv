@@ -26,14 +26,13 @@ use isrdxv\practice\session\{
 };
 use isrdxv\practice\command\{
   ArenaCommand,
-  HubCommand
+  HubCommand,
+  BanCommand
 };
 use isrdxv\practice\kit\KitManager;
 
 class Loader extends PluginBase
 {
-  public const PREFIX_PRACTICE = "&l&0[&3Practice&0] ";
-  
   private Translation $translation;
   
   private YAMLProvider $provider;
@@ -82,7 +81,8 @@ class Loader extends PluginBase
     }
     $this->getServer()->getCommandMap()->registerAll("practice", [
       new ArenaCommand(),
-      new HubCommand()
+      new HubCommand(),
+      new BanCommand()
     ]);
     $this->getServer()->getNetwork()->setName(TextFormat::colorize($this->getConfig()->get("motd")));
     $lobby = $this->getConfig()->get("lobby-name");

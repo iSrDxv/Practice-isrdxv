@@ -45,7 +45,7 @@ class BanCommand extends Command
     }
     $sender->getServer()->getNameBans()->addBan($name, $reason, $time, $sender->getName());
     if (($player = $sender->getServer()->getPlayerExact($name)) instanceof Player) {
-      //$player->kick();
+      $player->kick($reason !== "" ? $reason : "Banned by Console");
     }
   }
   
