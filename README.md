@@ -13,7 +13,9 @@ This is a beta version, it is very likely a drop in TPS or performance and clear
  - [ ] Party System
  - [x] Arena System
  - [x] Queue System
- 
+ - [ ] Game System
+ - [x] Session System
+
 <!--
 ━━━━━━━
 Plugin Information:
