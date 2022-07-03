@@ -26,9 +26,10 @@ discord:
 default-language: "en_US"
 
 ############## World from Practice ###################
-# Practice lobby name 
+# Practice lobby name
 lobby-name: "world"
-# i dont known :c
+#lobby-spawn:
+#lobby-border: i dont know :c
 ############## PVP ###################
 # Knockback
 knockback:
