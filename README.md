@@ -1,13 +1,13 @@
 # Practice
 PracticeCore for PocketMine-MP 4.0.0
 ## Description
-This is a beta version, it is very likely a drop in TPS or performance and clearly errors and bugs
+This is a beta version, It is very likely a drop in TPS or performance and clearly errors and bugs
 
 ## Recommendations
 - Do not use this plugin with another practice plugin
-- it is not necessary to implement more plugins, it will break the operation of the practice
-- recommended a good cpu
-- this plugin supports up to 150 or 100 simultaneous players (in theory, remember that it is a beta)
+- It is not necessary to implement more plugins, it will break the operation of the practice
+- Recommended a good cpu
+- This plugin supports up to 150 or 100 simultaneous players (in theory, remember that it is a beta)
 
 ## Implements
  - [ ] Party System
