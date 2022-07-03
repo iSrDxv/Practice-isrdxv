@@ -47,7 +47,7 @@ class Loader extends PluginBase
   {
     self::$instance = $this;
     $this->saveDefaultConfig();
-    $this->getServer()->getConfigGroup()->setConfigString("motd", $this->getConfig()->get("server-name"));
+    $this->getServer()->getConfigGroup()->setConfigString("motd", TextFormat::colorize($this->getConfig()->get("server-name")));
     $this->saveResource("arenas/world.yml");
   }
   

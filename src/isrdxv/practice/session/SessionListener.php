@@ -82,11 +82,9 @@ class SessionListener implements Listener
   public function onQuery(QueryRegenerateEvent $event): void
   {
     $query = $event->getQueryInfo();
-    $query->setServerName(Loader::getInstance()->getConfig()->get("server-name"));
-    if ($query->canListPlugins() === false) {
+    $query->setServerName(TextFormat::colorize(Loader::getInstance()->getConfig()->get("server-name")));
       $query->setListPlugins(true);
       $query->setPlugins([Loader::getInstance()]);
-    }
     $query->setWorld(Loader::getInstance()->getConfig()->get("lobby-name"));
     //$query->setMaxPlayerCount($query->getPlayerCount() + 1);
   }
