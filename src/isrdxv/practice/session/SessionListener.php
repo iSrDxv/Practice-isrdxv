@@ -9,6 +9,7 @@ use pocketmine\event\{
   player\PlayerRespawnEvent,
   player\PlayerInteractEvent,
   player\PlayerQuitEvent,
+  player\PlayerDropItemEvent,
   server\QueryRegenerateEvent,
   block\BlockBreakEvent,
   block\BlockPlaceEvent,
@@ -33,7 +34,7 @@ class SessionListener implements Listener
   {
     $player = $event->getPlayer();
     $query = $player->getServer()->getQueryInformation();
-    $player->getServer()->getConfigGroup()->setConfigInt("max-players", $query->getPlayerCount() + 1);
+    //$player->getServer()->getConfigGroup()->setConfigInt("max-players", $query->getPlayerCount() + 1);
     if (!$player->hasPlayedBefore()) {
       SessionManager::getInstance()->set($player->getName());
     }
@@ -43,7 +44,6 @@ class SessionListener implements Listener
   public function onJoin(PlayerJoinEvent $event): void
   {
     $player = $event->getPlayer();
-    var_dump($player->getPlayerInfo()->getExtraData());
     $session = SessionManager::getInstance()->get($player->getName());
     $world = Server::getInstance()->getWorldManager()->getWorldByName(Loader::getInstance()->getConfig()->get("lobby-name"));
     $player->teleport($world->getSafeSpawn());
@@ -83,8 +83,8 @@ class SessionListener implements Listener
   {
     $query = $event->getQueryInfo();
     $query->setServerName(TextFormat::colorize(Loader::getInstance()->getConfig()->get("server-name")));
-      $query->setListPlugins(true);
-      $query->setPlugins([Loader::getInstance()]);
+    $query->setListPlugins(true);
+    $query->setPlugins([Loader::getInstance()]);
     $query->setWorld(Loader::getInstance()->getConfig()->get("lobby-name"));
     //$query->setMaxPlayerCount($query->getPlayerCount() + 1);
   }
@@ -96,16 +96,23 @@ class SessionListener implements Listener
   {
     $player = $event->getPlayer();
     $item = $event->getItem();
+    $session = SessionManager::getInstance()->get($player->getName());
     if ($item->getCustomName() === TextFormat::colorize("&l&fSettings")) {
-      $player->sendForm(FormManager::getInstance()->settings(SessionManager::getInstance()->get($player->getName())));
+      $player->sendForm(FormManager::getInstance()->settings($session));
     }elseif ($item->getCustomName() === TextFormat::colorize("&l&fParty")) {
-      $player->sendForm(FormManager::getInstance()->party(SessionManager::getInstance()->get($player->getName())));
+      $player->sendForm(FormManager::getInstance()->party($session));
     }elseif ($item->getCustomName() === TextFormat::colorize("&l&fRanked &cQueue")) {
-      $player->sendForm(FormManager::getInstance()->ranked(SessionManager::getInstance()->get($player->getName())));
+      $player->sendForm(FormManager::getInstance()->ranked($session));
     }elseif ($item->getCustomName() === TextFormat::colorize("&l&fUnRanked &cQueue")) {
-      $player->sendForm(FormManager::getInstance()->unranked(SessionManager::getInstance()->get($player->getName())));
+      $player->sendForm(FormManager::getInstance()->unranked($session));
     }elseif ($item->getCustomName() === TextFormat::colorize("&l&fFFA &cQueue")) {
-      $player->sendForm(FormManager::getInstance()->ffa(SessionManager::getInstance()->get($player->getName())));
+      $player->sendForm(FormManager::getInstance()->ffa($session));
+    }elseif ($item->getCustomName() === TextFormat::colorize("&l&o&fLeave Queue")) {
+      if ($session->hasQueue()) {
+        $session->getQueue()->deletePlayer($session);
+        $session->setQueue(null);
+        $session->giveLobbyItems();
+      }
     }
   }
   
@@ -138,9 +145,19 @@ class SessionListener implements Listener
       $damager = $event->getDamager();
       if ($damager->getWorld()->getFolderName() === Loader::getInstance()->getConfig()->get("lobby-name")) {
         if ($entity instanceof Player && $damager instanceof Player) {
-        $event->cancel();
+          $event->cancel();
+        }elseif ($event->getCause() === EntityDamageEvent::CAUSE_FALL) {
+          $event->cancel();
         }
       }
+    }
+  }
+  
+  public function onDrop(PlayerDropItemEvent $event): void
+  {
+    $player = $event->getPlayer();
+    if ($player->getWorld()->getFolderName() === Loader::getInstance()->getConfig()->get("lobby-name")) {
+      $event->cancel();
     }
   }
   

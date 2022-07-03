@@ -32,6 +32,8 @@ class Session
   
   private string $language;
   
+  private string $device;
+  
   /** @var Scoreboard|null **/
   private ?Scoreboard $scoreboard;
   
@@ -64,9 +66,10 @@ class Session
     // String
     //$this->rank = Loader::getInstance()->getRankManager()->getRankByName($player->getName());
     $this->device = Loader::getInstance()->getProvider()->getDevice($player->getPlayerInfo()->getExtraData());
+    $this->control = Loader::getInstance()->getProvider()->getDeviceControl($player->getPlayerInfo()->getExtraData());
     $this->language = Loader::getInstance()->getProvider()->getLanguage($player->getName());
     $player->setNameTag(TextFormat::AQUA . $player->getName());
-    $player->setScoreTag($this->device);
+    $player->setScoreTag($this->device . " | " . $this->control);
   }
   
   public function getPlayer(): Player
@@ -115,7 +118,7 @@ class Session
   
   public function hasQueue(): bool
   {
-    return $this->queue !== null ? true : false;
+    return $this->queue !== null;
   }
   
   public function setQueue(?Queue $queue = null): void
@@ -133,7 +136,7 @@ class Session
   
   public function isGame(): bool
   {
-    return $this->queue !== null ? true : false;
+    return $this->game !== null;
   }
   
   public function setGame(?Game $game = null): void
