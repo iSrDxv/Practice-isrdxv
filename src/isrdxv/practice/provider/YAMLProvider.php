@@ -30,7 +30,9 @@ class YAMLProvider
   {
     if (empty($data) || empty($name)) return;
     $config = new Config(Loader::getInstance()->getDataFolder() . "players" . DIRECTORY_SEPARATOR . $name . ".yml", Config::YAML);
-    $config->setAll($data);
+    foreach($data as $key => $value) {
+      $config->set($key, $value);
+    }
     $config->save();
   }
   
