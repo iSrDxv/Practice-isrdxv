@@ -123,7 +123,7 @@ class FormManager
         Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "ranked-title-form"),
         Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "ranked-text-form"),
         $buttons,
-        function(Player $player, int $selected) use($queue): void{
+        function(Player $player, int $selected) use($queue,$session): void{
           $queue->addPlayer($session);
         });
     }
