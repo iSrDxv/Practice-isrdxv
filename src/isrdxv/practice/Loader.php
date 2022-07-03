@@ -66,7 +66,7 @@ class Loader extends PluginBase
     $this->translation = new Translation();
     $this->provider = new YAMLProvider();
     $this->getServer()->getPluginManager()->registerEvents(new SessionListener(), $this);
-    //$this->getServer()->getPluginManager()->registerEvents(new GameListener(), $this);
+    $this->getServer()->getPluginManager()->registerEvents(new GameListener(), $this);
     $this->getServer()->getPluginManager()->registerEvents(new QueueListener(), $this);
     $this->getScheduler()->scheduleRepeatingTask(new ClosureTask(function(): void {
       foreach(SessionManager::getInstance()->getSessions() as $session) {
