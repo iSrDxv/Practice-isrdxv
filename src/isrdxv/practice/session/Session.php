@@ -202,7 +202,6 @@ class Session
     if ($this->isGame()) {
       return $this->getGame()->isPlaying($this);
     }
-    return false;
   }
   
   public function sendMessage(TranslationMessage|string $message): void
