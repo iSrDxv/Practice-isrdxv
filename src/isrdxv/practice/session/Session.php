@@ -142,9 +142,6 @@ class Session
   
   public function setGame(?Game $game = null): void
   {
-    if ($this->isGame()) {
-      return;
-    }
     $this->game = $game;
   }
   
