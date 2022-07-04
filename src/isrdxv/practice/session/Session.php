@@ -119,7 +119,7 @@ class Session
   
   public function hasQueue(): bool
   {
-    return $this->queue !== null;
+    return empty($this->queue) ? false : true;
   }
   
   public function setQueue(?Queue $queue = null): void
@@ -134,7 +134,7 @@ class Session
   
   public function isGame(): bool
   {
-    return $this->game !== null;
+    return empty($this->game) ? false : true;
   }
   
   public function setGame(?Game $game = null): void
