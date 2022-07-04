@@ -83,7 +83,7 @@ class GameManager
     $count = 0;
     foreach($this->getGames() as $game) {
       if ($game->getPhase() === self::PHASE_PLAYING) {
-        $count++;
+        ++$count;
       }
     }
     return $count;
