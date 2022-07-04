@@ -47,6 +47,9 @@ class Loader extends PluginBase
   {
     self::$instance = $this;
     $this->saveDefaultConfig();
+    $lobby = $this->getConfig()->get("lobby-name");
+    $this->getServer()->getWorldManager()->loadWorld($lobby);
+    $this->getServer()->getWorldManager()->setDefaultWorld($this->getServer()->getWorldManager()->getWorldByName($lobby));
     $this->getServer()->getConfigGroup()->setConfigString("motd", TextFormat::colorize($this->getConfig()->get("server-name")));
     $this->saveResource("arenas/world.yml");
   }
@@ -83,9 +86,6 @@ class Loader extends PluginBase
       new BanCommand()
     ]);
     $this->getServer()->getNetwork()->setName(TextFormat::colorize($this->getConfig()->get("motd")));
-    $lobby = $this->getConfig()->get("lobby-name");
-    $this->getServer()->getWorldManager()->loadWorld($lobby);
-    $this->getServer()->getWorldManager()->setDefaultWorld($this->getServer()->getWorldManager()->getWorldByName($lobby));
     $this->getLogger()->info("Plugin enabled!!");
   }
   
