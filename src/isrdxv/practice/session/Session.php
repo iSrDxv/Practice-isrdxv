@@ -286,7 +286,7 @@ class Session
   {
     return [
       "name" => $this->getPlayer()->getName(),
-      "elo" => $this->getPoints(),
+      "points" => $this->getPoints(),
       "device" => $this->getDevice(),
       "points" => $this->getPoints(),
       //"rank" => $this->getRank(),
