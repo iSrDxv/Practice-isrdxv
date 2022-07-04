@@ -85,7 +85,7 @@ class Queue
   public function joinGame(): void
   {
     if (count($this->players) === 2) {
-      $game = GameManager::getInstance()->getGameAvailable(strtolower($this->getName()), $this->getModeType(), $this->getRanked());
+      $game = Loader::getInstance()->getGameManager()->getGameAvailable(strtolower($this->getName()), $this->getModeType(), $this->getRanked());
       foreach($this->players as $session) {
         if (isset($game)) {
           if (count($game->getPlayers()) <= 1) {
