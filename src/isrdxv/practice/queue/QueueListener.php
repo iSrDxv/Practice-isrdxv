@@ -19,7 +19,7 @@ class QueueListener implements Listener
     $session = SessionManager::getInstance()->get($event->getPlayer());
     if ($session->hasQueue()) {
       $session->getQueue()->removePlayer($session);
-      $session->setQueue(null);
+      $session->setQueue();
     }
   }
   

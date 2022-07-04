@@ -203,6 +203,14 @@ class Session
     return $this->language;
   }
   
+  public function isPlaying(): bool
+  {
+    if ($this->isGame()) {
+      return $this->getGame()->isPlaying($this);
+    }
+    return false;
+  }
+  
   public function sendMessage(TranslationMessage|string $message): void
   {
     if ($message instanceof TranslationMessage) {
@@ -267,7 +275,9 @@ class Session
   
   public function teleportToLobby(): void
   {
-    
+    $world = Server::getInstance()->getWorldManager()->getWorldByName(Loader::getInstance()->getConfig()->get("lobby-name"));
+    $this->player->teleport($world->getSafeSpawn());
+    $this->player->setHealth($this->player->getMaxhealth());
   }
   
   public function addPermission(string $permission = "", string $description = null): void

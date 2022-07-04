@@ -46,6 +46,7 @@ class SessionListener implements Listener
     $player = $event->getPlayer();
     $session = SessionManager::getInstance()->get($player->getName());
     $world = Server::getInstance()->getWorldManager()->getWorldByName(Loader::getInstance()->getConfig()->get("lobby-name"));
+    $world->loadChunk($world->getSafeSpawn()->getX(), $world->getSafeSpawn()->getZ());
     $player->teleport($world->getSafeSpawn());
     $session->giveLobbyItems();
     
@@ -64,8 +65,7 @@ class SessionListener implements Listener
   {
     $player = $event->getPlayer();
     $session = SessionManager::getInstance()->get($player->getName());
-    $world = Server::getInstance()->getWorldManager()->getWorldByName(Loader::getInstance()->getConfig()->get("lobby-name"));
-    $player->teleport($world->getSafeSpawn());
+    $session->teleportToLobby();
     $session->giveLobbyItems();
   }
   
@@ -110,7 +110,7 @@ class SessionListener implements Listener
     }elseif ($item->getCustomName() === TextFormat::colorize("&l&o&fLeave Queue")) {
       if ($session->hasQueue()) {
         $session->getQueue()->deletePlayer($session);
-        $session->setQueue(null);
+        $session->setQueue();
         $session->giveLobbyItems();
       }
     }
