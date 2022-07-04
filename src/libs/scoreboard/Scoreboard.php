@@ -38,8 +38,6 @@ class Scoreboard
   
   public string $title;
   
-  public bool $spawned = false;
-  
   /** @var ScorePacketEntry[] **/
   public array $lines = [];
   
@@ -53,27 +51,18 @@ class Scoreboard
     return $this->player;
   }
   
-  public function isSpawned(): bool
-  {
-    return $this->spawned;
-  }
-  
   public function spawn(): void 
   {
-    if (!$this->spawned) {
-      $pk = SetDisplayObjectivePacket::create(SetDisplayObjectivePacket::DISPLAY_SLOT_SIDEBAR, $this->getPlayer()->getName(), $this->title, "dummy", SetDisplayObjectivePacket::SORT_ORDER_ASCENDING);
-      $this->getPlayer()->getNetworkSession()->sendDataPacket($pk);
-      $this->spawned = true;
+    if (!$this->player->isOnline()) {
       return;
-    } 
+    }
+    $this->remove();
+    $pk = SetDisplayObjectivePacket::create(SetDisplayObjectivePacket::DISPLAY_SLOT_SIDEBAR, $this->getPlayer()->getName(), $this->title, "dummy", SetDisplayObjectivePacket::SORT_ORDER_ASCENDING);
+    $this->getPlayer()->getNetworkSession()->sendDataPacket($pk);
   }
   
   public function remove(): void
   { 
-    if (!$this->spawned) {
-      return;
-    }
-    $this->spawned = false;
     $pk = RemoveObjectivePacket::create($this->getPlayer()->getName());
     $this->getPlayer()->getNetworkSession()->sendDataPacket($pk);
   }

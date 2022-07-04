@@ -29,6 +29,9 @@ class HubCommand extends Command
   
   public function execute(CommandSender $sender, string $label, array $args): void
   {
+    if (!$sender instanceof Player) {
+      return;
+    }
     $world = Server::getInstance()->getWorldManager()->getWorldByName(Loader::getInstance()->getConfig()->get("lobby-name"));
     $session = SessionManager::getInstance()->get($sender->getName());
     $session->giveLobbyItems();

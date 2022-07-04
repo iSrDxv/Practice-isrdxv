@@ -96,11 +96,10 @@ class Queue
           }
         } else {
           $session->sendMessage(new TranslationMessage("queue-no-arenas"));
-          $world = $session->getPlayer()->getServer()->getWorldManager()->getWorldByName(Loader::getInstance()->getConfig()->get("lobby-name"));
-          $session->getPlayer()->teleport($world->getSafeSpawn());
+          $session->teleportToLobby();
           $session->giveLobbyItems();
           $this->deletePlayer($session);
-          $session->setQueue(null);
+          $session->setQueue();
         }
       }
     }
