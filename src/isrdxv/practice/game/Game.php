@@ -113,14 +113,50 @@ class Game
     return array_key_exists($session, $this->players);
   }
   
-  public function deletePlayer(Session $session): void
+  public function deletePlayer(Session $session, bool $game = false, bool $del_spectator = false): void
   {
     unset($this->players[array_search($session, $this->players, true)]);
+    if (!$this->isSpectating($session)) {
+      $this->addSpectator($session);
+    }
+    if ($game) {
+      $session->setGame();
+      $session->teleportToLobby();
+    }
+    if ($del_spectator) {
+      $this->deleteSpectator($session);
+    }
+    $session->setGamemode(0);
+  }
+  
+  public function addSpectator($session): void
+  {
+    $this->spectators[] = $session;
+    $session->setGamemode(3);
+  }
+  
+  public function isSpectating(Session $session): bool
+  {
+    return array_key_exists($session, $this->spectators);
+  }
+  
+  public function deleteSpectator(Session $session): void
+  {
+    unset($this->spectators[array_search($session, $this->spectators, true)]);
+    $session->setGamemode(0);
   }
   
   public function getPlayerCount(): int
   {
     return count($this->players);
+  }
+  
+  public function finish(Session $session): void
+  {
+    $this->deletePlayer($session);
+    foreach($this->players as $player) {
+      $this->setPhase(GameManager::PHASE_ENDING);
+    }
   }
   
   public function toReset(): void

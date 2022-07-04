@@ -211,6 +211,27 @@ class Session
     $this->getPlayer()->sendMessage(TextFormat::colorize($message));
   }
   
+  public function setGamemode(int $value): void
+  {
+    switch($value){
+      case 0:
+        $this->player->setGamemode(GameMode::SURVIVAL());
+      break;
+      case 1:
+        $this->player->setGamemode(GameMode::CREATIVE());
+      break;
+      case 2:
+        $this->player->setGamemode(GameMode::ADVENTURE());
+      break;
+      case 3:
+        $this->player->setGamemode(GameMode::SPECTATOR());
+      break;
+      default:
+        $this->player->setGamemode(GameMode::ADVENTURE());
+      break;
+    }
+  }
+  
   /**
    * I'm lazy to shorten the item code
    **/
@@ -242,6 +263,11 @@ class Session
     $this->getPlayer()->getInventory()->clearAll();
     $this->getPlayer()->getArmorInventory()->clearAll();
     $this->getPlayer()->getInventory()->setItem(4, $leave);
+  }
+  
+  public function teleportToLobby(): void
+  {
+    
   }
   
   public function addPermission(string $permission = "", string $description = null): void
