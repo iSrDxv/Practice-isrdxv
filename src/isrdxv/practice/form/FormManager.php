@@ -120,12 +120,12 @@ class FormManager
         $buttons[] = new MenuOption(Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "ranked-button-form", ["queue_name" => $queue->getName(), "line" => "\n", "type_mode" => "Duel", "queue_players" => count($queue->getPlayers())]));
         }
         return new MenuForm(
-        Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "ranked-title-form"),
-        Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "ranked-text-form"),
-        $buttons,
-        function(Player $player, int $selected) use($queue,$session): void{
+          Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "ranked-title-form"),
+          Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "ranked-text-form"),
+          $buttons,
+          function(Player $player, int $selected) use($queue,$session): void{
           $queue->addPlayer($session);
-        });
+          });
     }
   }
   

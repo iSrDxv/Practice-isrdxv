@@ -88,8 +88,12 @@ class Queue
       $game = GameManager::getInstance()->getGameAvailable(strtolower($this->getName()), $this->getModeType(), $this->getRanked());
       foreach($this->players as $session) {
         if (isset($game)) {
-          $game->addPlayer($session);
-          $session->sendMessage(new TranslationMessage("queue-join-arena"));
+          if (count($game->getPlayers()) <= 1) {
+            $game->addPlayer($session);
+            $session->sendMessage(new TranslationMessage("queue-join-arena"));
+          } else {
+            $game->addSpectator($session);
+          }
         } else {
           $session->sendMessage(new TranslationMessage("queue-no-arenas"));
           $world = $session->getPlayer()->getServer()->getWorldManager()->getWorldByName(Loader::getInstance()->getConfig()->get("lobby-name"));
