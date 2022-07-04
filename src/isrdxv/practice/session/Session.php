@@ -124,9 +124,6 @@ class Session
   
   public function setQueue(?Queue $queue = null): void
   {
-    if ($this->hasQueue()) {
-      return;
-    }
     $this->queue = $queue;
   }
   
