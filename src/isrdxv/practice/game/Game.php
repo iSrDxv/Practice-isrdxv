@@ -151,9 +151,9 @@ class Game
     return count($this->players);
   }
   
-  public function finish(Session $session): void
+  public function finish(Session $session, bool $global = true): void
   {
-    $this->deletePlayer($session);
+    $this->deletePlayer($session, $global, !$global);
     foreach($this->players as $player) {
       $this->setPhase(GameManager::PHASE_ENDING);
     }
