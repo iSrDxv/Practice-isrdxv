@@ -75,7 +75,7 @@ class Loader extends PluginBase
       foreach(SessionManager::getInstance()->getSessions() as $session) {
         $session->changeScoreboard();
       }
-    }), 20);
+    }), 25);
     $this->getScheduler()->scheduleRepeatingTask(new GameTask($this), 30);
     foreach(["ban", "kick", "me", "plugins", "pardon", "pardon-ip", "tell", "about", "list", "kill"] as $command) {
       $this->getServer()->getCommandMap()->unregister($this->getServer()->getCommandMap()->getCommand($command));

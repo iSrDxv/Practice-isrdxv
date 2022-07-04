@@ -35,7 +35,7 @@ class BanCommand extends Command
     $username = array_shift($args);
     $reason = implode(" ", $args);
     $time = null;
-    if (is_string($args[2])) {
+    if (isset($args[2])) {
       if ($this->validateDate($args[2])) {
         $time = new DateTime($args[2], new DateTimeZone("+2"));
       }
