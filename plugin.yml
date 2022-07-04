@@ -3,7 +3,7 @@ load: "STARTUP"
 author: iSrDxv
 #add your name here if you edited a file or added new functionality (only if you fork the repository)
 #authors: []
-version: 1.8.1-ALPHA
+version: 1.8.2-ALPHA
 main: isrdxv\practice\Loader
 api: 4.0.0
 prefix: "PracticeCore"
