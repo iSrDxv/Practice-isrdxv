@@ -8,6 +8,7 @@ use isrdxv\practice\game\{
   GameManager,
   GameException
 };
+use isrdxv\practice\session\Session;
 
 use pocketmine\utils\TextFormat;
 
