@@ -71,6 +71,7 @@ class Loader extends PluginBase
     $this->translation = new Translation();
     $this->provider = new YAMLProvider();
     $this->webhook = new WebhookManager($this);
+    $this->webhook->sendStatus();
     $this->getServer()->getPluginManager()->registerEvents(new SessionListener(), $this);
     $this->getServer()->getPluginManager()->registerEvents(new GameListener(), $this);
     $this->getServer()->getPluginManager()->registerEvents(new QueueListener(), $this);
@@ -90,6 +91,11 @@ class Loader extends PluginBase
     ]);
     $this->getServer()->getNetwork()->setName(TextFormat::colorize($this->getConfig()->get("motd")));
     $this->getLogger()->info("Plugin enabled!!");
+  }
+  
+  protected function onDisable(): void
+  {
+    $this->webhook->sendStatus(false);
   }
   
   public function getTranslation(): Translation
