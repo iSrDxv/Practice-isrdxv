@@ -11,7 +11,7 @@ final class TranslationMessage
   /** @var Array **/
   private $params = [];
   
-  public function __construct(string $text = "", array $params = null)
+  public function __construct(string $text = "", ?array $params = null)
   {
     if (empty($text)) {
       throw new TranslationException("$text variable is null or empty string");
@@ -31,7 +31,7 @@ final class TranslationMessage
   /** 
    * @return mixed[]
    */
-  public function getParameters(): array
+  public function getParameters(): ?array
   {
     return $this->params;
   }

@@ -48,7 +48,7 @@ class Translation
     return $language;
   }
   
-  public function sendTranslation(string $language, string $message, array $args = null): string
+  public function sendTranslation(string $language, string $message, ?array $args = null): string
   {
     if (empty($language) && empty($message)) {
       throw new LanguageException("[Practice: Translation] the message cannot be empty, and neither can the language");
