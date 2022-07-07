@@ -111,7 +111,7 @@ class Game
   
   public function isPlaying(Session $session): bool
   {
-    return array_key_exists($session, $this->players);
+    return in_array($session, $this->players);
   }
   
   public function deletePlayer(Session $session, bool $game = false, bool $del_spectator = false): void
@@ -138,7 +138,7 @@ class Game
   
   public function isSpectating(Session $session): bool
   {
-    return array_key_exists($session, $this->spectators);
+    return in_array($session, $this->spectators);
   }
   
   public function deleteSpectator(Session $session): void
