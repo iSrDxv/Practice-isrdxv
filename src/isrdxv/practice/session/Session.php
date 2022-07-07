@@ -5,6 +5,7 @@ namespace isrdxv\practice\session;
 
 use pocketmine\utils\TextFormat;
 use pocketmine\player\Player;
+use pocketmine\Server;
 use pocketmine\permission\{
   Permission,
   PermissionManager
@@ -202,12 +203,13 @@ class Session
     if ($this->isGame()) {
       return $this->getGame()->isPlaying($this);
     }
+    return false;
   }
   
   public function sendMessage(TranslationMessage|string $message): void
   {
     if ($message instanceof TranslationMessage) {
-      $message = Loader::getInstance()->getTranslation()->addMessage($this->getLanguage(), $message->getText(), $message->getParameters());
+      $message = Loader::getInstance()->getTranslation()->sendTranslation($this->getLanguage(), $message->getText(), $message->getParameters());
     }
     $this->getPlayer()->sendMessage(TextFormat::colorize($message));
   }
