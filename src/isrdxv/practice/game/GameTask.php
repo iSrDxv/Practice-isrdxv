@@ -29,7 +29,7 @@ class GameTask extends Task
           $game->setPhase($this->loader->getGameManager()::PHASE_STARTING);
         }
       }elseif ($game->getPhase() === $this->loader->getGameManager()::PHASE_STARTING) {
-        $game->sendAction(function(Session $session): void {
+        $game->sendAction(function(Session $session) use($game): void {
           if ($session->hasQueue()) {
             $session->getQueue()->deletePlayer($session);
             $session->setQueue();
@@ -37,7 +37,10 @@ class GameTask extends Task
           $player = $session->getPlayer();
           $player->getInventory()->clearAll();
           $player->getArmorInventory()->clearAll();
-          //$player->teleport();
+          for($slot = 0; $slot < 2; $slot++) {
+            //TODO: load chunk
+            $player->teleport($game->getArena()->getSpawns()["spawn-{$slot}"]);
+          }
         });
         $this->time--;
         if ($this->time <= 0) {
