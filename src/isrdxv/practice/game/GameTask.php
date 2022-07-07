@@ -39,7 +39,7 @@ class GameTask extends Task
           $player->getArmorInventory()->clearAll();
           for($slot = 0; $slot < 2; $slot++) {
             //TODO: load chunk
-            $player->teleport($game->getArena()->getSpawns()["spawn-{$slot}"]);
+            $player->teleport($game->getArena()->getSpawns()[$slot]);
           }
         });
         $this->time--;

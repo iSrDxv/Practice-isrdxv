@@ -3,7 +3,10 @@ declare(strict_types=1);
 
 namespace isrdxv\practice\arena;
 
-use isrdxv\practice\arena\ArenaManager;
+use isrdxv\practice\arena\{
+  ArenaManager,
+  mode\NormalMode
+};
 
 class Arena
 {
@@ -31,9 +34,9 @@ class Arena
   private int $mode_type;
   
   /** @var Array **/
-  private array $spawns;
+  private array $spawns = [];
   
-  public function __construct(string $name, int $slots, string $mode, string $type, bool $ranked, int $mode_type, array $spawns = []) 
+  public function __construct(string $name, int $slots, string $mode, string $type, bool $ranked, int $mode_type, array $spawns) 
   {
     $this->name = $name;
     $this->slots = isset($slots) ? $slots : 2;
@@ -41,7 +44,10 @@ class Arena
     $this->type = empty($type) ? "solo" : $type;
     $this->ranked = empty($ranked) ? false : $ranked; 
     $this->mode_type = empty($mode_type) ? ArenaManager::TYPE_FFA : $mode_type;
-    $this->spawns = ($spawns === []) ? ["spawn-1" => [], "spawn-2" => []] : $spawns;
+    foreach($spawns as $spawn) {
+      $position = explode(":", $spawn);
+      $this->spawns[] = new NormalMode($position[0], $position[1], $position[2], $position[3], $position[4]);
+    }
   }
   
   public function getName(): string
