@@ -1,5 +1,5 @@
 # Name from Server
-server-name: "&6MyServer"
+server-name: "&fMyServer"
 # Ad on entry
 # It can be in string or array, following the rules of .yml
 server-description: 
@@ -12,7 +12,7 @@ server-description:
 server-address: "play.yourserver.xyz"
 
 # MOTD From Server
-motd: "&o&fYourServer&fNetwork &l&7» &r&bPractice"
+motd: "&o&fYourServer &l&7» &r&bPractice"
 
 # Discord Logs
 discord:
