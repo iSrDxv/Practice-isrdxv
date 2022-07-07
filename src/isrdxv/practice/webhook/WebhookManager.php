@@ -59,4 +59,17 @@ class WebhookManager
     }
   }
   
+  public function sendStatus(bool $value = true): void
+  {
+    $msg = new Message();
+    $msg->setUsername($this->loader->getConfig()->get("discord")["username"]);
+    $msg->setAvatarURL($this->loader->getConfig()->get("discord")["avatarURL"]);
+    $embed = new Embed();
+    $embed->setTitle("Status");
+    $embed->setDescription($value === true ? "online" : "offline");
+    $embed->setAuthor("PracticeCore", "https://github.com/iSrDxv/Practice-isrdxv", $this->loader->getConfig()->get("discord")["avatarURL"]);
+    $msg->addEmbed($embed);
+    $this->user->send($msg);
+  }
+  
 }

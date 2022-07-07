@@ -41,6 +41,8 @@ class Loader extends PluginBase
   
   private QueueManager $queueManager;
   
+  private WebhookManager $webhook;
+  
   protected static $instance;
   
   public function onLoad(): void
@@ -68,6 +70,7 @@ class Loader extends PluginBase
     }
     $this->translation = new Translation();
     $this->provider = new YAMLProvider();
+    $this->webhook = new WebhookManager($this);
     $this->getServer()->getPluginManager()->registerEvents(new SessionListener(), $this);
     $this->getServer()->getPluginManager()->registerEvents(new GameListener(), $this);
     $this->getServer()->getPluginManager()->registerEvents(new QueueListener(), $this);
@@ -112,6 +115,11 @@ class Loader extends PluginBase
   public function getQueueManager(): QueueManager
   {
     return $this->queueManager;
+  }
+  
+  public function getWebhookManager(): WebhookManager
+  {
+    return $this->webhook;
   }
   
   public static function getInstance(): Loader

@@ -17,7 +17,7 @@ motd: "&o&fYourServer &l&7» &r&bPractice"
 # Discord Logs
 discord:
  username: "YourServer"
- avatarURL: "https://cdn.discordapp.com/icons/731320905032007680/5eff1b45b75e50084ade879743f7d357.png?size=4096"
+ avatarURL: "https://logodownload.org/wp-content/uploads/2014/09/twitter-logo-4.png"
  user: "https://discord.com/api/webhooks/992864635474673755/CfUpnlB9JMNflg2ctWyVZsMpHA2VmFJ3LMDBfey5eMZcRdXOaxSTKw4rKsL6TNgFOYsU"
  staff: "https://discord.com/api/webhooks/992864635474673755/CfUpnlB9JMNflg2ctWyVZsMpHA2VmFJ3LMDBfey5eMZcRdXOaxSTKw4rKsL6TNgFOYsU"
 
