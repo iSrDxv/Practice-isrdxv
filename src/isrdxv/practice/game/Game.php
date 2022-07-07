@@ -158,9 +158,7 @@ class Game
   public function finish(Session $session, bool $global = true): void
   {
     $this->deletePlayer($session, $global, $global);
-    foreach($this->players as $player) {
       $this->setPhase(GameManager::PHASE_ENDING);
-    }
   }
   
   public function toReset(): void
