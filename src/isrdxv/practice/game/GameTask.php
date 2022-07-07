@@ -37,6 +37,7 @@ class GameTask extends Task
           $player = $session->getPlayer();
           $player->getInventory()->clearAll();
           $player->getArmorInventory()->clearAll();
+          //give kit
           for($slot = 0; $slot < 2; $slot++) {
             //TODO: load chunk
             $player->teleport($game->getArena()->getSpawns()[$slot]);
