@@ -46,7 +46,7 @@ class Arena
     $this->mode_type = empty($mode_type) ? ArenaManager::TYPE_FFA : $mode_type;
     foreach($spawns as $spawn) {
       $position = explode(":", $spawn);
-      $this->spawns[] = new NormalMode($position[0], $position[1], $position[2], $position[3], $position[4]);
+      $this->spawns[] = new NormalMode(intval($position[0]), intval($position[1]), intval($position[2]), floatval($position[3]), floatval($position[4]));
     }
   }
   

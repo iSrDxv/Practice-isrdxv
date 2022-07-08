@@ -21,8 +21,8 @@ class WebhookManager
   public function __construct(Loader $loader)
   {
     $this->loader = $loader;
-    $this->user = new Webhook($loader->getConfig()->get("discord-logs")["user"]);
-    $this->staff = new Webhook($loader->getConfig()->get("discord-logs")["staff"]);
+    $this->user = new Webhook($loader->getConfig()->get("discord")["user"]);
+    $this->staff = new Webhook($loader->getConfig()->get("discord")["staff"]);
   }
   
   public function getWebhookUser(): Webhook

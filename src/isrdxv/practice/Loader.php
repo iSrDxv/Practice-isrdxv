@@ -28,6 +28,7 @@ use isrdxv\practice\command\{
   BanCommand
 };
 use isrdxv\practice\kit\KitManager;
+use isrdxv\practice\webhook\WebhookManager;
 
 class Loader extends PluginBase
 {
