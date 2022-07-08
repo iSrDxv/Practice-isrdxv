@@ -27,7 +27,7 @@ class ArenaManager
         return;
       }
       $config = new Config($file, Config::YAML);
-      $this->setArena($config->getAll());
+      $this->setArena(basename($file, ".yml"), $config->getAll());
       $loader->getLogger()->warning("Todas las arenas han sido cargadas");
     }
   }
@@ -56,9 +56,9 @@ class ArenaManager
  /**
   * It is used for the arena editing system, just change the parameter for an array
   */
-  public function setArena(array $data): void
+  public function setArena(string $name, array $data): void
   {
-    $this->arenas[$data["world"]] = ($arena = new Arena($data["world"], $data["slots"], $data["mode"], $data["type"], $data["ranked"], $data["type-mode"], $data["spawns"]));
+    $this->arenas[$name] = ($arena = new Arena($data["world"], $data["slots"], $data["mode"], $data["type"], $data["ranked"], $data["type-mode"], $data["spawns"]));
     (new ArenaCreationEvent($arena))->call();
   }
   
@@ -79,10 +79,12 @@ class ArenaManager
   /** 
    * Define the name of the arena and the class Arena with the data received from the creation of the arena
    */
-  public function createArena(?Arena $arena): void
+  public function createArena(string $name, ?Arena $arena): void
   {
-    if ($arena === null) return;
-    $this->arenas[$arena->getName()] = $arena;
+    if (empty($name) || empty($arena)) {
+      return;
+    }
+    $this->arenas[$name] = $arena;
     (new ArenaCreationEvent($arena))->call();
   }
   

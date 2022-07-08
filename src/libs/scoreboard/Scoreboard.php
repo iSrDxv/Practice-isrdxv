@@ -7,7 +7,7 @@
 *  |___/_|_\\___|____/_/ \_\___/ 
 *
 * @author: iSrDxv (SrClau)
-* @status: Beta
+* @status: Stable
 */
 
 namespace libs\scoreboard;
@@ -69,7 +69,7 @@ class Scoreboard
   
   public function setLine(int $line, string $description = ""): void
   {
-    if (isset($this->line[$line])) {
+    if (isset($this->lines[$line])) {
       $pk = new SetScorePacket(SetScorePacket::TYPE_REMOVE, [$this->lines[$line]]);
       $this->getPlayer()->getNetworkSession()->sendDataPacket($pk);
       unset($this->lines[$line]);
@@ -124,7 +124,7 @@ class Scoreboard
   
   public function removeAllLine(): void
   {
-    if (empty($this->lines) & ($this->spawned !== false)) {
+    if (empty($this->lines) && !$this->player->isOnline()) {
       return;
     }
     foreach($this->lines as $line) {
