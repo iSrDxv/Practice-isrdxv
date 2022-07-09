@@ -70,7 +70,7 @@ class Scoreboard
   public function setLine(int $line, string $description = ""): void
   {
     if (isset($this->lines[$line])) {
-      $pk = new SetScorePacket(SetScorePacket::TYPE_REMOVE, [$this->lines[$line]]);
+      $pk = SetScorePacket::create(SetScorePacket::TYPE_REMOVE, [$this->lines[$line]]);
       $this->getPlayer()->getNetworkSession()->sendDataPacket($pk);
       unset($this->lines[$line]);
       return;
@@ -112,13 +112,12 @@ class Scoreboard
   
   public function removeLine(int $id = 0): void
   {
-    $line = $this->lines[$id];
-    if (isset($line)) {
+    if (isset($this->lines[$id])) {
       $pk = new SetScorePacket();
       $pk->type = SetScorePacket::TYPE_REMOVE; 
-      $pk->entries[] = $line;
+      $pk->entries[] = $this->lines[$id];
       $this->getPlayer()->getNetworkSession()->sendDataPacket($pk);
-      unset($line);
+      unset($this->lines[$id]);
     }
   }
   
