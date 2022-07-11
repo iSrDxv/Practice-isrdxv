@@ -72,8 +72,9 @@ class SessionListener implements Listener
   public function onQuit(PlayerQuitEvent $event): void
   {
     $player = $event->getPlayer();
-    Loader::getInstance()->getProvider()->saveDataSession($player->getName(), (SessionManager::getInstance()->get($player->getName()))->__toArray());
-    $event->setQuitMessage(Loader::getInstance()->getTranslation()->sendTranslation(Loader::getInstance()->getProvider()->getLanguage($player->getName()), "leave-message", ["username" => $player->getName()]));
+    $session = SessionManager::getInstance()->get($player->getName());
+    Loader::getInstance()->getProvider()->saveDataSession($session);
+    $event->setQuitMessage(TextFormat::colorize(Loader::getInstance()->getTranslation()->sendTranslation($session->getLanguage(), "leave-message", ["username" => $player->getName()])));
   }
   
   /**

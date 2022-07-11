@@ -3,6 +3,7 @@
 namespace isrdxv\practice\provider;
 
 use isrdxv\practice\Loader;
+use isrdxv\practice\session\Session;
 
 use pocketmine\utils\Config;
 use pocketmine\network\mcpe\protocol\types\DeviceOS;
@@ -26,11 +27,10 @@ class YAMLProvider
     }*/
   }
   
-  public function saveDataSession(string $name, array $data): void 
+  public function saveDataSession(Session $session): void 
   {
-    if (empty($data) || empty($name)) return;
-    $config = new Config(Loader::getInstance()->getDataFolder() . "players" . DIRECTORY_SEPARATOR . $name . ".yml", Config::YAML);
-    foreach($data as $key => $value) {
+    $config = new Config(Loader::getInstance()->getDataFolder() . "players" . DIRECTORY_SEPARATOR . $session->getPlayer()->getName() . ".yml", Config::YAML);
+    foreach($session->__toArray() as $key => $value) {
       $config->set($key, $value);
     }
     $config->save();
