@@ -4,7 +4,10 @@ declare(strict_types=1);
 namespace isrdxv\practice\session;
 
 use pocketmine\utils\TextFormat;
-use pocketmine\player\Player;
+use pocketmine\player\{
+  Player,
+  GameMode
+};
 use pocketmine\Server;
 use pocketmine\permission\{
   Permission,
@@ -214,7 +217,7 @@ class Session
     $this->kit = $kit;
     //add items
     $this->getPlayer()->getInventory()->setContents($kit->getInventoryItems());
-    $this->getPlayer()->getArmorInventory($kit->getArmorItems());
+    $this->getPlayer()->getArmorInventory()->setContents($kit->getArmorItems());
   }
   
   public function sendMessage(TranslationMessage|string $message): void
