@@ -18,7 +18,7 @@ class GameListener implements Listener
   public function onDeath(PlayerDeathEvent $event): void
   {
     $event->setDrops([]);
-    $loser = SessionManager::getInstance()->get($event->getPlayer());
+    $loser = SessionManager::getInstance()->get($event->getPlayer()->getName());
     if (!($loser->isPlaying())) {
       return;
     }
@@ -31,7 +31,7 @@ class GameListener implements Listener
   
   public function onQuit(PlayerQuitEvent $event): void
   {
-    $session = SessionManager::getInstance()->get($event->getPlayer());
+    $session = SessionManager::getInstance()->get($event->getPlayer()->getName());
     if ($session->isGame()) {
       $session->getGame()->finish($session);
     }
