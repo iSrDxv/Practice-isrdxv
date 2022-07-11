@@ -28,7 +28,7 @@ class NoDebuff extends Kit
     $sword = VanillaItems::DIAMOND_SWORD();
     $this->addEnchantment($sword, new EnchantmentInstance(VanillaEnchantments::SHARPNESS(), 1));
     if ($sword instanceof Durable) {
-      $item->setUnbreakable();
+      $sword->setUnbreakable();
     }
     $this->addItem(parent::INVENTORY, $sword);
     $pearl = VanillaItems::ENDER_PEARL();

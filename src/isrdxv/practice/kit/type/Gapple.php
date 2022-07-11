@@ -27,7 +27,7 @@ class Gapple extends Kit
     $sword = VanillaItems::IRON_SWORD();
     $this->addEnchantment($sword, new EnchantmentInstance(VanillaEnchantments::UNBREAKING(), 10));
     if ($sword instanceof Durable) {
-      $item->setUnbreakable();
+      $sword->setUnbreakable();
     }
     $this->addItem(parent::INVENTORY, $sword);
     $apple = VanillaItems::GOLDEN_APPLE();

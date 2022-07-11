@@ -27,7 +27,7 @@ class Combo extends Kit
     $sword = VanillaItems::DIAMOND_SWORD();
     $this->addEnchantment($sword, new EnchantmentInstance(VanillaEnchantments::UNBREAKING(), 10));
     if ($sword instanceof Durable) {
-      $item->setUnbreakable();
+      $sword->setUnbreakable();
     }
     $this->addItem(parent::INVENTORY, $sword);
     $pearl = VanillaItems::ENDER_PEARL();
@@ -48,7 +48,6 @@ class Combo extends Kit
     foreach([VanillaItems::DIAMOND_HELMET(), VanillaItems::DIAMOND_CHESTPLATE(), VanillaItems::DIAMOND_LEGGINGS(), VanillaItems::DIAMOND_BOOTS()] as $item) {
       if ($item instanceof Durable) {
         $item->setUnbreakable();
-        $this->armor[] = $item;
       }
       $this->addItem(parent::ARMOR, $item);
       $this->addEnchantment($item, new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 10));
