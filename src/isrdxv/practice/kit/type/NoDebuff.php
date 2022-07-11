@@ -3,10 +3,12 @@
 namespace isrdxv\practice\kit\type;
 
 use pocketmine\item\{
+  Item,
   ItemFactory,
   enchantment\VanillaEnchantments,
   VanillaItems,
-  Durable
+  Durable,
+  enchantment\EnchantmentInstance
 };
 
 use isrdxv\practice\kit\Kit;
@@ -26,7 +28,7 @@ class NoDebuff extends Kit
     $sword = VanillaItems::DIAMOND_SWORD();
     $this->addEnchantment($sword, new EnchantmentInstance(VanillaEnchantments::SHARPNESS(), 1));
     if ($sword instanceof Durable) {
-      $this->inventory[] = $sword;
+      $item->setUnbreakable();
     }
     $this->addItem(parent::INVENTORY, $sword);
     $pearl = VanillaItems::ENDER_PEARL();
@@ -45,7 +47,6 @@ class NoDebuff extends Kit
     foreach([VanillaItems::DIAMOND_HELMET(), VanillaItems::DIAMOND_CHESTPLATE(), VanillaItems::DIAMOND_LEGGINGS(), VanillaItems::DIAMOND_BOOTS()] as $item) {
       if ($item instanceof Durable) {
         $item->setUnbreakable();
-        parent::armor[] = $item;
       }
       $this->addItem(parent::ARMOR, $item);
       $this->addEnchantment($item, new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));

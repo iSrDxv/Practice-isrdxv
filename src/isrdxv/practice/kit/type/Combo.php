@@ -3,9 +3,11 @@
 namespace isrdxv\practice\kit\type;
 
 use pocketmine\item\{
-  ItemFactory,
+  Item,
   enchantment\VanillaEnchantments,
-  VanillaItems
+  VanillaItems,
+  Durable,
+  enchantment\EnchantmentInstance
 };
 
 use isrdxv\practice\kit\Kit;
@@ -25,7 +27,7 @@ class Combo extends Kit
     $sword = VanillaItems::DIAMOND_SWORD();
     $this->addEnchantment($sword, new EnchantmentInstance(VanillaEnchantments::UNBREAKING(), 10));
     if ($sword instanceof Durable) {
-      $this->inventory[] = $sword;
+      $item->setUnbreakable();
     }
     $this->addItem(parent::INVENTORY, $sword);
     $pearl = VanillaItems::ENDER_PEARL();
