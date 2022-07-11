@@ -21,6 +21,7 @@ use isrdxv\practice\translation\TranslationMessage;
 use isrdxv\practice\provider\YAMLProvider;
 use isrdxv\practice\queue\Queue;
 use isrdxv\practice\game\Game;
+use isrdxv\practice\kit\Kit;
 
 use libs\scoreboard\type\LobbyScoreboard;
 use libs\scoreboard\Scoreboard;
@@ -43,6 +44,8 @@ class Session
   private ?Queue $queue = null;
   
   private ?Game $game = null;
+  
+  private Kit $kit;
   
   private array $settings;
   
@@ -206,6 +209,14 @@ class Session
     return false;
   }
   
+  public function setKit(Kit $kit): void
+  {
+    $this->kit = $kit;
+    //add items
+    $this->getPlayer()->getInventory()->setContents($kit->getInventoryItems());
+    $this->getPlayer()->getArmorInventory($kit->getArmorItems());
+  }
+  
   public function sendMessage(TranslationMessage|string $message): void
   {
     if ($message instanceof TranslationMessage) {
@@ -286,7 +297,7 @@ class Session
   public function __toArray(): array
   {
     return [
-      "name" => $this->getPlayer()->getName(),
+      "address" => $this->getPlayer()->getNetworkSession()->getIp(),
       "points" => $this->getPoints(),
       "device" => $this->getDevice(),
       "points" => $this->getPoints(),

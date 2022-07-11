@@ -17,22 +17,26 @@ class KitManager
     $this->registerAll([
       new NoDebuff(),
       new Gapple(),
-      new BuildUHC(),
+      //new BuildUHC(),
       new Combo(),
-      new Archer(),
-      new Trapping()
+      //new Archer(),
+      //new Trapping()
     ]);
   }
   
   public function register(?Kit $kit): void
   {
-    if ($kit === null) return;
+    if (empty($kit)) {
+      return;
+    }
     $this->kits[$kit->getName()] = $kit;
   }
   
   public function registerAll(?array $kits): void
   {
-    if ($kits === null) return;
+    if (empty($kits)) {
+      return;
+    }
     foreach($kits as $kit) {
       $this->register($kit);
     }
@@ -40,7 +44,7 @@ class KitManager
   
   public function getKitByName(string $kitName): ?Kit
   {
-    if ($kitName === null) {
+    if (empty($kitName)) {
       return null;
     }
     foreach($this->kits as $name => $class) {

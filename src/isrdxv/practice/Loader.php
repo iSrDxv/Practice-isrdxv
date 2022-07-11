@@ -65,6 +65,7 @@ class Loader extends PluginBase
     $this->arenaManager = new ArenaManager($this);
     $this->gameManager = new GameManager($this);
     $this->queueManager = new QueueManager();
+    KitManager::getInstance()->init();
     //KitManager::getInstance()->init();
     foreach(["languages/es_ES.ini", "languages/en_US.ini"] as $language) {
       $this->saveResource($language);
