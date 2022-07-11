@@ -32,14 +32,12 @@ class NoDebuff extends Kit
     }
     $this->addItem(parent::INVENTORY, $sword);
     $pearl = VanillaItems::ENDER_PEARL();
-    $pearl->setCount(16);
-    $this->addItem(parent::INVENTORY, $pearl);
+    $this->addItem(parent::INVENTORY, $pearl->setCount(16));
     $steak = VanillaItems::STEAK();
-    $steak->setCount(64);
-    $this->addItem(parent::INVENTORY, $steak);
-    $potion = ItemFactory::getInstance()->get(438, 22);
-    $potion->setCount(36);
-    $this->addItem(parent::INVENTORY, $potion);
+    $this->addItem(parent::INVENTORY, $steak->setCount(64));
+    for($i = 0; $i <= 36; $i++) {
+      $this->addItem(parent::INVENTORY, ItemFactory::getInstance()->get(438, 22));
+    }
   }
   
   public function setArmorItems(): void

@@ -19,6 +19,8 @@ class Kit
   private array $inventory = [];
   /** @var Item[] **/
   private array $armor = [];
+  /** @var EffectInstance[] **/
+  private array $effects = [];
   
   public function __construct(string $name)
   {
