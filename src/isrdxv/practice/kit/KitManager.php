@@ -3,6 +3,11 @@
 namespace isrdxv\practice\kit;
 
 use isrdxv\practice\kit\Kit;
+use isrdxv\practice\kit\type\{
+  NoDebuff,
+  Gapple,
+  Combo
+};
 
 use pocketmine\utils\SingletonTrait;
 

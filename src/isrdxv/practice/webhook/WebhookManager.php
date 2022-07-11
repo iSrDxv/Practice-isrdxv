@@ -67,7 +67,6 @@ class WebhookManager
     $embed = new Embed();
     $embed->setTitle("Status");
     $embed->setDescription($value === true ? "online" : "offline");
-    $embed->setAuthor("PracticeCore", "https://github.com/iSrDxv/Practice-isrdxv", $this->loader->getConfig()->get("discord")["avatarURL"]);
     $msg->addEmbed($embed);
     $this->user->send($msg);
   }
