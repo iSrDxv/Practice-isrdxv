@@ -2,6 +2,8 @@
 
 namespace isrdxv\practice\webhook;
 
+use DateTime;
+
 use libs\discord\{
   Webhook,
   Message,
@@ -65,8 +67,10 @@ class WebhookManager
     $msg->setUsername($this->loader->getConfig()->get("discord")["username"]);
     $msg->setAvatarURL($this->loader->getConfig()->get("discord")["avatarURL"]);
     $embed = new Embed();
-    $embed->setTitle("Status");
-    $embed->setDescription($value === true ? "online" : "offline");
+    $embed->addField("Status", $value === true ? ":green_circle:" : ":red_circle:", true);
+    $embed->addField("Address", $this->loader->getConfig()->get("server-address"));
+    $embed->setTimestamp(new DateTime("NOW"));
+    $embed->setFooter("iSrDxv");
     $msg->addEmbed($embed);
     $this->user->send($msg);
   }
