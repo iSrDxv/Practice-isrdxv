@@ -62,7 +62,7 @@ class Queue
   public function addPlayer(Session $session): void
   {
     if ($session->hasQueue()) {
-      $session->getPlayer()->sendMessage("You already are in a Queue");
+      $session->sendMessage(new TranslationMessage("queue-already-player"));
       return;
     }
     $session->giveQueueItems();
@@ -74,8 +74,7 @@ class Queue
   public function addSpectator(Session $session): void
   {
     if ($session->hasQueue()) {
-      $session->sendMessage("You already are in a Queue");
-      return;
+      $session->sendMessage(new TranslationMessage("queue-already-player"));
     }
     $this->spectators[] = $session;
     $session->setQueue($this);

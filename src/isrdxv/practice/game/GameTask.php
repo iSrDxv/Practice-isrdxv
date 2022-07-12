@@ -28,7 +28,7 @@ class GameTask extends Task
         if ($game->getPlayerCount() === 2) {
           $game->sendAction(function(Session $session) use($game): void {
             foreach($game->getPlayers() as $opponent) {
-              $session->sendMessage(new TranslationMessage("join-text-arena", [
+              $session->sendMessage(new TranslationMessage("game-text", [
               "line" => "\n",
               "kit_name" => $game->getKit()->getName(),
               "name" => $opponent->getName(),
