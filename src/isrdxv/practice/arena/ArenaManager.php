@@ -26,8 +26,8 @@ class ArenaManager
         $loader->getLogger()->warning("No hay arenas");
         return;
       }
-      $config = new Config($file, Config::YAML);
-      $this->setArena(basename($file, ".yml"), $config->getAll());
+      $config = yaml_parse(file_get_contents($file));
+      $this->setArena(basename($file, ".yml"), $config);
       $loader->getLogger()->warning("Todas las arenas han sido cargadas");
     }
   }
@@ -59,7 +59,6 @@ class ArenaManager
   public function setArena(string $name, array $data): void
   {
     $this->arenas[$name] = ($arena = new Arena($data["world"], $data["slots"], $data["mode"], $data["type"], $data["ranked"], $data["type-mode"], $data["spawns"]));
-    (new ArenaCreationEvent($arena))->call();
   }
   
   /** @return Arena[] **/
@@ -72,7 +71,6 @@ class ArenaManager
   {
     if (!empty($arena = $this->arenas[$arenaName])) {
         unset($arena);
-        (new ArenaDeleteEvent($arena))->call();
     }
   }
   
@@ -85,7 +83,6 @@ class ArenaManager
       return;
     }
     $this->arenas[$name] = $arena;
-    (new ArenaCreationEvent($arena))->call();
   }
   
 }
