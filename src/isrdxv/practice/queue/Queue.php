@@ -67,6 +67,7 @@ class Queue
     }
     $session->giveQueueItems();
     $this->players[] = $session;
+    var_dump($this->players);
     $session->setQueue($this);
     $this->joinGame();
   }
