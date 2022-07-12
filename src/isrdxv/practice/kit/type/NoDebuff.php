@@ -27,15 +27,19 @@ class NoDebuff extends Kit
   {
     $sword = VanillaItems::DIAMOND_SWORD();
     $this->addEnchantment($sword, new EnchantmentInstance(VanillaEnchantments::SHARPNESS(), 1));
+    $this->addEnchantment($sword, new EnchantmentInstance(VanillaEnchantments::UNBREAKING(), 5));
     if ($sword instanceof Durable) {
       $sword->setUnbreakable();
     }
     $this->addItem(parent::INVENTORY, $sword);
     $pearl = VanillaItems::ENDER_PEARL();
     $this->addItem(parent::INVENTORY, $pearl->setCount(16));
+    for($i = 0; $i <= 6; $i++) {
+      $this->addItem(parent::INVENTORY, ItemFactory::getInstance()->get(438, 22));
+    }
     $steak = VanillaItems::STEAK();
     $this->addItem(parent::INVENTORY, $steak->setCount(64));
-    for($i = 0; $i <= 36; $i++) {
+    for($i = 0; $i <= 30; $i++) {
       $this->addItem(parent::INVENTORY, ItemFactory::getInstance()->get(438, 22));
     }
   }
@@ -47,7 +51,8 @@ class NoDebuff extends Kit
         $item->setUnbreakable();
       }
       $this->addItem(parent::ARMOR, $item);
-      $this->addEnchantment($item, new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
+      $this->addEnchantment($item, new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 5));
+      $this->addEnchantment($item, new EnchantmentInstance(VanillaEnchantments::FIRE_PROTECTION(), 1));
     }
   }
 
