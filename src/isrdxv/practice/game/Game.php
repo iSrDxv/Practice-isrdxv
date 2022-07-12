@@ -167,6 +167,9 @@ class Game
   public function finish(Session $session, bool $global = true): void
   {
     $this->deletePlayer($session, $global, $global);
+    $winner = $this->players[1];
+    $winner->getPlayer()->sendTitle("§l§a¡VICTORY!", "§byou won the game");
+    $sesssion->getPlayer()->sendTitle("§l§c¡DEFEAT!", "§c{$winner->getName()} §bwon the game");
     $this->setPhase(GameManager::PHASE_ENDING);
   }
   
