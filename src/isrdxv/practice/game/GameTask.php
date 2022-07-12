@@ -46,7 +46,9 @@ class GameTask extends Task
         $this->time--;
         if ($this->time <= 0) {
           $game->sendAction(function(Session $session) use($game): void {
-            //$session->setScoreboard(new GameScoreboard($session, $game->getPlayers()[1], $game));
+            foreach($game->getPlayers() as $opponent) {
+              $session->setScoreboard(new GameScoreboard($session, $opponent, $game));
+            }
           });
         $game->setPhase($this->loader->getGameManager()::PHASE_PLAYING);
         } else {
@@ -62,13 +64,15 @@ class GameTask extends Task
         //I could add a switch but not until I'm done ok
         if ($this->time === 15) {
           foreach($game->getAllPlayers() as $session) {
-            //$session->getGame()->deletePlayer($session);
+            $session->getGame()->deletePlayer($session);
             $session->setGame();
           }
         }elseif ($this->time === 10) {
           $game->getArena()->toReset();
         }elseif ($this->time === 5) {
           $game->toReset();
+        }elseif ($this->time === 0) {
+          //destroy world
         }
       }
     }
