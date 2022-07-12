@@ -59,14 +59,10 @@ class Loader extends PluginBase
   
   public function onEnable(): void
   {
-    /*if (!InvMenuHandler::isRegistered()) {
-      InvMenuHandler::register($this);
-    }*/
+    KitManager::getInstance()->init();
     $this->arenaManager = new ArenaManager($this);
     $this->gameManager = new GameManager($this);
     $this->queueManager = new QueueManager();
-    KitManager::getInstance()->init();
-    //KitManager::getInstance()->init();
     foreach(["languages/es_ES.ini", "languages/en_US.ini"] as $language) {
       $this->saveResource($language);
     }
