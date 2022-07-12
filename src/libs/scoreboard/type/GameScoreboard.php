@@ -35,6 +35,7 @@ class GameScoreboard extends Scoreboard
     parent::setLine(1, "");
     parent::setLine(2, TextFormat::colorize(" &bFighting: &f" . $this->opponent->getName()));
     parent::setLine(3, " ");
+    //parent::setLine(4, TextFormat::colorize(" &bTime: &f" . gmdate()));
     parent::setLine(4, TextFormat::colorize(" &aYour Ping: &f" . parent::getPlayer()->getNetworkSession()->getPing()));
     parent::setLine(5, TextFormat::colorize(" &cTheir Ping: &f" . $this->opponent->getPing()));
     parent::setLine(6, " ");

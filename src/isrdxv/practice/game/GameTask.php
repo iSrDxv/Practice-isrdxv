@@ -59,6 +59,7 @@ class GameTask extends Task
         $this->time--;
         if ($this->time <= 0) {
           $game->sendAction(function(Session $session) use($game): void {
+            //$session->getPlayer()->sendTitle();
             foreach($game->getPlayers() as $opponent) {
               $session->setScoreboard(new GameScoreboard($session->getPlayer(), $opponent, $game));
             }
