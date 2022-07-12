@@ -85,6 +85,16 @@ class Session
     return $this->player;
   }
   
+  public function getName(): string
+  {
+    return $this->player->getName();
+  }
+  
+  public function getPing(): int
+  {
+    return $this->player->getNetworkSession()->getPing();
+  }
+  
   public function getDevice(): string
   {
     return $this->device;

@@ -28,7 +28,7 @@ class LobbyScoreboard extends Scoreboard
   
   public function showLines(): void
   {
-    parent::setLine(1, TextFormat::colorize(""));
+    parent::setLine(1, "");
     parent::setLine(2, TextFormat::colorize(" &bOnline: &f" . count(Server::getInstance()->getOnlinePlayers())));
     parent::setLine(3, TextFormat::colorize(" &bPing: &f" . parent::getPlayer()->getNetworkSession()->getPing()));
     parent::setLine(4, TextFormat::colorize(" &bIn Game: &f" . Loader::getInstance()->getGameManager()->getGameCount()));

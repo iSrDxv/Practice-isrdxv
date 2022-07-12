@@ -26,6 +26,16 @@ class GameTask extends Task
     foreach($this->loader->getGameManager()->getGames() as $game) {
       if ($game->getPhase() === $this->loader->getGameManager()::PHASE_WAITING) {
         if ($game->getPlayerCount() === 2) {
+          $game->sendAction(function(Session $session) use($game): void {
+            foreach($game->getPlayers() as $opponent) {
+              $session->sendMessage(new TranslationMessage("join-text-arena", [
+              "line" => "\n",
+              "kit_name" => $game->getKit()->getName(),
+              "name" => $opponent->getName(),
+              "opp_ping" => $opponent->getPing()
+            ]));
+            }
+          });
           $game->setPhase($this->loader->getGameManager()::PHASE_STARTING);
         }
       }elseif ($game->getPhase() === $this->loader->getGameManager()::PHASE_STARTING) {
@@ -37,17 +47,20 @@ class GameTask extends Task
           $player = $session->getPlayer();
           $player->getInventory()->clearAll();
           $player->getArmorInventory()->clearAll();
-          //give kit
+          $session->setKit($game->getKit());
           for($slot = 0; $slot < 2; $slot++) {
             //TODO: load chunk
-            $player->teleport($game->getArena()->getSpawns()[$slot]);
+            $world = $this->loader->getServer()->getWorldManager()->getWorldByName($game->getArena()->getName());
+            $pos = $game->getArena()->getSpawns()[$slot];
+            $world->loadChunk($pos->getX(), $pos->getZ());
+            $player->teleport($pos);
           }
         });
         $this->time--;
         if ($this->time <= 0) {
           $game->sendAction(function(Session $session) use($game): void {
             foreach($game->getPlayers() as $opponent) {
-              $session->setScoreboard(new GameScoreboard($session, $opponent, $game));
+              $session->setScoreboard(new GameScoreboard($session->getPlayer(), $opponent, $game));
             }
           });
         $game->setPhase($this->loader->getGameManager()::PHASE_PLAYING);

@@ -56,7 +56,7 @@ class Scoreboard
     if (!$this->player->isOnline()) {
       return;
     }
-    $this->remove();
+    //$this->remove();
     $pk = SetDisplayObjectivePacket::create(SetDisplayObjectivePacket::DISPLAY_SLOT_SIDEBAR, $this->getPlayer()->getName(), $this->title, "dummy", SetDisplayObjectivePacket::SORT_ORDER_ASCENDING);
     $this->getPlayer()->getNetworkSession()->sendDataPacket($pk);
   }

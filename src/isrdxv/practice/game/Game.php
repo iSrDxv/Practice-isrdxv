@@ -8,6 +8,10 @@ use isrdxv\practice\game\{
   GameManager,
   GameException
 };
+use isrdxv\practice\kit\{
+  Kit,
+  KitManager
+};
 use isrdxv\practice\session\Session;
 
 use pocketmine\utils\TextFormat;
@@ -41,7 +45,7 @@ class Game
     $this->arena = $arena;
     $this->mode = $arena->getMode();
     $this->mode_type = $arena->getModeType();
-    //$this->kit = KitManager::getInstance()->getKitByName($arena->getMode());
+    $this->kit = KitManager::getInstance()->getKitByName($arena->getMode());
     $this->phase = GameManager::PHASE_WAITING;
   }
   
@@ -58,6 +62,11 @@ class Game
   public function getArenaModeType(): int
   {
     return $this->mode_type;
+  }
+  
+  public function getKit(): Kit
+  {
+    return $this->kit;
   }
   
   public function getPhase(): string

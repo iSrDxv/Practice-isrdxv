@@ -20,7 +20,7 @@ class NormalMode extends Vector3
   
   public function getYaw(): float|int
   {
-    return $this->yae;
+    return $this->yaw;
   }
   
   public function getPitch(): float|int
@@ -30,7 +30,7 @@ class NormalMode extends Vector3
   
   public function toObject(Vector3 $pos, float|int $yaw, float|int $pitch): self
   {
-    return self($pos->x, $pos->y, $pos->z, $yaw, $pitch);
+    return new self($pos->x, $pos->y, $pos->z, $yaw, $pitch);
   }
   
   public function __toString(): string
