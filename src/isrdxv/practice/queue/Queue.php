@@ -9,6 +9,8 @@ use isrdxv\practice\game\GameManager;
 use isrdxv\practice\translation\TranslationMessage;
 use isrdxv\practice\Loader;
 
+use libs\worldbackup\WorldBackup;
+
 use pocketmine\entity\Location;
 use pocketmine\Server;
 
@@ -85,9 +87,18 @@ class Queue
   public function joinGame(): void
   {
     if (count($this->players) === 2) {
-      $game = Loader::getInstance()->getGameManager()->getGameAvailable(strtolower($this->getName()), $this->getModeType(), $this->getRanked());
+      $game = Loader::getInstance()->getGameManager()->getRandomGame(strtolower($this->getName()), $this->getModeType(), $this->getRanked());
       foreach($this->players as $session) {
         if (isset($game)) {
+          $worldBackup = new WorldBackup();
+          if ($worldBackup->createBackup(bin2hex(random_bytes(8)), $game->getArena()->getName())) {
+            $session->sendMessage(new TranslationMessage("queue-backup-arena", [
+              "map_name" => $game->getArena()->getName()
+            ]));
+          } else {
+            $session->sendMessage(new TranslationMessage("queue-no-arenas"));
+            return;
+          }
           if (count($game->getPlayers()) <= 1) {
             $game->addPlayer($session);
             $session->sendMessage(new TranslationMessage("queue-join-arena"));

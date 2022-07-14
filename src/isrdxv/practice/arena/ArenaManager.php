@@ -27,6 +27,7 @@ class ArenaManager
         return;
       }
       $config = yaml_parse(file_get_contents($file));
+      $loader->getServer()->getWorldManager()->loadWorld($config["world"], true);
       $this->setArena(basename($file, ".yml"), $config);
       $loader->getLogger()->warning("Todas las arenas han sido cargadas");
     }
