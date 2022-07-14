@@ -15,11 +15,11 @@ class NormalMode extends Position
   
   public float|int $pitch;
   
-  public function __construct(float|int $x, float|int $y, float|int $z, float|int $yaw = 0.0, float|int $pitch = 0.0)
+  public function __construct(float|int $x, float|int $y, float|int $z, ?World $world = null, float|int $yaw = 0.0, float|int $pitch = 0.0)
   {
     $this->yaw = $yaw;
     $this->pitch = $pitch;
-    parent::__construct($x, $y, $z, null);
+    parent::__construct($x, $y, $z, $world);
   }
   
   public function getYaw(): float|int
