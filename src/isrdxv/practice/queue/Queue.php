@@ -4,7 +4,10 @@ declare(strict_types=1);
 namespace isrdxv\practice\queue;
 
 use isrdxv\practice\session\Session;
-use isrdxv\practice\arena\ArenaManager;
+use isrdxv\practice\arena\{
+  Arena,
+  ArenaManager
+};
 use isrdxv\practice\game\GameManager;
 use isrdxv\practice\translation\TranslationMessage;
 use isrdxv\practice\Loader;
@@ -86,7 +89,7 @@ class Queue
   
   public function joinGame(): void
   {
-    if (count($this->players) === 2) {
+    if (count($this->players) === Arena::MAX_PLAYERS) {
       $game = Loader::getInstance()->getGameManager()->getRandomGame(strtolower($this->getName()), $this->getModeType(), $this->getRanked());
       foreach($this->players as $session) {
         if (isset($game)) {
@@ -99,10 +102,10 @@ class Queue
             $session->sendMessage(new TranslationMessage("queue-no-arenas"));
             return;
           }
-          if (count($game->getPlayers()) <= 1) {
+          if (count($game->getPlayers()) < 0) {
             $game->addPlayer($session);
             $session->sendMessage(new TranslationMessage("queue-join-arena"));
-          } else {
+          }elseif (count($game->getPlayers()) === Arena::MAX_PLAYERS) {
             $game->addSpectator($session);
           }
         } else {
