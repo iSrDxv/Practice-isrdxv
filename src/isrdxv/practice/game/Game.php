@@ -14,11 +14,14 @@ use isrdxv\practice\kit\{
 };
 use isrdxv\practice\session\Session;
 
+use pocketmine\world\World;
 use pocketmine\utils\TextFormat;
 
 class Game
 {
   private Arena $arena;
+  
+  private World $world;
   
   private ?string $mode = null;
   
@@ -54,6 +57,11 @@ class Game
     return $this->arena;
   }
   
+  public function getWorld(): World
+  {
+    return $this->world;
+  }
+  
   public function getArenaMode(): string
   {
     return $this->mode;
@@ -87,6 +95,11 @@ class Game
   public function setTime(): void
   {
     $this->time++;
+  }
+  
+  public function setWorld(World $world): void
+  {
+    $this->world = $world;
   }
   
   public function setPhase(string $phase): void

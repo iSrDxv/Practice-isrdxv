@@ -94,7 +94,14 @@ class Queue
       foreach($this->players as $session) {
         if (isset($game)) {
           $worldBackup = new WorldBackup();
-          if ($worldBackup->createBackup(bin2hex(random_bytes(8)), $game->getArena()->getName())) {
+          $randomId = bin2hex(random_bytes(8));
+          if ($worldBackup->createBackup($randomId, $game->getArena()->getName())) {
+            Server::getInstance()->getWorldManager()->loadWorld($randomId);
+            $world = Server::getInstance()->getWorldManager()->getWorldByName($randomId);
+            $world->setAutoSave(false);
+            $world->setTime(1000);
+            $world->stopTime();
+            $game->setWorld($world);
             $session->sendMessage(new TranslationMessage("queue-backup-arena", [
               "map_name" => $game->getArena()->getName()
             ]));

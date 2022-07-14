@@ -3,8 +3,12 @@
 namespace isrdxv\practice\arena\mode;
 
 use pocketmine\math\Vector3;
+use pocketmine\world\{
+  World,
+  Position
+};
 
-class NormalMode extends Vector3
+class NormalMode extends Position
 {
   
   public float|int $yaw;
@@ -15,7 +19,7 @@ class NormalMode extends Vector3
   {
     $this->yaw = $yaw;
     $this->pitch = $pitch;
-    parent::__construct($x, $y, $z);
+    parent::__construct($x, $y, $z, null);
   }
   
   public function getYaw(): float|int
@@ -28,7 +32,7 @@ class NormalMode extends Vector3
     return $this->pitch;
   }
   
-  public function toObject(Vector3 $pos, float|int $yaw, float|int $pitch): self
+  public function toObject(?World $world, Vector3 $pos, float|int $yaw, float|int $pitch): self
   {
     return new self($pos->x, $pos->y, $pos->z, $yaw, $pitch);
   }

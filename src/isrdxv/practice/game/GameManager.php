@@ -16,7 +16,6 @@ class GameManager
   /** @var Game[] **/
   private array $games = [];
   
-  //TODO: this will be a construct very soon XD
   public function __construct(Loader $loader)
   {
     if ($loader->getArenaManager()->getArenas() === []) {

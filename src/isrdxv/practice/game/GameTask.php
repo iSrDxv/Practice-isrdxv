@@ -3,6 +3,7 @@
 namespace isrdxv\practice\game;
 
 use isrdxv\practice\Loader;
+use isrdxv\practice\arena\Arena;
 use isrdxv\practice\translation\TranslationMessage;
 use isrdxv\practice\session\Session;
 
@@ -50,12 +51,12 @@ class GameTask extends Task
           $player->getInventory()->clearAll();
           $player->getArmorInventory()->clearAll();
           $session->setKit($game->getKit());
-          for($slot = 0; $slot < 2; $slot++) {
-            //TODO: load chunk
-            $world = $this->loader->getServer()->getWorldManager()->getWorldByName($game->getArena()->getName());
-            $pos = $game->getArena()->getSpawns()[$slot];
-            $world->loadChunk($pos->getX(), $pos->getZ());
-            $player->teleport($pos);
+          for($slot = 0; $slot < Arena::MAX_PLAYERS; $slot++) {
+            $world = $game->getWorld();
+            $spawn = $game->getArena()->getSpawns()[$slot];
+            $world->loadChunk($spawn->getX(), $spawn->getZ());
+            $spawn->world = $world;
+            $player->teleport($spawn);
           }
         });
         $this->time--;

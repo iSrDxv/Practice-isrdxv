@@ -44,7 +44,7 @@ class CreateBackup extends AsyncTask
           $this->copyDirectory($dest . DIRECTORY_SEPARATOR . $entry, $newEntry);
           continue;
         }
-        @copy($newEntry, $dest DIRECTORY_SEPARATOR . $entry);
+        @copy($newEntry, $dest . DIRECTORY_SEPARATOR . $entry);
       }
       $d->close();
     } else {
@@ -65,7 +65,7 @@ class CreateBackup extends AsyncTask
     $nbt = $tag->getCompoundTag("Data");
     if ($nbt instanceof CompoundTag) {
       $nbt->setString("LevelName", $this->name);
-      file_put_contents($path, $serializer->write(new TreeRoot(CompoundTag::create()->setTag("", $nbt))));
+      file_put_contents($path, $serializer->write(new TreeRoot(CompoundTag::create()->setTag("Data", $nbt))));
       $this->setResult(true);
       return;
     }

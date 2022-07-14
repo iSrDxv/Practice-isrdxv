@@ -48,7 +48,7 @@ class GameListener implements Listener
       return;
     }
     foreach(Loader::getInstance()->getGameManager()->getGames() as $game) {
-      if (Server::getInstance()->getWorldManager()->getWorldByName($game->getArena()->getName())->getFolderName() === $entity->getWorld()->getFolderName()) {
+      if ($game->getWorld()->getDisplayName() === $entity->getWorld()->getDisplayName()) {
         if ($event->getCause() === EntityDamageEvent::CAUSE_SUFFOCATION && $event->getCause() === CAUSE_FALL) {
           $event->cancel();
         }
