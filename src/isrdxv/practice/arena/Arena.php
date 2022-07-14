@@ -3,25 +3,20 @@ declare(strict_types=1);
 
 namespace isrdxv\practice\arena;
 
-use isrdxv\practice\arena\{
-  ArenaManager,
-  mode\NormalMode
-};
+use isrdxv\practice\arena\mode\NormalMode;
 
 class Arena
 {
+  public const MAX_PLAYERS = 2;
   
   /** @var String **/ 
   private string $name;
   
   /** @var Int **/
-  private int $slots;
+  private int $slot;
   
   /** @var String **/
   private string $mode;
-  
-  /** @var String **/
-  private string $type;
   
   /**
    * true = yes, false = no
@@ -33,20 +28,19 @@ class Arena
    */
   private int $mode_type;
   
-  /** @var Array **/
+  /** @var Vector3[] **/
   private array $spawns = [];
   
-  public function __construct(string $name, int $slots, string $mode, string $type, bool $ranked, int $mode_type, array $spawns) 
+  public function __construct(string $name, string $mode, bool $ranked, int $mode_type, array $spawns) 
   {
     $this->name = $name;
-    $this->slots = isset($slots) ? $slots : 2;
-    $this->mode = empty($mode) ? "nodebuff" : $mode;
-    $this->type = empty($type) ? "solo" : $type;
-    $this->ranked = empty($ranked) ? false : $ranked; 
-    $this->mode_type = empty($mode_type) ? ArenaManager::TYPE_FFA : $mode_type;
+    $this->slot = self::MAX_PLAYERS;
+    $this->mode = $mode;
+    $this->ranked = $ranked;
+    $this->mode_type = $mode_type;
     foreach($spawns as $spawn) {
       $position = explode(":", $spawn);
-      $this->spawns[] = new NormalMode(intval($position[0]), intval($position[1]), intval($position[2]), floatval($position[3]), floatval($position[4]));
+      $this->spawns[] = new NormalMode($position[0], $position[1], $position[2], $position[3], $position[4]);
     }
   }
   
@@ -57,17 +51,12 @@ class Arena
   
   public function getSlots(): int
   {
-    return $this->slots;
+    return $this->slot;
   }
   
   public function getMode(): string
   {
     return $this->mode;
-  }
-  
-  public function getType(): string
-  {
-    return $this->type;
   }
   
   public function getRanked(): bool
@@ -87,14 +76,16 @@ class Arena
   
   public function __toArray(): array
   {
+    $spawns = [];
+    foreach($this->spawns as $spawn) {
+      $spawns[] = $spawn->__toString();
+    }
     return [
       "world" => $this->name,
-      "slots" => $this->slots,
       "mode" => $this->mode,
-      "type" => $this->type,
       "ranked" => $this->ranked,
       "type-mode" => $this->type_mode,
-      "spawns" => $this->spawns
+      "spawns" => $spawns
     ];
   }
   

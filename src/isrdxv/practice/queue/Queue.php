@@ -91,7 +91,7 @@ class Queue
           if (count($game->getPlayers()) <= 1) {
             $game->addPlayer($session);
             $session->sendMessage(new TranslationMessage("queue-join-arena"));
-          }elseif (count($game->getPlayers()) === 2) {
+          } else {
             $game->addSpectator($session);
           }
         } else {

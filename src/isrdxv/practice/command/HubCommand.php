@@ -34,7 +34,11 @@ class HubCommand extends Command
     }
     $world = Server::getInstance()->getWorldManager()->getWorldByName(Loader::getInstance()->getConfig()->get("lobby-name"));
     $session = SessionManager::getInstance()->get($sender->getName());
-    $session->giveLobbyItems();
+    if ($session->hasQueue()) {
+      $session->giveQueueItems();
+    } else {
+      $session->giveLobbyItems();
+    }
     $sender->teleport($world->getSafeSpawn());
   }
   

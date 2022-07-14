@@ -5,7 +5,7 @@ namespace isrdxv\practice\arena\creator;
 use pocketmine\player\Player;
 use pocketmine\utils\Config;
 
-use isrdxv\practice\arena\Arena;
+use isrdxv\practice\arena\creator\CreatorData;
 use isrdxv\practice\Loader;
 
 class Creator
@@ -13,12 +13,12 @@ class Creator
   
   private Player $player;
   
-  private Arena $arena;
+  private CreatorData $data;
   
-  public function __construct(Player $player, Arena $arena)
+  public function __construct(Player $player, CreatorData $data)
   {
     $this->player = $player;
-    $this->arena = $arena;
+    $this->data = $data;
   }
   
   public function getPlayer(): Player
@@ -26,51 +26,41 @@ class Creator
     return $this->player;
   }
   
-  public function getArena(): Arena
+  public function getData(): CreatorData
   {
-    return $this->arena;
-  }
-  
-  /**
-   * solo = 2
-   * duo = 4
-   * squad = 6
-   */
-  public function setSlots(int $slot): void
-  {
-    $this->getArena()->slots = $slot;
-    $this->getPlayer()->sendMessage("Usa /practice mode <string: nodebuff|combo|gapple>");
+    return $this->data;
   }
   
   public function setMode(string $mode): void
   {
-    $this->getArena()->mode = $mode;
+    $this->data->mode = $mode;
     $this->getPlayer()->sendMessage("Usa /practice typeMode <string: 0 FFA|1 Duel>");
   }
   
-  public function setTypeMode(int $type_mode): void
+  public function setModeType(int $mode_type): void
   {
-    $this->getArena()->type_mode = $type_mode;
+    $this->data->mode_type = $mode_type;
     $this->getPlayer()->sendMessage("Usa /practice ranked <bool: true Type from Arena>");
   }
   
   public function setRanked(bool $value): void
   {
-    $this->getArena()->ranked = $value;
+    $this->data->ranked = $value;
     $this->getPlayer()->sendMessage("Usa /practice spawn <int: 2 Spawns for Arena>");
   }
   
-  public function setSpawn(int $spawn, array $location): void
+  public function setSpawn(array $location): void
   {
-    $this->getArena()->spawns["spawn-{$spawn}"] = $location;
+    $spawn = implode(":", $location);
+    $this->data->spawns[] = $spawn;
     $this->getPlayer()->sendMessage("Ready arena");
   }
   
   public function save(): void
   {
-    $arena = new Config(Loader::getInstance()->getDataFolder() . "arenas" . DIRECTORY_SEPARATOR . $this->getArena()->getName() . ".yml", Config::YAML);
-      $arena->setAll($this->getArena()->__toArray());
-    $arena->save();
+    $config = new Config(Loader::getInstance()->getDataFolder() . "arenas" . DIRECTORY_SEPARATOR . $this->data->name . ".yml", Config::YAML);
+    $config->setAll($this->data->toArray());
+    $config->save();
   }
   
 }

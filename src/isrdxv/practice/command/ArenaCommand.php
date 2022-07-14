@@ -2,11 +2,18 @@
 
 namespace isrdxv\practice\command;
 
+use isrdxv\practice\Loader;
+use isrdxv\practice\arena\{
+  ArenaManager,
+  creator\CreatorManager
+};
+
 use pocketmine\command\{
   Command,
   CommandSender
 };
 use pocketmine\player\Player;
+use pocketmine\Server;
 use pocketmine\utils\TextFormat;
 
 class ArenaCommand extends Command
@@ -34,6 +41,16 @@ class ArenaCommand extends Command
     }
     switch($args[0]){
     case "create":
+      if (Loader::getInstance()->getArenaManager()->getArenaByName($args[1]) !== null && CreatorManager::getInstance()->isCreating($args[1])) {
+        $sender->sendMessage("This arena already exists");
+        return;
+      }
+      if (CreatorManager::getInstance()->isCreator($sender->getName())) {
+        $sender->sendMessage("You cannot create another arena in creation mode.");
+        return;
+      }
+      $player = Server::getInstance()->getPlayerByExact($sender->getName());
+      CreatorManager::getInstance()->setCreator($player, (string)$args[1],(string)$args[2]);
     break;
     case "set":
     break;

@@ -17,4 +17,13 @@ class ModeType
   
   public const BUILD_UHC = "builduhc";
   
+  public const MODES_LIST = [
+    self::COMBO,
+    self::GAPPLE,
+    self::NO_DEBUFF,
+    self::SUMO,
+    self::ARCHER,
+    self::BUILD_UHC
+  ];
+  
 }

@@ -4,8 +4,15 @@ namespace isrdxv\practice\arena\creator;
 
 use pocketmine\utils\SingletonTrait;
 
-use isrdxv\practice\arena\{ArenaManager, Arena};
-use isrdxv\practice\arena\creator\Creator;
+use isrdxv\practice\arena\{
+  ArenaManager,
+  Arena
+};
+use isrdxv\practice\arena\creator\{
+  Creator,
+  CreatorData
+};
+use isrdxv\practice\Loader;
 
 class CreatorManager
 {
@@ -23,10 +30,13 @@ class CreatorManager
     return $this->creators[$username];
   }
   
-  public function setCreator(Player $player, string $world): void
+  public function setCreator(Player $player, string $name, string $world): void
   {
-    ArenaManager::getInstance()->createArena(new Arena($world));
-    $this->creators[$player->getName()] = new Creator($player, ArenaManager::getInstance()->getArenaByName($world));
+    $creatorData = new CreatorData();
+    $creatorData->customName = $name;
+    $creatorData->world = $world;
+    Loader::getInstance()->getArenaManager()->createArena($name);
+    $this->creators[$player->getName()] = new Creator($player, $creatorData);
   }
   
   public function isCreating(string $arenaName): bool
@@ -48,7 +58,7 @@ class CreatorManager
   
   public function cancelCreation(string $username): void
   {
-    ArenaManager::getInstance()->deleteArena($this->getCreator($username)->getArena()->getName());
+    Loader::getInstance()->getArenaManager()->deleteArena($this->getCreator($username)->getData()->getName());
     $this->deleteCreator($username);
   }
   

@@ -58,7 +58,7 @@ class ArenaManager
   */
   public function setArena(string $name, array $data): void
   {
-    $this->arenas[$name] = ($arena = new Arena($data["world"], $data["slots"], $data["mode"], $data["type"], $data["ranked"], $data["type-mode"], $data["spawns"]));
+    $this->arenas[$name] = new Arena($data["world"], $data["mode"], $data["ranked"], $data["type-mode"], $data["spawns"]);
   }
   
   /** @return Arena[] **/
@@ -77,9 +77,9 @@ class ArenaManager
   /** 
    * Define the name of the arena and the class Arena with the data received from the creation of the arena
    */
-  public function createArena(string $name, ?Arena $arena): void
+  public function createArena(string $name, ?Arena $arena = null): void
   {
-    if (empty($name) || empty($arena)) {
+    if (empty($name)) {
       return;
     }
     $this->arenas[$name] = $arena;

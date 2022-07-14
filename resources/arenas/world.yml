@@ -1,9 +1,11 @@
 world: "world"
-slots: 2
 mode: "nodebuff"
-type: "solo"
 ranked: true
 type-mode: 1
 spawns: 
  - "100:65:100:0.0:0.0"
  - "200:65:200:0.0:0.0"
+# Soon
+#borders:
+# - "0:0:0:0.0:0.0"
+# - "0:0:0:0.0:0.0"
