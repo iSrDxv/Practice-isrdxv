@@ -67,7 +67,7 @@ class WebhookManager
     $msg->setUsername($this->loader->getConfig()->get("discord")["username"]);
     $msg->setAvatarURL($this->loader->getConfig()->get("discord")["avatarURL"]);
     $embed = new Embed();
-    $embed->addField("Status", $value === true ? ":green_circle:" : ":red_circle:", true);
+    $embed->addField("Status", $value === true ? "`:green_circle:`" : "`:red_circle:`", true);
     $embed->addField("Address", $this->loader->getConfig()->get("server-address"));
     $embed->setTimestamp(new DateTime("NOW"));
     $embed->setFooter("iSrDxv");
