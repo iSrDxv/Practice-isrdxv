@@ -40,7 +40,7 @@ class Arena
     $this->mode_type = $mode_type;
     foreach($spawns as $spawn) {
       $position = explode(":", $spawn);
-      $this->spawns[] = new NormalMode(floatval($position[0]), floatval($position[1]), floatval($position[2]), floatval($position[3]), floatval($position[4]));
+      $this->spawns[] = new NormalMode(floatval($position[0]), floatval($position[1]), floatval($position[2]), null, floatval($position[3]), floatval($position[4]));
     }
   }
   
