@@ -17,7 +17,7 @@ This is a beta version, It is very likely a drop in TPS or performance and clear
  - [x] Session System
  - [ ] Leaderboards System
  - [ ] Events System (Premium)
- - [ ] System Kits (Premium)
+ - [ ] System Kits (Premium) [Custom]
 
 <!--
 ━━━━━━━
