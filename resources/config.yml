@@ -1,0 +1,61 @@
+# Name from Server
+server-name: "&fMyServer"
+# Ad on entry
+# It can be in string or array, following the rules of .yml
+server-description: 
+  - "&f⸻⸻⸻⸻⸻"
+  - "&bTwitter: &fhttps://twitter.com/YourServerNetwork"
+  - "&7Discord: &fhttps://discord.gg/yourservernetwork"
+  - "&4Store: &fhttps://store.yourservernetwork.com"
+  - "&f⸻⸻⸻⸻⸻"
+# IP address of your server, for scoreboard and something else
+server-address: "play.yourserver.xyz"
+
+# MOTD From Server
+motd: "&o&fYourServer &l&7» &r&bPractice"
+
+# Discord Logs
+discord:
+ username: "YourServer"
+ avatarURL: "https://logodownload.org/wp-content/uploads/2014/09/twitter-logo-4.png"
+ user: "https://discord.com/api/webhooks/992864635474673755/CfUpnlB9JMNflg2ctWyVZsMpHA2VmFJ3LMDBfey5eMZcRdXOaxSTKw4rKsL6TNgFOYsU"
+ staff: "https://discord.com/api/webhooks/992864635474673755/CfUpnlB9JMNflg2ctWyVZsMpHA2VmFJ3LMDBfey5eMZcRdXOaxSTKw4rKsL6TNgFOYsU"
+
+############## Language ###################
+# Default language
+default-language: "en_US"
+
+############## World from Practice ###################
+# Practice lobby name
+lobby-name: "world"
+#lobby-spawn:
+#lobby-border: i dont know :c
+############## PVP ###################
+# Knockback
+knockback:
+ combo: 0.400
+ gapple: 0.300
+ nodebuff: 0.300
+ trapping: 0.250
+# Cooldown Attack
+cooldown-attack: 10
+############## MySQL ###################
+database:
+  # The database type. "sqlite" and "mysql" are supported.
+  type: sqlite
+
+  # Edit these settings only if you choose "sqlite".
+  sqlite:
+    # The file name of the database in the plugin data folder.
+    # You can also put an absolute path here.
+    file: data.sqlite
+  # Edit these settings only if you choose "mysql".
+  mysql:
+    host: 127.0.0.1
+    # Avoid using the "root" user for security reasons.
+    username: root
+    password: ""
+    schema: your_db
+  # The maximum number of simultaneous SQL queries
+  # Recommended: 1 for sqlite, 2 for MySQL. You may want to further increase this value if your MySQL connection is very slow.
+  worker-limit: 1

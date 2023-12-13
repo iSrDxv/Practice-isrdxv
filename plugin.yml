@@ -1,0 +1,31 @@
+name: Practice
+load: "STARTUP"
+author: iSrDxv
+#add your name here if you edited a file or added new functionality (only if you fork the repository)
+#authors: []
+version: 1.0.0-beta
+main: isrdxv\practice\Loader
+api: 5.0.0
+prefix: "PracticeCore"
+description: "Practice Plugin from PocketMine-MP 5.x"
+website: "https://github.com/iSrDxv/Practice-isrdxv"
+permissions:
+  arena.command:
+    description: Use this command for Create the Arena
+    default: op
+  practice.command:
+    default: op
+  staffmode.command:
+    description: Authorized personal only
+    default: false
+  ban.command:
+    description: Ban a specific user
+    default: false
+  hub.command:
+    default: true
+  lobby.block.break:
+    description: Break blocks in the lobby
+    default: false
+  lobby.block.place:
+    description: Place blocks in the lobby
+    default: false
