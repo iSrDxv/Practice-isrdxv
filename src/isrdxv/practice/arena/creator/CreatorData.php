@@ -5,7 +5,7 @@ namespace isrdxv\practice\arena\creator;
 class CreatorData
 {
   
-  public string $customName;
+  public string $customName = "Arena_God";
   
   public string $world;
   

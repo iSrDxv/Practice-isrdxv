@@ -80,7 +80,7 @@ class ArenaManager
    */
   public function createArena(string $name, ?Arena $arena = null): void
   {
-    if (empty($name)) {
+    if ($name === "") {
       return;
     }
     $this->arenas[$name] = $arena;

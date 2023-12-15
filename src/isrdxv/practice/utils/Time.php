@@ -7,17 +7,32 @@ use function gmdate;
 class Time
 {
   
-  public function getTimeToSeconds(int $time): int
+  public static function getTimeToSeconds(int $time): int
   {
     return gmdate("i:s", $time);
   }
   
-  public function getTimeToHours(int $time): int
+  public static function getTimeToHours(int $time): int
   {
     return gmdate("H:i:s", $time);
   }
   
-  public function getTimeFull(int $time): string
+  public static function secondsToTicks(int $time): int
+  {
+    return ($time * 20);
+  }
+  
+  public static function minutesToTicks(int $time): int
+  {
+    return ($time * 1200);
+  }
+
+  public static function hoursToTicks(int $time): int
+  {
+    return ($time * 72000);
+  }
+  
+  public static function getTimeFull(int $time): string
   {
     $time = $time - time();
     $seconds = $time % 60;

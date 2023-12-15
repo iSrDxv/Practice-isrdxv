@@ -30,7 +30,8 @@ class BanCommand extends Command
       return;
     }
     if (count($args) === 0) {
-      throw new InvalidCommandSintaxException();
+      $sender->sendMessage("No hay argumentos, por favor usa: " . $this->getUsage());
+      return;
     }
     $username = array_shift($args);
     $reason = implode(" ", $args);

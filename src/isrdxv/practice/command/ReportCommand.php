@@ -27,9 +27,10 @@ class ReportCommand extends Command
     if (!$this->testPermission($sender)) {
       return;
     }
-    /*if (empty($args)) {
+    if (count($args) === 0 || empty($args)) {
+      $sender->sendMessage("No hay argumentos, por favor usa: " . $this->getUsage());
       return;
-    }*/
+    }
     $username = str_replace(" ", "_", $args[0]);
   }
 }
