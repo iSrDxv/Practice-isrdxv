@@ -12,9 +12,6 @@ class Arena
   /** @var String **/ 
   private string $name;
   
-  /** @var Int **/
-  private int $slot;
-  
   /** @var String **/
   private string $mode;
   
@@ -34,7 +31,6 @@ class Arena
   public function __construct(string $name, string $mode, bool $ranked, int $mode_type, array $spawns) 
   {
     $this->name = $name;
-    $this->slot = self::MAX_PLAYERS;
     $this->mode = $mode;
     $this->ranked = $ranked;
     $this->mode_type = $mode_type;

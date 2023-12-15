@@ -28,7 +28,7 @@ class GameTask extends Task
   {
     foreach($this->loader->getGameManager()->getGames() as $game) {
       if ($game->getPhase() === $this->loader->getGameManager()::PHASE_WAITING) {
-        if ($game->getPlayerCount() === 2) {
+        if ($game->getPlayerCount() === Arena::MAX_PLAYERS) {
           $game->sendAction(function(Session $session) use($game): void {
             $opponent = $game->getPlayers()[1];
             $session->sendMessage(new TranslationMessage("game-text", [
