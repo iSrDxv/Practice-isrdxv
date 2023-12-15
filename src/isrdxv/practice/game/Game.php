@@ -14,6 +14,7 @@ use isrdxv\practice\kit\{
 };
 use isrdxv\practice\session\Session;
 
+use pocketmine\Server;
 use pocketmine\world\World;
 use pocketmine\utils\TextFormat;
 
@@ -43,7 +44,7 @@ class Game
   public function __construct(?Arena $arena = null)
   {
     if (empty($arena)) {
-      throw new GameException("I can't be empty :c");
+      Server::getInstance()->getLogger()->error("I can't be empty :c");
     }
     $this->arena = $arena;
     $this->mode = $arena->getMode();
