@@ -65,6 +65,8 @@ class GameListener implements Listener
     if ($event instanceof EntityDamageByEntityEvent) {
       $damager = $event->getDamager();
       foreach(Loader::getInstance()->getGameManager()->getGames() as $game) {
+        //TODO: This would cause problems later, but I will fix it soon jsjsjs
+        //NOTE: I shouldn't change the knockback globally, it should be for mundox but situations happened and I didn't think it through
         if ($game->getArenaMode() === ModeType::COMBO) {
           $event->setKnockBack(Loader::getInstance()->getConfig()->get("knockback")["combo"]);
         }
