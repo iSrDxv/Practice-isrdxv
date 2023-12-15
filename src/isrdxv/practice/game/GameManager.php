@@ -42,7 +42,9 @@ class GameManager
         array_push($games, $class);
       }
     }
-    if (count($games) === 0) return null;
+    if (count($games) === 0) {
+      return null;
+     }
     
     return $games[array_rand($games, 1)];
   }
@@ -57,7 +59,9 @@ class GameManager
   public function getGameByName(string $name): ?Game
   {
     if (empty($name)) return null;
-    if (empty($this->games[$name])) return null;
+    if (empty($this->games[$name])) {
+      return null;
+    }
     return $this->games[$name];
   }
   
