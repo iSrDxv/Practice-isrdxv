@@ -47,7 +47,7 @@ class Arena
   
   public function getSlots(): int
   {
-    return $this->slot;
+    return self::MAX_PLAYERS;
   }
   
   public function getMode(): string
