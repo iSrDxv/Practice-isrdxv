@@ -78,7 +78,7 @@ class Loader extends PluginBase
     
     /* Code of libasynql */
     $this->database = libasynql::create($this, $this->getConfig()->get("database"), [
-            "sqlite" => "sqlite.sql",
+            /*"sqlite" => "sqlite.sql",*/
             "mysql" => "mysql.sql"
     ]);
     
