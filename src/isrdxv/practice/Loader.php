@@ -32,6 +32,7 @@ use isrdxv\practice\command\{
 };
 use isrdxv\practice\kit\KitManager;
 use isrdxv\practice\webhook\WebhookManager;
+use libs\cache\Cache;
 
 class Loader extends PluginBase
 {
@@ -48,6 +49,8 @@ class Loader extends PluginBase
   private QueueManager $queueManager;
   
   private WebhookManager $webhook;
+  
+  private Cache $cache;
   
   protected static $instance;
   
@@ -75,6 +78,7 @@ class Loader extends PluginBase
     $this->provider = new YAMLProvider();
     /*$this->webhook = new WebhookManager($this);
     $this->webhook->sendStatus();*/
+    $this->cache = new Cache();
     
     /* Code of libasynql */
     $this->database = libasynql::create($this, $this->getConfig()->get("database"), [
@@ -144,6 +148,11 @@ class Loader extends PluginBase
   public function getWebhookManager(): WebhookManager
   {
     return $this->webhook;
+  }
+  
+  public function getCache(): Cache
+  {
+    return $this->cache;
   }
   
   public static function getInstance(): Loader
