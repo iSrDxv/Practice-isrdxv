@@ -81,6 +81,7 @@ class Loader extends PluginBase
             /*"sqlite" => "sqlite.sql",*/
             "mysql" => "mysql.sql"
     ]);
+    $this->database->executeGeneric("table.bans", [], function(): void {});
     
     $this->getServer()->getPluginManager()->registerEvents(new SessionListener(), $this);
     $this->getServer()->getPluginManager()->registerEvents(new GameListener(), $this);
