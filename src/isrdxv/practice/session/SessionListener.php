@@ -33,8 +33,6 @@ class SessionListener implements Listener
   public function onLogin(PlayerLoginEvent $event): void
   {
     $player = $event->getPlayer();
-    $query = $player->getServer()->getQueryInformation();
-    //$player->getServer()->getConfigGroup()->setConfigInt("max-players", $query->getPlayerCount() + 1);
     if (!$player->hasPlayedBefore()) {
       SessionManager::getInstance()->set($player->getName());
     }
