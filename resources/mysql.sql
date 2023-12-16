@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS bans(id INT AUTO_INCREMENT PRIMARY KEY, banned_user V
 -- #}
 
 -- #{ table.duration
-CREATE TABLE IF NOT EXISTS duration(xuid VARCHAR(18) NOT NULL UNIQUE PRIMARY KEY, name VARCHAR(30) NOT NULL, voted TEXT, donated TEXT, muted TEXT, lastplayed TEXT, totalonline TEXT, warnings, INT)
+CREATE TABLE IF NOT EXISTS duration(xuid VARCHAR(18) NOT NULL UNIQUE PRIMARY KEY, name VARCHAR(30) NOT NULL, voted TEXT, donated TEXT, muted TEXT, lastplayed TEXT, totalonline TEXT, warnings INT)
 -- #}
 
 -- #{ table.stats
