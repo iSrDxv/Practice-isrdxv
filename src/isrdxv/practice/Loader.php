@@ -82,6 +82,12 @@ class Loader extends PluginBase
             "mysql" => "mysql.sql"
     ]);
     $this->database->executeGeneric("table.bans", [], function(): void {});
+    $this->database->executeGeneric("table.duration", [], function(): void {});
+    $this->database->executeGeneric("table.stats", [], function(): void {});
+    $this->database->executeGeneric("table.staff.stats", [], function(): void {});
+    $this->database->executeGeneric("table.kits", [], function(): void {});
+    $this->database->executeGeneric("table.user_data", [], function(): void {});
+    $this->database->executeGeneric("alter.table.bans", [], function(): void {});
     
     $this->getServer()->getPluginManager()->registerEvents(new SessionListener(), $this);
     $this->getServer()->getPluginManager()->registerEvents(new GameListener(), $this);
