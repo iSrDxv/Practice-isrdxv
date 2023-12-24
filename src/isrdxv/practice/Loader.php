@@ -8,6 +8,8 @@ use pocketmine\scheduler\ClosureTask;
 
 // libasynql (PMMP)
 use poggit\libasynql\libasynql;
+use poggit\libasynql\DataConnector;
+use poggit\libasynql\SqlError;
 
 use isrdxv\practice\translation\Translation;
 use isrdxv\practice\provider\YAMLProvider;
@@ -85,13 +87,48 @@ class Loader extends PluginBase
             /*"sqlite" => "sqlite.sql",*/
             "mysql" => "mysql.sql"
     ]);
-    $this->database->executeGeneric("table.bans", [], function(): void {});
-    $this->database->executeGeneric("table.duration", [], function(): void {});
-    $this->database->executeGeneric("table.stats", [], function(): void {});
-    $this->database->executeGeneric("table.staff.stats", [], function(): void {});
-    $this->database->executeGeneric("table.kits", [], function(): void {});
-    $this->database->executeGeneric("table.user_data", [], function(): void {});
-    $this->database->executeGeneric("alter.table.bans", [], function(): void {});
+    $this->database->executeGeneric("table.bans", [], function() use($this): void {
+      $this->getLogger()->info("[MySQL] Table: bans, loaded correctly");
+    }, function(SqlError $error_) use(&$error){
+      $error = $error_;
+    });
+    $this->database->waitAll();
+    $this->database->executeGeneric("table.duration", [], function() use($this): void {
+      $this->getLogger()->info("[MySQL] Table: duration, loaded correctly");
+    }, function(SqlError $error_) use(&$error){
+      $error = $error_;
+    });
+    $this->database->waitAll();
+    $this->database->executeGeneric("table.stats", [], function() use($this): void {
+      $this->getLogger()->info("[MySQL] Table: stats, loaded correctly");
+    }, function(SqlError $error_) use(&$error){
+      $error = $error_;
+    });
+    $this->database->waitAll();
+    $this->database->executeGeneric("table.staff.stats", [], function() use($this): void {
+      $this->getLogger()->info("[MySQL] Table: staff.stats, loaded correctly");
+    }, function(SqlError $error_) use(&$error){
+      $error = $error_;
+    });
+    $this->database->waitAll();
+    $this->database->executeGeneric("table.kits", [], function() use($this): void {
+      $this->getLogger()->info("[MySQL] Table: kits, loaded correctly");
+    }, function(SqlError $error_) use(&$error){
+      $error = $error_;
+    });
+    $this->database->waitAll();
+    $this->database->executeGeneric("table.user_data", [], function() use($this): void {
+      $this->getLogger()->info("[MySQL] Table: user_data, loaded correctly");
+    }, function(SqlError $error_) use(&$error){
+      $error = $error_;
+    });
+    $this->database->waitAll();
+    $this->database->executeGeneric("alter.table.bans", [], function() use($this): void {
+      $this->getLogger()->info("[MySQL] Table: bans, alter correctly");
+    }, function(SqlError $error_) use(&$error){
+      $error = $error_;
+    });
+    $this->database->waitAll();
     
     $this->getServer()->getPluginManager()->registerEvents(new SessionListener(), $this);
     $this->getServer()->getPluginManager()->registerEvents(new GameListener(), $this);
@@ -145,9 +182,14 @@ class Loader extends PluginBase
     return $this->queueManager;
   }
   
-  public function getWebhookManager(): WebhookManager
+  /*public function getWebhookManager(): WebhookManager
   {
     return $this->webhook;
+  }*/
+  
+  public function getDatabase(): DataConnector
+  {
+    return $this->database;
   }
   
   public function getCache(): Cache

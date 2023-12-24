@@ -34,9 +34,10 @@ class SessionListener implements Listener
   {
     $player = $event->getPlayer();
     if (!$player->hasPlayedBefore()) {
-      SessionManager::getInstance()->set($player->getName());
+      SessionManager::getInstance()->set($player, true);
+      return;
     }
-    SessionManager::getInstance()->create($player);
+    SessionManager::getInstance()->set($player, false);
   }
   
   public function onJoin(PlayerJoinEvent $event): void

@@ -261,6 +261,11 @@ class Session
     }
   }
   
+  public function loadData(array $data): void
+  {
+    
+  }
+  
   /**
    * I'm lazy to shorten the item code
    **/
