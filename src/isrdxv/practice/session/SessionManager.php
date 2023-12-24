@@ -47,10 +47,20 @@ class SessionManager
       Loader::getInstance()->getDatabase()->executeInsert("table.murders.insert", ["xuid" => $player->getXuid(), "combo" => 0, "gapple" => 0, "nodebuff" => 0, "trapping" => 0, "bridge" => 0, "classic" => 0]);
       $firstTimeServer = new DateTime("NOW");
       Loader::getInstance()->getDatabase()->executeInsert("table.duration.insert", ["xuid" => $player->getXuid(), "voted" => "0", "donated" => "0", "muted" => "0", "lastplayed" => "0", "totalonline" => "0", "join_first_time_server" => date_format($firstTimeServer, "Y-m-d-H-i"), "warnings" => 0]);
+      //$player->sendForm(new RulesForm());
       return;
     }
-    Loader::getInstance()->getDatabase()->executeSelect();
-    ($this->get($player->getName()))->loadData();
+    $player->sendMessage("Loading your data...");
+    $xuid = $player->getXuid();
+    $session = ($this->get($player->getName()));//->loadData();
+    Loader::getInstance()->getDatabase()->executeSelect("SELECT * FROM duration,bans,murders,kills,points,won_events,user_data,settings WHERE duration.xuid = '$xuid' AND bans.xuid = '$xuid' AND murders.xuid = '$xuid' AND kills.xuid = '$xuid' AND points.xuid = '$xuid' AND won_events.xuid = '$xuid' AND user_data.xuid = '$xuid' AND settings.xuid = '$xuid'", [], function(array $rows) use($session, $player) {
+      if ($player instanceof Player) {
+        var_dump($rows);
+        if (isset($rows[0]) && $player->getXuid() !== null) {
+          //$session->loadData();
+        }
+      }
+    }, null);
   }
   
   public function getSessions(): array
