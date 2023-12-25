@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS duration(xuid VARCHAR(18) NOT NULL UNIQUE PRIMARY KEY
 -- #  :warnings int
 INSERT INTO duration(xuid, voted, donated, muted, lastplayed, totalonline, warnings) VALUES (:xuid, :voted, :donated, :muted, :lastplayed, :totalonline, :time_join_server, :warnings)
 -- #}
+-- #}
 
 -- #{ table.murders
 CREATE TABLE IF NOT EXISTS murders(xuid VARCHAR(18) NOT NULL UNIQUE PRIMARY KEY, combo INT, gapple INT, nodebuff INT, trapping INT, bridge INT, classic INT)
@@ -35,6 +36,7 @@ CREATE TABLE IF NOT EXISTS murders(xuid VARCHAR(18) NOT NULL UNIQUE PRIMARY KEY,
 -- #  :bridge int
 -- #  :classic int
 INSERT INTO murders(xuid, combo, gapple, nodebuff, trapping, bridge, classic) VALUES (:xuid, :combo, :gapple, :nodebuff, :trapping, :bridge, :classic)
+-- #}
 -- #}
 
 -- #{ table.kills
@@ -52,6 +54,7 @@ CREATE TABLE IF NOT EXISTS kills(xuid VARCHAR(18) NOT NULL UNIQUE PRIMARY KEY, c
 -- #   :classic int
 INSERT INTO kills(xuid, combo, gapple, nodebuff, trapping, bridge, classic) VALUES (:xuid, :combo, :gapple, :nodebuff, :trapping, :bridge, :classic)
 -- #}
+-- #}
 
 -- #{ table.points
 CREATE TABLE IF NOT EXISTS points(xuid VARCHAR(18) NOT NULL UNIQUE PRIMARY KEY, combo INT, gapple INT, nodebuff INT, trapping INT, bridge INT, classic INT)
@@ -67,6 +70,7 @@ CREATE TABLE IF NOT EXISTS points(xuid VARCHAR(18) NOT NULL UNIQUE PRIMARY KEY, 
 -- #  :bridge int
 -- #  :classic int
 INSERT INTO points(xuid, combo, gapple, nodebuff, trapping, bridge, classic) VALUES (:xuid, :combo, :gapple, :nodebuff, :trapping, :bridge, :classic)
+-- #}
 -- #}
 
 -- #{ table.staff.stats
@@ -85,6 +89,7 @@ CREATE TABLE IF NOT EXISTS won_events(xuid VARCHAR(18) NOT NULL UNIQUE PRIMARY K
 -- #  :description string
 -- #  :prize string
 INSERT INTO won_events(xuid, name, title, description, prize) VALUES (:xuid, :username, :title, :description, :prize)
+-- #}
 -- #}
 
 -- #{ table.kits
@@ -105,6 +110,7 @@ CREATE TABLE IF NOT EXISTS user_data(xuid VARCHAR(18) NOT NULL UNIQUE, name VARC
 -- # :skin string
 INSERT INTO user_data(xuid, name, custom_name, alias, language, skin, coin) VALUES (:xuid, :name, :custom_name, :alias, :language, :skin, :coin)
 -- #}
+-- #}
 
 -- #{ table.settings
 CREATE TABLE IF NOT EXISTS settings(xuid VARCHAR(18) NOT NULL UNIQUE, scoreboard BOOLEAN, queue BOOLEAN, cps BOOLEAN, auto_join BOOLEAN)
@@ -118,6 +124,7 @@ CREATE TABLE IF NOT EXISTS settings(xuid VARCHAR(18) NOT NULL UNIQUE, scoreboard
 -- #  :cps bool
 -- #  :auto_join bool
 INSERT INTO settings(xuid, scoreboard, queue, cps, auto_jon) VALUES (:xuid, :scoreboard, :cps, :auto_join)
+-- #}
 -- #}
 
 -- #{ alter.table.bans
