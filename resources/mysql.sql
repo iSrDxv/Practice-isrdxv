@@ -1,6 +1,6 @@
 -- #! mysql
 
--- BANS
+--BANS
 
 -- #{ table.bans
 CREATE TABLE IF NOT EXISTS bans(id INT AUTO_INCREMENT PRIMARY KEY, banned_user VARCHAR(30) NOT NULL, event VARCHAR(25), expired TEXT, reason TEXT, staff VARCHAR(30))
