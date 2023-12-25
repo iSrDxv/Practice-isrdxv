@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS bans(id INT AUTO_INCREMENT PRIMARY KEY, banned_user V
 CREATE TABLE IF NOT EXISTS duration(xuid VARCHAR(18) NOT NULL UNIQUE PRIMARY KEY, voted TEXT, donated TEXT, muted TEXT, lastplayed TEXT, totalonline TEXT, time_join_server TEXT, warnings INT)
 -- #}
 
--- #{ table.duration
+-- #{ duration
 -- # { insert
 -- #  :xuid string
 -- #  :voted string
