@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS duration(xuid VARCHAR(18) NOT NULL UNIQUE PRIMARY KEY
 -- #  :muted string
 -- #  :lastplayed string
 -- #  :totalonline string
--- #  :time_join_server
+-- #  :time_join_server string
 -- #  :warnings int
 INSERT INTO duration(xuid, voted, donated, muted, lastplayed, totalonline, warnings) VALUES (:xuid, :voted, :donated, :muted, :lastplayed, :totalonline, :time_join_server, :warnings)
 -- #}
@@ -25,7 +25,7 @@ INSERT INTO duration(xuid, voted, donated, muted, lastplayed, totalonline, warni
 CREATE TABLE IF NOT EXISTS murders(xuid VARCHAR(18) NOT NULL UNIQUE PRIMARY KEY, combo INT, gapple INT, nodebuff INT, trapping INT, bridge INT, classic INT)
 -- #}
 
--- #{ table.murders
+-- #{ murders
 -- # { insert
 -- #  :xuid string
 -- #  :combo int
@@ -41,7 +41,7 @@ INSERT INTO murders(xuid, combo, gapple, nodebuff, trapping, bridge, classic) VA
 CREATE TABLE IF NOT EXISTS kills(xuid VARCHAR(18) NOT NULL UNIQUE PRIMARY KEY, combo INT, gapple INT, nodebuff INT, trapping INT, bridge INT, classic INT)
 -- #}
 
--- #{ table.kills
+-- #{ kills
 -- # { insert
 -- #   :xuid string
 -- #   :combo int
