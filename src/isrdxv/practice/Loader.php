@@ -89,43 +89,43 @@ class Loader extends PluginBase
     ]);
     $logger = $this->getLogger();
     $this->database->executeGeneric("table.bans", [], function() use($logger): void {
-      $logger->info("MySQL Table: bans, loaded correctly");
+      $logger->warning("MySQL Table: bans, loaded correctly");
     }, function(SqlError $error_) use(&$error){
       $error = $error_;
     });
     $this->database->waitAll();
     $this->database->executeGeneric("table.duration", [], function() use($logger): void {
-      $logger->info("MySQL Table: duration, loaded correctly");
+      $logger->warning("MySQL Table: duration, loaded correctly");
     }, function(SqlError $error_) use(&$error){
       $error = $error_;
     });
     $this->database->waitAll();
     $this->database->executeGeneric("table.stats", [], function() use($logger): void {
-      $logger->info("MySQL Table: stats, loaded correctly");
+      $logger->warning("MySQL Table: stats, loaded correctly");
     }, function(SqlError $error_) use(&$error){
       $error = $error_;
     });
     $this->database->waitAll();
     $this->database->executeGeneric("table.staff.stats", [], function() use($logger): void {
-      $logger->info("MySQL Table: staff.stats, loaded correctly");
+      $logger->warning("MySQL Table: staff.stats, loaded correctly");
     }, function(SqlError $error_) use(&$error){
       $error = $error_;
     });
     $this->database->waitAll();
     $this->database->executeGeneric("table.kits", [], function() use($logger): void {
-      $logger->info("MySQL Table: kits, loaded correctly");
+      $logger->warning("MySQL Table: kits, loaded correctly");
     }, function(SqlError $error_) use(&$error){
       $error = $error_;
     });
     $this->database->waitAll();
     $this->database->executeGeneric("table.user_data", [], function() use($logger): void {
-      $logger->info("MySQL Table: user_data, loaded correctly");
+      $logger->warning("MySQL Table: user_data, loaded correctly");
     }, function(SqlError $error_) use(&$error){
       $error = $error_;
     });
     $this->database->waitAll();
     $this->database->executeGeneric("alter.table.bans", [], function() use($logger): void {
-      $logger->info("MySQL Table: bans, alter correctly");
+      $logger->warning("MySQL Table: bans, alter correctly");
     }, function(SqlError $error_) use(&$error){
       $error = $error_;
     });
