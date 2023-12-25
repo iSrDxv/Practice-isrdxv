@@ -87,44 +87,45 @@ class Loader extends PluginBase
             /*"sqlite" => "sqlite.sql",*/
             "mysql" => "mysql.sql"
     ]);
-    $this->database->executeGeneric("table.bans", [], function() use($this): void {
-      $this->getLogger()->info("[MySQL] Table: bans, loaded correctly");
+    $logger = $this->getLogger();
+    $this->database->executeGeneric("table.bans", [], function() use($logger): void {
+      $logger->info("MySQL Table: bans, loaded correctly");
     }, function(SqlError $error_) use(&$error){
       $error = $error_;
     });
     $this->database->waitAll();
-    $this->database->executeGeneric("table.duration", [], function() use($this): void {
-      $this->getLogger()->info("[MySQL] Table: duration, loaded correctly");
+    $this->database->executeGeneric("table.duration", [], function() use($logger): void {
+      $logger->info("MySQL Table: duration, loaded correctly");
     }, function(SqlError $error_) use(&$error){
       $error = $error_;
     });
     $this->database->waitAll();
-    $this->database->executeGeneric("table.stats", [], function() use($this): void {
-      $this->getLogger()->info("[MySQL] Table: stats, loaded correctly");
+    $this->database->executeGeneric("table.stats", [], function() use($logger): void {
+      $logger->info("MySQL Table: stats, loaded correctly");
     }, function(SqlError $error_) use(&$error){
       $error = $error_;
     });
     $this->database->waitAll();
-    $this->database->executeGeneric("table.staff.stats", [], function() use($this): void {
-      $this->getLogger()->info("[MySQL] Table: staff.stats, loaded correctly");
+    $this->database->executeGeneric("table.staff.stats", [], function() use($logger): void {
+      $logger->info("MySQL Table: staff.stats, loaded correctly");
     }, function(SqlError $error_) use(&$error){
       $error = $error_;
     });
     $this->database->waitAll();
-    $this->database->executeGeneric("table.kits", [], function() use($this): void {
-      $this->getLogger()->info("[MySQL] Table: kits, loaded correctly");
+    $this->database->executeGeneric("table.kits", [], function() use($logger): void {
+      $logger->info("MySQL Table: kits, loaded correctly");
     }, function(SqlError $error_) use(&$error){
       $error = $error_;
     });
     $this->database->waitAll();
-    $this->database->executeGeneric("table.user_data", [], function() use($this): void {
-      $this->getLogger()->info("[MySQL] Table: user_data, loaded correctly");
+    $this->database->executeGeneric("table.user_data", [], function() use($logger): void {
+      $logger->info("MySQL Table: user_data, loaded correctly");
     }, function(SqlError $error_) use(&$error){
       $error = $error_;
     });
     $this->database->waitAll();
-    $this->database->executeGeneric("alter.table.bans", [], function() use($this): void {
-      $this->getLogger()->info("[MySQL] Table: bans, alter correctly");
+    $this->database->executeGeneric("alter.table.bans", [], function() use($logger): void {
+      $logger->info("MySQL Table: bans, alter correctly");
     }, function(SqlError $error_) use(&$error){
       $error = $error_;
     });
