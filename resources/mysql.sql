@@ -7,14 +7,13 @@ CREATE TABLE IF NOT EXISTS bans(id INT AUTO_INCREMENT PRIMARY KEY, banned_user V
 -- #}
 
 ------------------------------------------
-
 --DURATION (of any shit)
 
 -- #{ table.duration
 CREATE TABLE IF NOT EXISTS duration(xuid VARCHAR(18) NOT NULL UNIQUE PRIMARY KEY, voted TEXT, donated TEXT, muted TEXT, lastplayed TEXT, totalonline TEXT, join_first_time_server TEXT, warnings INT)
 -- #}
 
--- #{ table.duration
+-- #{ table.duration.insert
 INSERT INTO duration(xuid, voted, donated, muted, lastplayed, totalonline, warnings) VALUES (:xuid, :voted, :donated, :muted, :lastplayed, :totalonline, :join_first_time_server, :warnings)
 -- #}
 ------------------------------------------
