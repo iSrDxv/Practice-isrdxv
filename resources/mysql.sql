@@ -64,10 +64,6 @@ INSERT INTO won_events(xuid, name, title, description, prize) VALUES (:xuid, :na
 -- #}
 -- #}
 
--- #{ query.declarartion
-CREATE TABLE IF NOT EXISTS kits(xuid VARCHAR(18) NOT NULL UNIQUE PRIMARY KEY, username VARCHAR(30) NOT NULL)
--- #}
-
 -- #{ user_data
 -- #  { insert
 -- # :xuid string
