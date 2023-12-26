@@ -60,7 +60,7 @@ INSERT INTO points(xuid, combo, gapple, nodebuff, trapping, bridge, classic) VAL
 -- #  :title string
 -- #  :description string
 -- #  :prize string
-INSERT INTO won_events(xuid, name, title, description, prize) VALUES (:xuid, :username, :title, :description, :prize)
+INSERT INTO won_events(xuid, name, title, description, prize) VALUES (:xuid, :name, :title, :description, :prize)
 -- #}
 -- #}
 
@@ -87,6 +87,6 @@ INSERT INTO user_data(xuid, name, custom_name, alias, language, skin, coin) VALU
 -- #  :queue bool
 -- #  :cps bool
 -- #  :auto_join bool
-INSERT INTO settings(xuid, scoreboard, queue, cps, auto_jon) VALUES (:xuid, :scoreboard, :cps, :auto_join)
+INSERT INTO settings(xuid, scoreboard, queue, cps, auto_jon) VALUES (:xuid, :scoreboard, :queue, :cps, :auto_join)
 -- #}
 -- #}
