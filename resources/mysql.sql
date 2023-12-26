@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS user_data(xuid VARCHAR(18) NOT NULL UNIQUE, name VARC
 ALTER TABLE bans AUTO_INCREMENT = 0;
 -- # }
 
--- #{ insert.duration
+-- # { insert.duration
 -- #  :xuid string
 -- #  :voted string
 -- #  :donated string
@@ -47,9 +47,9 @@ ALTER TABLE bans AUTO_INCREMENT = 0;
 -- #  :time_join_server string
 -- #  :warnings int
 INSERT OR REPLACE INTO duration(xuid, voted, donated, muted, lastplayed, totalonline, warnings) VALUES (:xuid, :voted, :donated, :muted, :lastplayed, :totalonline, :time_join_server, :warnings)
--- #}
+-- # }
 
--- #{ insert.murders
+-- # { insert.murders
 -- #  :xuid string
 -- #  :combo int
 -- #  :gapple int
@@ -58,9 +58,9 @@ INSERT OR REPLACE INTO duration(xuid, voted, donated, muted, lastplayed, totalon
 -- #  :bridge int
 -- #  :classic int
 INSERT OR REPLACE INTO murders(xuid, combo, gapple, nodebuff, trapping, bridge, classic) VALUES (:xuid, :combo, :gapple, :nodebuff, :trapping, :bridge, :classic)
--- #}
+-- # }
 
--- #{ insert.kills
+-- # { insert.kills
 -- #   :xuid string
 -- #   :combo int
 -- #   :gapple int
@@ -69,9 +69,9 @@ INSERT OR REPLACE INTO murders(xuid, combo, gapple, nodebuff, trapping, bridge, 
 -- #   :bridge int
 -- #   :classic int
 INSERT OR REPLACE INTO kills(xuid, combo, gapple, nodebuff, trapping, bridge, classic) VALUES (:xuid, :combo, :gapple, :nodebuff, :trapping, :bridge, :classic)
--- #}
+-- # }
 
--- #{ points
+-- # { points
 -- #  :xuid string
 -- #  :combo int
 -- #  :gapple int
@@ -80,18 +80,18 @@ INSERT OR REPLACE INTO kills(xuid, combo, gapple, nodebuff, trapping, bridge, cl
 -- #  :bridge int
 -- #  :classic int
 INSERT OR REPLACE INTO points(xuid, combo, gapple, nodebuff, trapping, bridge, classic) VALUES (:xuid, :combo, :gapple, :nodebuff, :trapping, :bridge, :classic)
--- #}
+-- # }
 
--- #{ won_events
+-- # { won_events
 -- #  :xuid string
 -- #  :name string
 -- #  :title string
 -- #  :description string
 -- #  :prize string
 INSERT OR REPLACE INTO won_events(xuid, name, title, description, prize) VALUES (:xuid, :name, :title, :description, :prize)
--- #}
+-- # }
 
--- #{ user_data
+-- # { user_data
 -- # :xuid string
 -- # :name string
 -- # :custom_name string
@@ -99,15 +99,15 @@ INSERT OR REPLACE INTO won_events(xuid, name, title, description, prize) VALUES 
 -- # :language: string
 -- # :skin string
 INSERT OR REPLACE INTO user_data(xuid, name, custom_name, alias, language, skin, coin) VALUES (:xuid, :name, :custom_name, :alias, :language, :skin, :coin)
--- #}
+-- # }
 
--- #{ settings
+-- # { settings
 -- #  :xuid string
 -- #  :scoreboard bool
 -- #  :queue bool
 -- #  :cps bool
 -- #  :auto_join bool
 INSERT OR REPLACE INTO settings(xuid, scoreboard, queue, cps, auto_jon) VALUES (:xuid, :scoreboard, :queue, :cps, :auto_join)
--- #}
+-- # }
 
 -- #}
