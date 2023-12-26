@@ -88,27 +88,27 @@ class Loader extends PluginBase
             "mysql" => "mysql.sql"
     ]);
     $logger = $this->getLogger();
-    $this->database->executeGeneric("CREATE TABLE IF NOT EXISTS kills(xuid VARCHAR(18) NOT NULL UNIQUE PRIMARY KEY, combo INT, gapple INT, nodebuff INT, trapping INT, bridge INT, classic INT)", [], function(): void {});
+    $this->database->executeGeneric("claude.init.kills", [], function(): void {});
     $this->database->waitAll();
-    $this->database->executeGeneric("CREATE TABLE IF NOT EXISTS murders(xuid VARCHAR(18) NOT NULL UNIQUE PRIMARY KEY, combo INT, gapple INT, nodebuff INT, trapping INT, bridge INT, classic INT)", [], function(): void {});
+    $this->database->executeGeneric("claude.init.murders", [], function(): void {});
     $this->database->waitAll();
-    $this->database->executeGeneric("CREATE TABLE IF NOT EXISTS bans(id INT AUTO_INCREMENT PRIMARY KEY, banned_user VARCHAR(30) NOT NULL, event VARCHAR(25), expired TEXT, reason TEXT, staff VARCHAR(30));", [], function(): void {});
+    $this->database->executeGeneric("claude.init.bans", [], function(): void {});
     $this->database->waitAll();
-    $this->database->executeGeneric("CREATE TABLE IF NOT EXISTS duration(xuid VARCHAR(18) NOT NULL UNIQUE PRIMARY KEY, voted TEXT, donated TEXT, muted TEXT, lastplayed TEXT, totalonline TEXT, time_join_server TEXT, warnings INT);", [], function(): void {});
+    $this->database->executeGeneric("claude.init.duration", [], function(): void {});
     $this->database->waitAll();
     /*$this->database->executeGeneric("table.stats");
     $this->database->waitAll();*/
-    $this->database->executeGeneric("CREATE TABLE IF NOT EXISTS settings(xuid VARCHAR(18) NOT NULL UNIQUE, scoreboard BOOLEAN, queue BOOLEAN, cps BOOLEAN, auto_join BOOLEAN)", [], function(): void {});
+    $this->database->executeGeneric("claude.init.settings", [], function(): void {});
     $this->database->waitAll();
-    $this->database->executeGeneric("CREATE TABLE IF NOT EXISTS staff_stats(xuid VARCHAR(18) NOT NULL UNIQUE PRIMARY KEY, name VARCHAR(30) NOT NULL, kicks INT, silenceds INT, reports INT);", [], function(): void {});
+    $this->database->executeGeneric("claude init.staff.stats", [], function(): void {});
     $this->database->waitAll();
-    $this->database->executeGeneric("CREATE TABLE IF NOT EXISTS won_events(xuid VARCHAR(18) NOT NULL UNIQUE PRIMARY KEY, name VARCHAR(30) NOT NULL, title TEXT, description VARCHAR(100), prize VARCHAR(30))", [], function(): void {});
+    $this->database->executeGeneric("claude init.won.events", [], function(): void {});
     $this->database->waitAll();    
-    $this->database->executeGeneric("CREATE TABLE IF NOT EXISTS points(xuid VARCHAR(18) NOT NULL UNIQUE PRIMARY KEY, combo INT, gapple INT, nodebuff INT, trapping INT, bridge INT, classic INT);", []);
+    $this->database->executeGeneric("claude.init.points", [], function(): void {});
     $this->database->waitAll();
-    $this->database->executeGeneric("CREATE TABLE IF NOT EXISTS user_data(xuid VARCHAR(18) NOT NULL UNIQUE, name VARCHAR(30) NOT NULL, custom_name VARCHAR(30) NULL, alias VARCHAR(25) NULL, language TEXT, skin LONGTEXT, coin INT);", [], function(): void {});
+    $this->database->executeGeneric("claude.init.user.data", [], function(): void {});
     $this->database->waitAll();
-    $this->database->executeGeneric("ALTER TABLE bans AUTO_INCREMENT = 0", [], function(): void {});
+    $this->database->executeGeneric("claude.alter.bans", [], function(): void {});
     $this->database->waitAll();
     
     $this->getServer()->getPluginManager()->registerEvents(new SessionListener(), $this);
