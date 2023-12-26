@@ -1,4 +1,5 @@
 -- #! mysql
+-- #{ claude
 
 -- #{ duration
 -- # { insert
@@ -85,4 +86,6 @@ INSERT INTO user_data(xuid, name, custom_name, alias, language, skin, coin) VALU
 -- #  :auto_join bool
 INSERT INTO settings(xuid, scoreboard, queue, cps, auto_jon) VALUES (:xuid, :scoreboard, :queue, :cps, :auto_join)
 -- #}
+-- #}
+
 -- #}
