@@ -11,6 +11,8 @@ use pocketmine\utils\{
   Config
 };
 
+use DateTime;
+
 class SessionManager 
 {
   use SingletonTrait;
@@ -40,14 +42,14 @@ class SessionManager
     $this->create($player);
     $player->sendMessage("Loading your data...");
     if ($firstJoin) {
-      Loader::getInstance()->getDatabase()->executeInsert("claude.insert.settings", ["xuid" => $player->getXuid(), "scoreboard" => true, "queue" => false, "cps" => false, "auto_join" => false]);
-      Loader::getInstance()->getDatabase()->executeInsert("claude.insert.user_data", ["xuid" => $player->getXuid(), "name" => $player->getName(), "custom_name" => "lol", "alias" => "", "language" => Loader::getInstance()->getProvider()->getDefaultLanguage(), "skin" => "", "coin" => 500]);
-      Loader::getInstance()->getDatabase()->executeInsert("claude.insert.won_events", ["xuid" => $player->getXuid(), "name" => $player->getName(), "title" => "Enter the server for the first time", "description" => "an event for having entered for the first time, you win 500 coins", "prize" => "500"]);
-      Loader::getInstance()->getDatabase()->executeInsert("claude.insert.points", ["xuid" => $player->getXuid(), "combo" => 1000, "gapple" => 1000, "nodebuff" => 1000, "trapping" => 1000, "bridge" => 1000, "classic" => 1000]);
-      Loader::getInstance()->getDatabase()->executeInsert("claude.insert.kills", ["xuid" => $player->getXuid(), "combo" => 0, "gapple" => 0, "nodebuff" => 0, "trapping" => 0, "bridge" => 0, "classic" => 0]);
-      Loader::getInstance()->getDatabase()->executeInsert("claude.insert.murders", ["xuid" => $player->getXuid(), "combo" => 0, "gapple" => 0, "nodebuff" => 0, "trapping" => 0, "bridge" => 0, "classic" => 0]);
+      Loader::getInstance()->getDatabase()->executeInsert("claude.settings", ["xuid" => $player->getXuid(), "scoreboard" => true, "queue" => false, "cps" => false, "auto_join" => false]);
+      Loader::getInstance()->getDatabase()->executeInsert("claude.user_data", ["xuid" => $player->getXuid(), "name" => $player->getName(), "custom_name" => "lol", "alias" => "", "language" => Loader::getInstance()->getProvider()->getDefaultLanguage(), "skin" => "", "coin" => 500]);
+      Loader::getInstance()->getDatabase()->executeInsert("claude.won_events", ["xuid" => $player->getXuid(), "name" => $player->getName(), "title" => "Enter the server for the first time", "description" => "an event for having entered for the first time, you win 500 coins", "prize" => "500"]);
+      Loader::getInstance()->getDatabase()->executeInsert("claude.points", ["xuid" => $player->getXuid(), "combo" => 1000, "gapple" => 1000, "nodebuff" => 1000, "trapping" => 1000, "bridge" => 1000, "classic" => 1000]);
+      Loader::getInstance()->getDatabase()->executeInsert("claude.kills", ["xuid" => $player->getXuid(), "combo" => 0, "gapple" => 0, "nodebuff" => 0, "trapping" => 0, "bridge" => 0, "classic" => 0]);
+      Loader::getInstance()->getDatabase()->executeInsert("claude.murders", ["xuid" => $player->getXuid(), "combo" => 0, "gapple" => 0, "nodebuff" => 0, "trapping" => 0, "bridge" => 0, "classic" => 0]);
       $firstTimeServer = new DateTime("NOW");
-      Loader::getInstance()->getDatabase()->executeInsert("claude.insert.duration", ["xuid" => $player->getXuid(), "voted" => "0", "donated" => "0", "muted" => "0", "lastplayed" => "0", "totalonline" => "0", "time_join_server" => date_format($firstTimeServer, "Y-m-d-H-i"), "warnings" => 0]);
+      Loader::getInstance()->getDatabase()->executeInsert("claude.duration", ["xuid" => $player->getXuid(), "voted" => "0", "donated" => "0", "muted" => "0", "lastplayed" => "0", "totalonline" => "0", "time_join_server" => date_format($firstTimeServer, "Y-m-d-H-i"), "warnings" => 0]);
       //$player->sendForm(new RulesForm());
       return;
     }
