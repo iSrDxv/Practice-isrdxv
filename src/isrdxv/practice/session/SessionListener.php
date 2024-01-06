@@ -54,8 +54,7 @@ class SessionListener implements Listener
     if (is_array($desc = Loader::getInstance()->getConfig()->get("server-description"))) {
       $text = implode("\n", $desc);
       $player->sendMessage(TextFormat::colorize($text));
-    }
-    if (is_string($desc = Loader::getInstance()->getConfig()->get("server-description"))) {
+    }elseif(is_string($desc = Loader::getInstance()->getConfig()->get("server-description"))) {
       $player->sendMessage(TextFormat::colorize($desc));
     }
     
