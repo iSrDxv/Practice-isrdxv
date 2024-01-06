@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS bans(id INT AUTO_INCREMENT PRIMARY KEY, banned_user V
 -- # }
 
 -- # { init.duration
-CREATE TABLE IF NOT EXISTS duration(xuid VARCHAR(18) NOT NULL UNIQUE PRIMARY KEY, voted TEXT, donated TEXT, muted TEXT, lastplayed TEXT, totalonline TEXT, warnings INT, time_join_server TEXT);
+CREATE TABLE IF NOT EXISTS duration(xuid VARCHAR(18) NOT NULL UNIQUE PRIMARY KEY, warnings INT, voted TEXT, donated TEXT, muted TEXT, lastplayed TEXT, totalonline TEXT, time_join_server TEXT);
 -- # }
 
 -- # { init.staff.stats
@@ -50,7 +50,7 @@ ALTER TABLE bans AUTO_INCREMENT = 0;
 -- #  :totalonline string
 -- #  :warnings int
 -- #  :time_join_server string
-INSERT OR REPLACE INTO duration(xuid, voted, donated, muted, lastplayed, totalonline, warnings, time_join_server) VALUES (:xuid, :voted, :donated, :muted, :lastplayed, :totalonline, :warnings, :time_join_server)
+INSERT OR REPLACE INTO duration(xuid, warnings, voted, donated, muted, lastplayed, totalonline, time_join_server) VALUES (:xuid, :warnings, :voted, :donated, :muted, :lastplayed, :totalonline, :time_join_server)
 -- # }
 
 -- # { murders
