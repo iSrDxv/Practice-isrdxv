@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS settings(xuid VARCHAR(18) NOT NULL UNIQUE, scoreboard
 ALTER TABLE bans AUTO_INCREMENT = 0;
 -- # }
 
--- # { insert.duration
+-- # { duration
 -- #  :xuid string
 -- #  :voted string
 -- #  :donated string
@@ -53,7 +53,7 @@ ALTER TABLE bans AUTO_INCREMENT = 0;
 INSERT OR REPLACE INTO duration(xuid, voted, donated, muted, lastplayed, totalonline, warnings) VALUES (:xuid, :voted, :donated, :muted, :lastplayed, :totalonline, :time_join_server, :warnings)
 -- # }
 
--- # { insert.murders
+-- # { murders
 -- #  :xuid string
 -- #  :combo int
 -- #  :gapple int
@@ -64,7 +64,7 @@ INSERT OR REPLACE INTO duration(xuid, voted, donated, muted, lastplayed, totalon
 INSERT OR REPLACE INTO murders(xuid, combo, gapple, nodebuff, trapping, bridge, classic) VALUES (:xuid, :combo, :gapple, :nodebuff, :trapping, :bridge, :classic)
 -- # }
 
--- # { insert.kills
+-- # { kills
 -- #   :xuid string
 -- #   :combo int
 -- #   :gapple int
