@@ -96,7 +96,7 @@ INSERT OR REPLACE INTO won_events(xuid, name, title, description, prize) VALUES 
 -- # :name string
 -- # :custom_name string
 -- # :alias string
--- # :language: string
+-- # :language string
 -- # :skin string
 INSERT OR REPLACE INTO user_data(xuid, name, custom_name, alias, language, skin, coin) VALUES (:xuid, :name, :custom_name, :alias, :language, :skin, :coin)
 -- # }
