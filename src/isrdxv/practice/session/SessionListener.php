@@ -33,16 +33,18 @@ class SessionListener implements Listener
   public function onLogin(PlayerLoginEvent $event): void
   {
     $player = $event->getPlayer();
-    if (!$player->hasPlayedBefore()) {
-      SessionManager::getInstance()->set($player, true);
-      return;
-    }
-    SessionManager::getInstance()->set($player, false);
   }
   
   public function onJoin(PlayerJoinEvent $event): void
   {
     $player = $event->getPlayer();
+    if (!$player->hasPlayedBefore()) {
+      SessionManager::getInstance()->set($player, true);
+      return;
+    }
+    SessionManager::getInstance()->set($player, false);
+    $player->sendMessage("Loading your data...");
+    
     $session = SessionManager::getInstance()->get($player->getName());
     $world = Server::getInstance()->getWorldManager()->getWorldByName(Loader::getInstance()->getConfig()->get("lobby-name"));
     

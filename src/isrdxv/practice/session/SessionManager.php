@@ -40,7 +40,6 @@ class SessionManager
   public function set(Player $player, bool $firstJoin = false): void
   {
     $this->create($player);
-    $player->sendMessage("Loading your data...");
     if ($firstJoin) {
       Loader::getInstance()->getDatabase()->executeInsert("claude.settings", ["xuid" => $player->getXuid(), "scoreboard" => true, "queue" => false, "cps" => false, "auto_join" => false]);
       Loader::getInstance()->getDatabase()->executeInsert("claude.user_data", ["xuid" => $player->getXuid(), "name" => $player->getName(), "custom_name" => "lol", "alias" => "", "language" => Loader::getInstance()->getProvider()->getDefaultLanguage(), "skin" => "", "coin" => 500]);
@@ -55,7 +54,7 @@ class SessionManager
     }
     $xuid = $player->getXuid();
     $session = $this->get($player->getName());//->loadData();
-    Loader::getInstance()->getDatabase()->executeSelect("SELECT * FROM duration,bans,murders,kills,points,won_events,user_data,settings WHERE duration.xuid = '$xuid' AND bans.xuid = '$xuid' AND murders.xuid = '$xuid' AND kills.xuid = '$xuid' AND points.xuid = '$xuid' AND won_events.xuid = '$xuid' AND user_data.xuid = '$xuid' AND settings.xuid = '$xuid'", [], function(array $rows) use($session, $player) {
+    Loader::getInstance()->getDatabase()->executeImplRaw("SELECT * FROM duration,bans,murders,kills,points,won_events,user_data,settings WHERE duration.xuid = '$xuid' AND murders.xuid = '$xuid' AND kills.xuid = '$xuid' AND points.xuid = '$xuid' AND won_events.xuid = '$xuid' AND user_data.xuid = '$xuid' AND settings.xuid = '$xuid'", [], function(array $rows) use($session, $player) {
       if ($player instanceof Player) {
         var_dump($rows);
         if (isset($rows[0]) && $player->getXuid() !== null) {
