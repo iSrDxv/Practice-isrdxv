@@ -56,8 +56,8 @@ class SessionManager
     $session = $this->get($player->getName());//->loadData();
     Loader::getInstance()->getDatabase()->executeImplRaw("SELECT * FROM duration,bans,murders,kills,points,won_events,user_data,settings WHERE duration.xuid = '$xuid' AND murders.xuid = '$xuid' AND kills.xuid = '$xuid' AND points.xuid = '$xuid' AND won_events.xuid = '$xuid' AND user_data.xuid = '$xuid' AND settings.xuid = '$xuid'", [], function(array $rows) use($session, $player) {
       if ($player instanceof Player) {
-        var_dump($rows);
-        if (isset($rows[0]) && $player->getXuid() !== null) {
+        var_dump($rows[0]); //test xd
+        if (isset($rows[0], $rows[0]->getRows()[0]) && $player->getXuid() !== null) {
           //$session->loadData();
         }
       }
