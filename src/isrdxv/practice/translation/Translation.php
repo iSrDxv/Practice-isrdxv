@@ -17,9 +17,6 @@ class Translation
       $language = "es_ES";
     break;
     case 1:
-      $language = "es_MX";
-    break;
-    case 2:
       $language = "en_US";
     break;
     default: 
@@ -35,14 +32,11 @@ class Translation
     case "es_ES":
       $language = 0;
     break;
-    case "es_MX":
+    case "en_US":
       $language = 1;
     break;
-    case "en_US":
-      $language = 2;
-    break;
     default:
-      $language = 2;
+      $language = 1;
     break;
     }
     return $language;

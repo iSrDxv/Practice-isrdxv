@@ -19,9 +19,9 @@ class YAMLProvider
     if (!is_dir($folder = Loader::getInstance()->getDataFolder() . "kits" . DIRECTORY_SEPARATOR)) {
       @mkdir($folder);
     }
-    /*if (!is_dir($folder = Loader::getInstance()->getDataFolder() . "bans" . DIRECTORY_SEPARATOR)) {
+    if (!is_dir($folder = Loader::getInstance()->getDataFolder() . "backup" . DIRECTORY_SEPARATOR)) {
       @mkdir($folder);
-    }*/
+    }
   }
   
   public function saveDataSession(Session $session): void 

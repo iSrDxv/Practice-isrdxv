@@ -203,6 +203,11 @@ class Session
     return $this->wonEvents;
   }
   
+  public function setLanguage(string $language): void
+  {
+    $this->language = $language;
+  }
+  
   public function getLanguage(): string
   {
     return $this->language;

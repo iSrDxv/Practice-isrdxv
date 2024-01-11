@@ -87,7 +87,7 @@ class SessionListener implements Listener
     $query->setListPlugins(true);
     $query->setPlugins([Loader::getInstance()]);
     $query->setWorld(Loader::getInstance()->getConfig()->get("lobby-name"));
-    //$query->setMaxPlayerCount($query->getPlayerCount() + 1);
+    $query->setMaxPlayerCount($query->getPlayerCount() + 1);
   }
   
   /**
@@ -99,15 +99,15 @@ class SessionListener implements Listener
     $item = $event->getItem();
     $session = SessionManager::getInstance()->get($player->getName());
     if ($item->getCustomName() === TextFormat::colorize("&l&fSettings")) {
-      $player->sendForm(FormManager::getInstance()->settings($session));
+      $player->sendForm(new SettingsForm($session));
     }elseif ($item->getCustomName() === TextFormat::colorize("&l&fParty")) {
-      $player->sendForm(FormManager::getInstance()->party($session));
+      $player->sendForm(new PartyMenuForm($session));
     }elseif ($item->getCustomName() === TextFormat::colorize("&l&fRanked &cQueue")) {
-      $player->sendForm(FormManager::getInstance()->ranked($session));
+      $player->sendForm(new RankedForm($session));
     }elseif ($item->getCustomName() === TextFormat::colorize("&l&fUnRanked &cQueue")) {
-      $player->sendForm(FormManager::getInstance()->unranked($session));
+      $player->sendForm(new UnRankedForm($session));
     }elseif ($item->getCustomName() === TextFormat::colorize("&l&fFFA &cQueue")) {
-      $player->sendForm(FormManager::getInstance()->ffa($session));
+      $player->sendForm(new FFAForm($session));
     }elseif ($item->getCustomName() === TextFormat::colorize("&l&o&fLeave Queue")) {
       if ($session->hasQueue()) {
         $session->getQueue()->deletePlayer($session);
