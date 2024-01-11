@@ -50,7 +50,7 @@ ALTER TABLE bans AUTO_INCREMENT = 0;
 -- #  :totalonline string
 -- #  :warnings int
 -- #  :time_join_server string
-INSERT OR REPLACE INTO duration(xuid, time_join_server, warnings, voted, donated, muted, lastplayed, totalonline) VALUES (:xuid, :time_join_server, :warnings, :voted, :donated, :muted, :lastplayed, :totalonline)
+INSERT INTO duration(xuid, time_join_server, warnings, voted, donated, muted, lastplayed, totalonline) VALUES (:xuid, :time_join_server, :warnings, :voted, :donated, :muted, :lastplayed, :totalonline) ON DUPLICATE KEY UPDATE time_join_server=VALUES(time_join_server), warnings=VALUES(warnings), voted=VALUES(voted), donated=VALUES(donated), muted=VALUES(muted), lastplayed=VALUES(lastplayed), totalonline=VALUES(totalonline);
 -- # }
 
 -- # { murders
@@ -61,7 +61,7 @@ INSERT OR REPLACE INTO duration(xuid, time_join_server, warnings, voted, donated
 -- #  :trapping int
 -- #  :bridge int
 -- #  :classic int
-INSERT OR REPLACE INTO murders(xuid, combo, gapple, nodebuff, trapping, bridge, classic) VALUES (:xuid, :combo, :gapple, :nodebuff, :trapping, :bridge, :classic)
+INSERT INTO murders(xuid, combo, gapple, nodebuff, trapping, bridge, classic) VALUES (:xuid, :combo, :gapple, :nodebuff, :trapping, :bridge, :classic)
 -- # }
 
 -- # { kills
@@ -72,7 +72,7 @@ INSERT OR REPLACE INTO murders(xuid, combo, gapple, nodebuff, trapping, bridge, 
 -- #   :trapping int
 -- #   :bridge int
 -- #   :classic int
-INSERT OR REPLACE INTO kills(xuid, combo, gapple, nodebuff, trapping, bridge, classic) VALUES (:xuid, :combo, :gapple, :nodebuff, :trapping, :bridge, :classic)
+INSERT INTO kills(xuid, combo, gapple, nodebuff, trapping, bridge, classic) VALUES (:xuid, :combo, :gapple, :nodebuff, :trapping, :bridge, :classic)
 -- # }
 
 -- # { points
@@ -83,7 +83,7 @@ INSERT OR REPLACE INTO kills(xuid, combo, gapple, nodebuff, trapping, bridge, cl
 -- #  :trapping int
 -- #  :bridge int
 -- #  :classic int
-INSERT OR REPLACE INTO points(xuid, combo, gapple, nodebuff, trapping, bridge, classic) VALUES (:xuid, :combo, :gapple, :nodebuff, :trapping, :bridge, :classic)
+INSERT  INTO points(xuid, combo, gapple, nodebuff, trapping, bridge, classic) VALUES (:xuid, :combo, :gapple, :nodebuff, :trapping, :bridge, :classic)
 -- # }
 
 -- # { won_events
@@ -92,7 +92,7 @@ INSERT OR REPLACE INTO points(xuid, combo, gapple, nodebuff, trapping, bridge, c
 -- #  :title string
 -- #  :description string
 -- #  :prize string
-INSERT OR REPLACE INTO won_events(xuid, name, title, description, prize) VALUES (:xuid, :name, :title, :description, :prize)
+INSERT INTO won_events(xuid, name, title, description, prize) VALUES (:xuid, :name, :title, :description, :prize)
 -- # }
 
 -- # { user_data
@@ -102,7 +102,8 @@ INSERT OR REPLACE INTO won_events(xuid, name, title, description, prize) VALUES 
 -- # :alias string
 -- # :language string
 -- # :skin string
-INSERT OR REPLACE INTO user_data(xuid, name, custom_name, alias, language, skin, coin) VALUES (:xuid, :name, :custom_name, :alias, :language, :skin, :coin)
+-- # :coin int
+INSERT INTO user_data(xuid, name, custom_name, alias, language, skin, coin) VALUES (:xuid, :name, :custom_name, :alias, :language, :skin, :coin)
 -- # }
 
 -- # { settings
@@ -111,7 +112,7 @@ INSERT OR REPLACE INTO user_data(xuid, name, custom_name, alias, language, skin,
 -- #  :queue bool
 -- #  :cps bool
 -- #  :auto_join bool
-INSERT OR REPLACE INTO settings(xuid, scoreboard, queue, cps, auto_jon) VALUES (:xuid, :scoreboard, :queue, :cps, :auto_join)
+INSERT INTO settings(xuid, scoreboard, queue, cps, auto_jon) VALUES (:xuid, :scoreboard, :queue, :cps, :auto_join)
 -- # }
 
 -- #}
