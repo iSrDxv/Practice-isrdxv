@@ -280,6 +280,7 @@ class Session
     $this->wonEvents = array(
       "title" => $data["title"], "description" => $data["description"], "prize" => $data["prize"]
     );
+    var_dump($this->wonEvents); //to see what the array is like, and what steps I should follow.
     $this->elo = $data["points"];
     $this->name = is_string($data["name"]) ? $data["name"] : "unknown";
     $this->custom_name = is_string($data["custom_name"]) ? $data["custom_name"] : null;
@@ -343,19 +344,11 @@ class Session
     PermissionManager::getInstance()->addPermission($permission);
   }
   
-  public function __toArray(): array
+  public function saveData(): void
   {
-    return [
-      "address" => $this->getPlayer()->getNetworkSession()->getIp(),
-      "points" => $this->getPoints(),
-      "device" => $this->getDevice(),
-      "points" => $this->getPoints(),
-      //"rank" => $this->getRank(),
-      "murders" => $this->getMurders(),
-      "deaths" => $this->getDeaths(),
-      //"language" => $this->getPlayer()->getLocale(),
-      "won-events" => $this->getWonEvents(),
-    ];
+    $database = Loader::getInstance()->getDatabase();
+    $database->executeImplRaw([0 => "UPDATE deaths SET combo1='$this->deaths['combo']', gapple1='$this->deaths['gapple'], nodebuff1='$this->deaths['nodebuff'], trapping1='$this->deaths['trapping'], bridge1='$this->deaths['bridge'], classic1='$this->deaths['classic']' WHERE xuid='$this->getPlayer()->getXuid()'"], [0 => []], [0 => SqlThread::MODE_CHANGE], function(int $affectedRows): void {});
+    $database->executeImplRaw([0 => "UPDATE murders SET combo='$this->deaths['combo']', gapple='$this->deaths['gapple'], nodebuff='$this->deaths['nodebuff'], trapping='$this->deaths['trapping'], bridge='$this->deaths['bridge'], classic='$this->deaths['classic']' WHERE xuid='$this->getPlayer()->getXuid()'"], [0 => []], [0 => SqlThread::MODE_CHANGE], function(int $affectedRows): void {});
   }
   
 }
