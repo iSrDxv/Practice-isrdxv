@@ -104,8 +104,6 @@ class Loader extends PluginBase
     $this->database->waitAll();
     $this->database->executeGeneric("claude.init.won.events", [], function(): void {});
     $this->database->waitAll();    
-    $this->database->executeGeneric("claude.init.points", [], function(): void {});
-    $this->database->waitAll();
     $this->database->executeGeneric("claude.init.user.data", [], function(): void {});
     $this->database->waitAll();
     $this->database->executeGeneric("claude.alter.bans", [], function(): void {});

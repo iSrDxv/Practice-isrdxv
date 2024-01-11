@@ -34,6 +34,10 @@ class Session
   
   private Player $player;
   
+  private ?string $name;
+  
+  private ?string $custom_name;
+  
   private string $rank;
   
   private string $language;
@@ -66,20 +70,8 @@ class Session
   {
     $this->player = $player;
     $this->scoreboard = new LobbyScoreboard($player);
-    // Array
-    $this->settings = Loader::getInstance()->getProvider()->loadSettings($player->getName());
-    $this->kills = Loader::getInstance()->getProvider()->loadMurders($player->getName());
-    $this->deaths = Loader::getInstance()->getProvider()->loadDeaths($player->getName());
-    $this->wonEvents = Loader::getInstance()->getProvider()->loadWonEvents($player->getName());
-    // Integer
-    $this->elo = Loader::getInstance()->getProvider()->loadPoints($player->getName());
     // String
     //$this->rank = Loader::getInstance()->getRankManager()->getRankByName($player->getName());
-    $this->device = Loader::getInstance()->getProvider()->getDevice($player->getPlayerInfo()->getExtraData());
-    $this->control = Loader::getInstance()->getProvider()->getDeviceControl($player->getPlayerInfo()->getExtraData());
-    $this->language = Loader::getInstance()->getProvider()->getLanguage($player->getName());
-    $player->setNameTag(TextFormat::AQUA . $player->getName());
-    $player->setScoreTag($this->device . " | " . $this->control);
   }
   
   public function getPlayer(): Player
@@ -89,7 +81,7 @@ class Session
   
   public function getName(): string
   {
-    return $this->player->getName();
+    return $this->name;
   }
   
   public function getPing(): int
@@ -264,11 +256,43 @@ class Session
   public function loadData(array $data): void
   {
     $this->settings = [
-      "cps" => 
-      "score"
-      "queue"
-      "auto-join"
+      "cps" => (bool)$data["cps"],
+      "score" => (bool)$data["scoreboard"],
+      "queue" => (bool)$data["queue"],
+      "auto-join" => (bool)$data["auto_join"]
     ];
+    $this->kills = [
+      "combo" => $data["combo"],
+      "gapple" => $data["gapple"],
+      "nodebuff" => $data["nodebuff"],
+      "trapping" => $data["trapping"],
+      "bridge" => $data["bridge"],
+      "classic" => $data["classic"]
+    ];
+    $this->deaths = [
+      "combo" => $data["combo1"],
+      "gapple" => $data["gapple1"],
+      "nodebuff" => $data["nodebuff1"],
+      "trapping" => $data["trapping1"],
+      "bridge" => $data["bridge1"],
+      "classic" => $data["classic1"]
+    ];
+    $this->wonEvents = array(
+      "title" => $data["title"], "description" => $data["description"], "prize" => $data["prize"]
+    );
+    $this->elo = $data["points"];
+    $this->name = is_string($data["name"]) ? $data["name"] : "unknown";
+    $this->custom_name = is_string($data["custom_name"]) ? $data["custom_name"] : null;
+    $this->alias = $data["alias"];
+    $this->language = $data["language"];
+    /*$this->coin = $data["coin"];
+    $this->wins = $data["wins"];*/
+    $player = $this->getPlayer();
+    $name = $this->custom_name !== null ? $this->custom_name : $this->name;
+    $player->setNameTag(TextFormat::AQUA . $name);
+    $this->device = $data["device"];
+    $this->control = $data["control"];
+    $player->setScoreTag($this->device . " | " . $this->control);
   }
   
   /**

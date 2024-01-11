@@ -44,13 +44,12 @@ class SessionManager
     $this->create($player);
     if ($firstJoin) {
       Loader::getInstance()->getDatabase()->executeInsert("claude.settings", ["xuid" => $player->getXuid(), "scoreboard" => true, "queue" => false, "cps" => false, "auto_join" => false]);
-      Loader::getInstance()->getDatabase()->executeInsert("claude.user_data", ["xuid" => $player->getXuid(), "name" => $player->getName(), "custom_name" => "lol", "alias" => "", "language" => Loader::getInstance()->getProvider()->getDefaultLanguage(), "skin" => " ", "coin" => 500]);
+      Loader::getInstance()->getDatabase()->executeInsert("claude.user_data", ["xuid" => $player->getXuid(), "name" => $player->getName(), "custom_name" => "lol", "alias" => "", "language" => Loader::getInstance()->getProvider()->getDefaultLanguage(), "skin" => " ", "coin" => 500, "points" => 1000, "wins" => 0, "address" => $player->getNetworkSession()->getIp(), "device" => Loader::getInstance ()->getProvider()->getDevice($player->getPlayerInfo()->getExtraData()), "control" => Loader::getInstance ()->getProvider()->getDeviceControl($player->getPlayerInfo()->getExtraData())]);
       Loader::getInstance()->getDatabase()->executeInsert("claude.won_events", ["xuid" => $player->getXuid(), "name" => $player->getName(), "title" => "Enter the server for the first time", "description" => "an event for having entered for the first time, you win 500 coins", "prize" => "500"]);
-      Loader::getInstance()->getDatabase()->executeInsert("claude.points", ["xuid" => $player->getXuid(), "combo" => 1000, "gapple" => 1000, "nodebuff" => 1000, "trapping" => 1000, "bridge" => 1000, "classic" => 1000]);
-      Loader::getInstance()->getDatabase()->executeInsert("claude.kills", ["xuid" => $player->getXuid(), "combo" => 0, "gapple" => 0, "nodebuff" => 0, "trapping" => 0, "bridge" => 0, "classic" => 0]);
+      Loader::getInstance()->getDatabase()->executeInsert("claude.deaths", ["xuid" => $player->getXuid(), "combo1" => 0, "gapple1" => 0, "nodebuff1" => 0, "trapping1" => 0, "bridge1" => 0, "classic1" => 0]);
       Loader::getInstance()->getDatabase()->executeInsert("claude.murders", ["xuid" => $player->getXuid(), "combo" => 0, "gapple" => 0, "nodebuff" => 0, "trapping" => 0, "bridge" => 0, "classic" => 0]);
       $firstTimeServer = new DateTime("NOW");
-      Loader::getInstance()->getDatabase()->executeInsert("claude.duration", ["xuid" => $player->getXuid(), "voted" => "0", "donated" => "0", "muted" => "0", "lastplayed" => "0", "totalonline" => "0", "time_join_server" => date_format($firstTimeServer, "Y-m-d-H-i"), "warnings" => 0]);
+      Loader::getInstance()->getDatabase()->executeInsert("claude.duration", ["xuid" => $player->getXuid(), "firstplayed" => date_format($firstTimeServer, "Y-m-d-H-i"), "warnings" => 0, "voted" => "0", "donated" => "0", "muted" => "0", "lastplayed" => "0", "totalonline" => "0"]);
       $player->sendForm(new RulesForm());
     }
     $xuid = $player->getXuid();
@@ -59,7 +58,7 @@ class SessionManager
       if ($player instanceof Player) {
         var_dump($rows[0]->getRows()[0]); //test xd
         if (isset($rows[0], $rows[0]->getRows()[0]) && $player->getXuid() !== null) {
-          $session->loadData($rows[0]->getRows[0]);
+          $session->loadData($rows[0]->getRows()[0]);
         }
       }
     }, null);
