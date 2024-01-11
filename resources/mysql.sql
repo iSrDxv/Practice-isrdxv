@@ -112,7 +112,7 @@ INSERT INTO user_data(xuid, name, custom_name, alias, language, skin, coin) VALU
 -- #  :queue bool
 -- #  :cps bool
 -- #  :auto_join bool
-INSERT INTO settings(xuid, scoreboard, queue, cps, auto_jon) VALUES (:xuid, :scoreboard, :queue, :cps, :auto_join)
+INSERT INTO settings(xuid, scoreboard, queue, cps, auto_join) VALUES (:xuid, :scoreboard, :queue, :cps, :auto_join)
 -- # }
 
 -- #}
