@@ -69,12 +69,12 @@ class Scoreboard
   
   public function setLine(int $line, string $description = ""): void
   {
-    if (isset($this->lines[$line])) {
+    /*if (isset($this->lines[$line])) {
       $pk = SetScorePacket::create(SetScorePacket::TYPE_REMOVE, [$this->lines[$line]]);
       $this->getPlayer()->getNetworkSession()->sendDataPacket($pk);
       unset($this->lines[$line]);
       return;
-    }
+    }*/
     $entry = new ScorePacketEntry();
     $entry->type = ScorePacketEntry::TYPE_FAKE_PLAYER;
     
