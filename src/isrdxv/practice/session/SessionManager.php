@@ -11,6 +11,8 @@ use pocketmine\utils\{
   Config
 };
 
+use poggit\libasynql\SqlThread;
+
 use DateTime;
 
 class SessionManager 
@@ -42,7 +44,7 @@ class SessionManager
     $this->create($player);
     if ($firstJoin) {
       Loader::getInstance()->getDatabase()->executeInsert("claude.settings", ["xuid" => $player->getXuid(), "scoreboard" => true, "queue" => false, "cps" => false, "auto_join" => false]);
-      Loader::getInstance()->getDatabase()->executeInsert("claude.user_data", ["xuid" => $player->getXuid(), "name" => $player->getName(), "custom_name" => "lol", "alias" => "", "language" => Loader::getInstance()->getProvider()->getDefaultLanguage(), "skin" => "", "coin" => 500]);
+      Loader::getInstance()->getDatabase()->executeInsert("claude.user_data", ["xuid" => $player->getXuid(), "name" => $player->getName(), "custom_name" => "lol", "alias" => "", "language" => Loader::getInstance()->getProvider()->getDefaultLanguage(), "skin" => " ", "coin" => 500]);
       Loader::getInstance()->getDatabase()->executeInsert("claude.won_events", ["xuid" => $player->getXuid(), "name" => $player->getName(), "title" => "Enter the server for the first time", "description" => "an event for having entered for the first time, you win 500 coins", "prize" => "500"]);
       Loader::getInstance()->getDatabase()->executeInsert("claude.points", ["xuid" => $player->getXuid(), "combo" => 1000, "gapple" => 1000, "nodebuff" => 1000, "trapping" => 1000, "bridge" => 1000, "classic" => 1000]);
       Loader::getInstance()->getDatabase()->executeInsert("claude.kills", ["xuid" => $player->getXuid(), "combo" => 0, "gapple" => 0, "nodebuff" => 0, "trapping" => 0, "bridge" => 0, "classic" => 0]);
@@ -53,7 +55,7 @@ class SessionManager
     }
     $xuid = $player->getXuid();
     $session = $this->get($player->getName());
-    Loader::getInstance()->getDatabase()->executeImplRaw("SELECT * FROM duration,bans,murders,kills,points,won_events,user_data,settings WHERE duration.xuid = '$xuid' AND murders.xuid = '$xuid' AND kills.xuid = '$xuid' AND points.xuid = '$xuid' AND won_events.xuid = '$xuid' AND user_data.xuid = '$xuid' AND settings.xuid = '$xuid'", [], function(array $rows) use($session, $player) {
+    Loader::getInstance()->getDatabase()->executeImplRaw([0 => "SELECT * FROM duration,bans,murders,kills,points,won_events,user_data,settings WHERE duration.xuid = '$xuid' AND murders.xuid = '$xuid' AND kills.xuid = '$xuid' AND points.xuid = '$xuid' AND won_events.xuid = '$xuid' AND user_data.xuid = '$xuid' AND settings.xuid = '$xuid'"], [0 => []], [0 => SqlThread::MODE_SELECT], function(array $rows) use($session, $player) {
       if ($player instanceof Player) {
         var_dump($rows[0]); //test xd
         if (isset($rows[0], $rows[0]->getRows()[0]) && $player->getXuid() !== null) {
