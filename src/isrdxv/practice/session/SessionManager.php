@@ -49,11 +49,10 @@ class SessionManager
       Loader::getInstance()->getDatabase()->executeInsert("claude.murders", ["xuid" => $player->getXuid(), "combo" => 0, "gapple" => 0, "nodebuff" => 0, "trapping" => 0, "bridge" => 0, "classic" => 0]);
       $firstTimeServer = new DateTime("NOW");
       Loader::getInstance()->getDatabase()->executeInsert("claude.duration", ["xuid" => $player->getXuid(), "voted" => "0", "donated" => "0", "muted" => "0", "lastplayed" => "0", "totalonline" => "0", "time_join_server" => date_format($firstTimeServer, "Y-m-d-H-i"), "warnings" => 0]);
-      //$player->sendForm(new RulesForm());
-      return;
+      $player->sendForm(new RulesForm());
     }
     $xuid = $player->getXuid();
-    $session = $this->get($player->getName());//->loadData();
+    $session = $this->get($player->getName());
     Loader::getInstance()->getDatabase()->executeImplRaw("SELECT * FROM duration,bans,murders,kills,points,won_events,user_data,settings WHERE duration.xuid = '$xuid' AND murders.xuid = '$xuid' AND kills.xuid = '$xuid' AND points.xuid = '$xuid' AND won_events.xuid = '$xuid' AND user_data.xuid = '$xuid' AND settings.xuid = '$xuid'", [], function(array $rows) use($session, $player) {
       if ($player instanceof Player) {
         var_dump($rows[0]); //test xd
