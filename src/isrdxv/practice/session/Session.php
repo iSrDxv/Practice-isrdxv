@@ -263,7 +263,12 @@ class Session
   
   public function loadData(array $data): void
   {
-    
+    $this->settings = [
+      "cps" => 
+      "score"
+      "queue"
+      "auto-join"
+    ];
   }
   
   /**

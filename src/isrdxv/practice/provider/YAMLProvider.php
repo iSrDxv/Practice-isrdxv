@@ -13,9 +13,6 @@ class YAMLProvider
   
   public function __construct()
   {
-    if (!is_dir($dir = Loader::getInstance()->getDataFolder() . "players" . DIRECTORY_SEPARATOR)) {
-      @mkdir($dir);
-    }
     if (!is_dir($dir = Loader::getInstance()->getDataFolder() . "arenas" . DIRECTORY_SEPARATOR)) {
       @mkdir($dir);
     }
