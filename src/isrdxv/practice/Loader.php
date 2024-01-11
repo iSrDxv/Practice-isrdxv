@@ -73,7 +73,7 @@ class Loader extends PluginBase
     $this->arenaManager = new ArenaManager($this);
     $this->gameManager = new GameManager($this);
     $this->queueManager = new QueueManager();
-    foreach(["languages/es_ES.ini", "languages/en_US.ini"] as $language) {
+    foreach(glob($this->getDataFolder() . "languages/*") as $language) {
       $this->saveResource($language);
     }
     $this->translation = new Translation();
@@ -118,7 +118,7 @@ class Loader extends PluginBase
       foreach(SessionManager::getInstance()->getSessions() as $session) {
         $session->changeScoreboard();
       }
-    }), 25);
+    }), 20);
     $this->getScheduler()->scheduleRepeatingTask(new GameTask($this), 30);
     foreach(["ban", "kick", "me", "plugins", "pardon", "pardon-ip", "tell", "about", "list", "kill"] as $command) {
       $this->getServer()->getCommandMap()->unregister($this->getServer()->getCommandMap()->getCommand($command));
