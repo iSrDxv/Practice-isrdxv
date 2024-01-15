@@ -12,7 +12,7 @@ use poggit\libasynql\DataConnector;
 use poggit\libasynql\SqlError;
 
 use isrdxv\practice\translation\Translation;
-use isrdxv\practice\provider\YAMLProvider;
+use isrdxv\practice\provider\DataProvider;
 use isrdxv\practice\arena\ArenaManager;
 use isrdxv\practice\game\{
   GameManager,
@@ -44,7 +44,7 @@ class Loader extends PluginBase
   
   private Translation $translation;
   
-  private YAMLProvider $provider;
+  private DataProvider $provider;
   
   private ArenaManager $arenaManager;
   
@@ -77,7 +77,7 @@ class Loader extends PluginBase
       $this->saveResource($language);
     }
     $this->translation = new Translation();
-    $this->provider = new YAMLProvider();
+    $this->provider = new DataProvider();
     /*$this->webhook = new WebhookManager($this);
     $this->webhook->sendStatus();*/
     $this->cache = new Cache();
@@ -141,7 +141,7 @@ class Loader extends PluginBase
     return $this->translation;
   }
   
-  public function getProvider(): YAMLProvider
+  public function getProvider(): DataProvider
   {
     return $this->provider;
   }
