@@ -3,7 +3,7 @@
 namespace isrdxv\practice;
 
 use pocketmine\plugin\PluginBase;
-use pocketmine\utils\TextFormat;
+use pocketmine\utils\{TextFormat, SingletonTrait};
 use pocketmine\scheduler\ClosureTask;
 
 // libasynql (PMMP)
@@ -38,6 +38,8 @@ use libs\cache\Cache;
 
 class Loader extends PluginBase
 {
+  use SingletonTrait;
+  
   private $database;
   
   private Translation $translation;
@@ -54,11 +56,9 @@ class Loader extends PluginBase
   
   private Cache $cache;
   
-  protected static $instance;
-  
   public function onLoad(): void
   {
-    self::$instance = $this;
+    self::setInstance($this);
     $this->saveDefaultConfig();
     $lobby = $this->getConfig()->get("lobby-name");
     $this->getServer()->getWorldManager()->loadWorld($lobby);
@@ -132,7 +132,7 @@ class Loader extends PluginBase
   
   protected function onDisable(): void
   {
-    if(isset($this->database)) {  $this->database->close(); }
+    if(isset($this->database)) { $this->database->close(); }
     //$this->webhook->sendStatus(false);
   }
   
@@ -174,11 +174,6 @@ class Loader extends PluginBase
   public function getCache(): Cache
   {
     return $this->cache;
-  }
-  
-  public static function getInstance(): Loader
-  {
-    return self::$instance;
   }
   
 }

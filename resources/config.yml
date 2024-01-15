@@ -25,20 +25,30 @@ discord:
 # Default language
 default-language: "en_US"
 
-############## World from Practice ###################
+############## Servers of Practice ############
+servers:
+  North_America:
+  - address: "192.168.2.3"
+    port: 19132
+  Latin_America:
+  - address: "192.168.2.3"
+    port: 19132
+  Europe:
+  - address: "192.168.2.5"
+    port: 19132
+
+############## World of Practice ############
 # Practice lobby name
 lobby-name: "world"
-#lobby-spawn:
-#lobby-border: i dont know :c
+lobby-spawn: "250:0:456"
+lobby-border: 2000
+
 ############## PVP ###################
 # Knockback
-knockback:
- combo: 0.400
- gapple: 0.300
- nodebuff: 0.300
- trapping: 0.250
+knockback: null
 # Cooldown Attack
 cooldown-attack: 10
+
 ############## MySQL ###################
 database:
   # The database type. "sqlite" and "mysql" are supported.
