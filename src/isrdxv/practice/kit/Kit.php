@@ -3,67 +3,32 @@ declare(strict_types=1);
 
 namespace isrdxv\practice\kit;
 
-use pocketmine\item\{
-  Item,
-  enchantment\EnchantmentInstance,
-};
+use isrdxv\practice\kit\misc\Knockback;
+use isrdxv\practice\kit\misc\ExtraDataEquipment;
 
-class Kit
+interface Kit
 {
   public const INVENTORY = "inventory";
+  
   public const ARMOR = "armor";
   
-  /** @var String **/
-  private string $name;
-  /** @var Item[] **/
-  private array $inventory = [];
-  /** @var Item[] **/
-  private array $armor = [];
-  /** @var EffectInstance[] **/
-  private array $effects = [];
-  
-  public function __construct(string $name)
+  /*function __construct(string $name, string $localName)
   {
     $this->name = $name;
-  }
+    $this->localName = $localName;
+  }*/
   
-  public function getName(): string
-  {
-    return $this->name;
-  }
+  function giveTo(): bool;
   
-  public function getInventoryItems(): array
-  {
-    return $this->inventory;
-  }
+  function equals($kit): bool;
+    
+  function export(): array;
+    
+  function getName(): string;
   
-  public function getArmorItems(): array
-  {
-    return $this->armor;
-  }
+  function getLocalName(): string;
   
-  public function addItem(string $type, Item $item): void
-  {
-    switch(strtolower($type)){
-      case self::INVENTORY:
-        $this->inventory[] = $item;
-      break;
-      case self::ARMOR:
-        $this->armor[] = $item;
-      break;
-    }
-  }
+  function getKnockback(): Knockback;
   
-  public function addEnchantment(Item $item, array|EnchantmentInstance $enchantments = null): void
-  {
-    if ($enchantments !== null) {
-      if (!is_array($enchantments)) {
-        $item->addEnchantment($enchantments);
-      }
-      foreach($enchantments as $enchantment) {
-        $item->addEnchantment($enchantment);
-      }
-    }
-  }
-  
+  function getExtraData(): ExtraDataEquipment;
 }
