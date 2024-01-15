@@ -32,15 +32,17 @@ class GameScoreboard extends Scoreboard
   
   public function showLines(): void
   {
+    $date = new DateTime("NOW", new DateTimeZone("America/Mexico_City"));
     parent::setLine(1, "");
-    parent::setLine(2, TextFormat::colorize(" &bFighting: &f" . $this->opponent->getName()));
-    parent::setLine(3, " ");
+    parent::setLine(2, $date->format("Y/m/d H:i"));
+    parent::setLine(3, TextFormat::colorize(" &bFighting: &f" . $this->opponent->getName()));
+    parent::setLine(4, " ");
     //parent::setLine(4, TextFormat::colorize(" &bTime: &f" . gmdate()));
-    parent::setLine(4, TextFormat::colorize(" &aYour Ping: &f" . parent::getPlayer()->getNetworkSession()->getPing()));
-    parent::setLine(5, TextFormat::colorize(" &cTheir Ping: &f" . $this->opponent->getPing()));
-    parent::setLine(6, " ");
-    parent::setLine(7, TextFormat::colorize(" &o&7" . Loader::getInstance()->getConfig()->getNested("server-address")));
-    parent::setLine(8, TextFormat::colorize("&7"));
+    parent::setLine(5, TextFormat::colorize(" &aYour Ping: &f" . parent::getPlayer()->getNetworkSession()->getPing()));
+    parent::setLine(6, TextFormat::colorize(" &cTheir Ping: &f" . $this->opponent->getPing()));
+    parent::setLine(7, " ");
+    parent::setLine(8, TextFormat::colorize(" &o&7" . Loader::getInstance()->getConfig()->getNested("server-address")));
+    parent::setLine(9, TextFormat::colorize("&7"));
   }
   
 }

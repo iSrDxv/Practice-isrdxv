@@ -42,7 +42,7 @@ class GameTask extends Task
           $game->setPhase($this->loader->getGameManager()::PHASE_STARTING);
         }
       }elseif ($game->getPhase() === $this->loader->getGameManager()::PHASE_STARTING) {
-        $game->sendAction(function(Session $session) use($game): void {
+        $game->sendAction(function(Session $session) use($game, $time): void {
           if ($session->hasQueue()) {
             $session->getQueue()->deletePlayer($session);
             $session->setQueue();
@@ -62,7 +62,7 @@ class GameTask extends Task
         $this->time--;
         if ($this->time <= 0) {
           $game->sendAction(function(Session $session) use($game): void {
-            //$session->getPlayer()->sendTitle();
+            $session->getPlayer()->sendTitle();
             $opponent = $game->getPlayers()[1];
             $session->setScoreboard(new GameScoreboard($session->getPlayer(), $opponent, $game));
           });
