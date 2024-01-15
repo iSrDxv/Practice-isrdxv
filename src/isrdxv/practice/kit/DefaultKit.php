@@ -35,10 +35,14 @@ class DefaultKit implements Kit
   /** @var EffectInstance[] **/
   private array $effects = [];
   
-  public function __construct(string $name, string $localName)
+  public function __construct(string $name, string $localName, array $inventory = [], array $armor = [], ExtraDataEquipment $extraData, Knockback $knockback)
   {
     $this->name = $name;
     $this->localName = $localName;
+    $this->inventory = $inventory;
+    $this->armor = $armor;
+    $this->extraData = $extraData;
+    $this->knockback = $knockback;
   }
   
   public function getName(): string

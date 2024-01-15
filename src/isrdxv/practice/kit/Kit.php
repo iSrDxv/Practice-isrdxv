@@ -12,11 +12,7 @@ interface Kit
   
   public const ARMOR = "armor";
   
-  /*function __construct(string $name, string $localName)
-  {
-    $this->name = $name;
-    $this->localName = $localName;
-  }*/
+  function __construct(string $name, string $localName, array $inventory = [], array $armor = [], ExtraDataEquipment $extraData, Knockback $knockback);
   
   function giveTo(): bool;
   
