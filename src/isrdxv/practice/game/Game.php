@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace isrdxv\practice\game;
 
+use isrdxv\practice\Loader;
 use isrdxv\practice\arena\Arena;
 use isrdxv\practice\game\{
   GameManager,
@@ -220,7 +221,7 @@ class Game
   
   public function destroy(): void
   {
-    
+    WorldBackup::deleteBackup(Loader::getInstance()->getDataFolder() . "backup" . DIRECTORY_SEPARATOR . $this->localName);
   }
   
 }
