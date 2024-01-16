@@ -11,7 +11,7 @@ This is a beta version, It is very likely a drop in TPS or performance and clear
 
 ## Implements
  - [ ] Party System
- - [x] Arena System
+ - [ ] Arena System
  - [x] Queue System
  - [ ] Game System
  - [x] Session System
