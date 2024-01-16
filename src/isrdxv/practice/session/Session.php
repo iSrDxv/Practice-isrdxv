@@ -57,6 +57,8 @@ class Session
   
   private Kit $kit;
   
+  private array $alias;
+  
   private array $settings;
   
   private array $kills;
