@@ -30,6 +30,8 @@ use isrdxv\practice\kit\Kit;
 use libs\scoreboard\type\LobbyScoreboard;
 use libs\scoreboard\Scoreboard;
 
+use poggit\libasynql\SqlThread;
+
 class Session
 {
   
@@ -297,13 +299,17 @@ class Session
     $this->elo = $data["points"];
     $this->name = is_string($data["name"]) ? $data["name"] : "unknown";
     $this->custom_name = is_string($data["custom_name"]) ? $data["custom_name"] : null;
-    $this->alias = $data["alias"];
+    if ($data["alias"] === null) {
+      $this->alias = $data["alias"];
+    } else {
+      $this->alias = explode(",", $data["alias"]);
+    }
     $this->language = $data["language"];
     /*$this->coin = $data["coin"];
     $this->wins = $data["wins"];*/
     $player = $this->getPlayer();
     $name = $this->custom_name !== null ? $this->custom_name : $this->name;
-    $player->setNameTag(TextFormat::AQUA . $name);
+    $player->setNameTag(TextFormat::AQUA . $name . " " . TextFormat::RED . "[" . implode(",", $this->alias) . TextFormat::RED . "]");
     $this->device = $data["device"];
     $this->control = $data["control"];
     $player->setScoreTag($this->device . " | " . $this->control);
@@ -362,6 +368,7 @@ class Session
     $database = Loader::getInstance()->getDatabase();
     $database->executeImplRaw([0 => "UPDATE deaths SET combo1={$this->deaths['combo']}, gapple1={$this->deaths['gapple']}, nodebuff1={$this->deaths['nodebuff']}, trapping1={$this->deaths['trapping']}, bridge1={$this->deaths['bridge']}, classic1={$this->deaths['classic']} WHERE xuid={$this->getPlayer()->getXuid()}"], [0 => []], [0 => SqlThread::MODE_CHANGE], function(array $rows): void {}, null);
     $database->executeImplRaw([0 => "UPDATE murders SET combo={$this->deaths['combo']}, gapple={$this->deaths['gapple']}, nodebuff={$this->deaths['nodebuff']}, trapping={$this->deaths['trapping']}, bridge={$this->deaths['bridge']}, classic={$this->deaths['classic']} WHERE xuid={$this->getPlayer()->getXuid()}"], [0 => []], [0 => SqlThread::MODE_CHANGE], function(array $rows): void {}, null);
+    $database->executeImplRaw([0 => "UPDATE settings SET scoreboard={$this->settings['score']}, queue={$this->settings['queue']}, cps={$this->settings['cps']}, auto_join={$this->settings['auto-join']} WHERE xuid={$this->getPlayer()->getXuid()}"], [0 => []], [0 => SqlThread::MODE_CHANGE], function(array $rows): void {}, null);
   }
   
 }
