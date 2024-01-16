@@ -10,6 +10,7 @@ use isrdxv\practice\session\Session;
 use libs\scoreboard\type\GameScoreboard;
 
 use pocketmine\scheduler\Task;
+use pocketmine\world\sound\ClickSound;
 
 class GameTask extends Task
 {
@@ -42,7 +43,7 @@ class GameTask extends Task
           $game->setPhase($this->loader->getGameManager()::PHASE_STARTING);
         }
       }elseif ($game->getPhase() === $this->loader->getGameManager()::PHASE_STARTING) {
-        $game->sendAction(function(Session $session) use($game, $time): void {
+        $game->sendAction(function(Session $session) use($game): void {
           if ($session->hasQueue()) {
             $session->getQueue()->deletePlayer($session);
             $session->setQueue();
@@ -62,7 +63,7 @@ class GameTask extends Task
         $this->time--;
         if ($this->time <= 0) {
           $game->sendAction(function(Session $session) use($game): void {
-            $session->getPlayer()->sendTitle();
+            $session->getPlayer()->sendTitle(TextFormat::colorize("¡¡Game started!!"));
             $opponent = $game->getPlayers()[1];
             $session->setScoreboard(new GameScoreboard($session->getPlayer(), $opponent, $game));
           });
@@ -70,6 +71,7 @@ class GameTask extends Task
         } else {
           $game->sendAction(function(Session $session) {
             $session->sendMessage(new TranslationMessage("game-starting", ["time" => $this->time]));
+            $session->sendSound(new ClickSound(5));
           });
         }
       }elseif ($game->getPhase() === $this->loader->getGameManager()::PHASE_PLAYING) {
@@ -77,18 +79,22 @@ class GameTask extends Task
       }elseif ($game->getPhase() === $this->loader->getGameManager()::PHASE_ENDING) {
         $this->time = 20;
         $this->time--;
-        //I could add a switch but not until I'm done ok
-        if ($this->time === 15) {
-          foreach($game->getAllPlayers() as $session) {
+        switch($this->time){
+          case 15:
+            foreach($game->getAllPlayers() as $session) {
             $session->getGame()->deletePlayer($session);
             $session->setGame();
           }
-        }elseif ($this->time === 10) {
-          $game->getArena()->toReset();
-        }elseif ($this->time === 5) {
-          $game->toReset();
-        }elseif ($this->time === 0) {
-          //destroy world
+          break;
+          case 10:
+            $game->getArena()->toReset();
+          break;
+          case 5:
+            $game->toReset();
+          break;
+          case 0:
+            $game->destroy();
+          break;
         }
       }
     }

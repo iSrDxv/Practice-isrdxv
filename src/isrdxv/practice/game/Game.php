@@ -12,7 +12,13 @@ use isrdxv\practice\kit\{
   Kit,
   KitManager
 };
-use isrdxv\practice\session\Session;
+use isrdxv\practice\session\{
+  Session,
+  SessionManager
+};
+use isrdxv\practice\utils\Utilities;
+
+use libs\worldbackup\WorldBackup;
 
 use pocketmine\Server;
 use pocketmine\world\World;
@@ -20,6 +26,8 @@ use pocketmine\utils\TextFormat;
 
 class Game
 {
+  private string $localName;
+  
   private Arena $arena;
   
   private World $world;
@@ -44,13 +52,21 @@ class Game
   public function __construct(?Arena $arena = null)
   {
     if (empty($arena)) {
-      Server::getInstance()->getLogger()->error("I can't be empty :c");
+      throw new GameException("I can't be empty :c");
     }
+    $this->localName = Utilities::getRandomBin();
     $this->arena = $arena;
+    $this->world = Server::getInstance()->getWorldByName($arena->getName());
     $this->mode = $arena->getMode();
     $this->mode_type = $arena->getModeType();
     $this->kit = KitManager::getInstance()->getKitByName($arena->getMode());
     $this->phase = GameManager::PHASE_WAITING;
+    WorldBackup::createBackup($this->localName, $this->world->getFolderName());
+  }
+  
+  public function getLocalName(): string
+  {
+    return $this->localName;
   }
   
   public function getArena(): Arena
@@ -189,9 +205,22 @@ class Game
   
   public function toReset(): void
   {
+    foreach($this->players as $player) {
+      $session = SessionManager::getInstance()->get($player->getName());
+      $session->teleportToLobby();
+    }
+    foreach($this->spectators as $spectator) {
+      $spec = SessionManager::getInstance()->get($spec->getName());
+      $spec->teleportToLobby();
+    }
     $this->players = [];
     $this->spectators = [];
     $this->phase = GameManager::PHASE_WAITING;
+  }
+  
+  public function destroy(): void
+  {
+    
   }
   
 }

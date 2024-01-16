@@ -9,6 +9,7 @@ use pocketmine\player\{
   GameMode
 };
 use pocketmine\Server;
+use pocketmine\world\sound\Sound;
 use pocketmine\permission\{
   Permission,
   PermissionManager
@@ -219,6 +220,11 @@ class Session
       return $this->getGame()->isPlaying($this);
     }
     return false;
+  }
+  
+  public function sendSound(Sound $sound): void
+  {
+    $this->player->broadcastSound($sound, [$this->player]);
   }
   
   public function setKit(Kit $kit): void

@@ -7,10 +7,12 @@ use libs\worldbackup\async\DeleteBackup;
 
 use pocketmine\Server;
 
+use isrdxv\practice\Loader;
+
 final class WorldBackup
 {
   
-  public function createBackup(string $newName, string $worldName): bool
+  static function createBackup(string $newName, string $worldName): bool
   {
     $worldManager = Server::getInstance()->getWorldManager();
     if ($worldManager->isWorldGenerated($newName)) {
@@ -23,13 +25,13 @@ final class WorldBackup
       //exception
       return false;
     }
-    $destination = Server::getInstance()->getDataPath() . DIRECTORY_SEPARATOR . $newName;
-    $source = Server::getInstance()->getDataPath() . DIRECTORY_SEPARATOR . $worldName;
+    $destination = Loader::getInstance()->getDataFolder() . DIRECTORY_SEPARATOR . "backup" . DIRECTORY_SEPARATOR . $newName;
+    $source = Server::getInstance()->getDataPath() . DIRECTORY_SEPARATOR . "worlds" . DIRECTORY_SEPARATOR . $worldName;
     Server::getInstance()->getAsyncPool()->submitTask(new CreateBackup($newName, $destination, $source));
     return true;
   }
   
-  public function deleteBackup(string $directory): bool
+  static function deleteBackup(string $directory): bool
   {
     if (!is_dir($directory)) {
       return false;
