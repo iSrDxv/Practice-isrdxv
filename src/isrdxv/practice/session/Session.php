@@ -360,8 +360,8 @@ class Session
   public function saveData(): void
   {
     $database = Loader::getInstance()->getDatabase();
-    $database->executeImplRaw([0 => "UPDATE deaths SET combo1='$this->deaths['combo']', gapple1='$this->deaths['gapple'], nodebuff1='$this->deaths['nodebuff'], trapping1='$this->deaths['trapping'], bridge1='$this->deaths['bridge'], classic1='$this->deaths['classic']' WHERE xuid='$this->getPlayer()->getXuid()'"], [0 => []], [0 => SqlThread::MODE_CHANGE], function(int $affectedRows): void {});
-    $database->executeImplRaw([0 => "UPDATE murders SET combo='$this->deaths['combo']', gapple='$this->deaths['gapple'], nodebuff='$this->deaths['nodebuff'], trapping='$this->deaths['trapping'], bridge='$this->deaths['bridge'], classic='$this->deaths['classic']' WHERE xuid='$this->getPlayer()->getXuid()'"], [0 => []], [0 => SqlThread::MODE_CHANGE], function(int $affectedRows): void {});
+    $database->executeImplRaw([0 => "UPDATE deaths SET combo1={$this->deaths['combo']}, gapple1={$this->deaths['gapple']}, nodebuff1={$this->deaths['nodebuff']}, trapping1={$this->deaths['trapping']}, bridge1={$this->deaths['bridge']}, classic1={$this->deaths['classic']} WHERE xuid={$this->getPlayer()->getXuid()}"], [0 => []], [0 => SqlThread::MODE_CHANGE], function(array $rows): void {}, null);
+    $database->executeImplRaw([0 => "UPDATE murders SET combo={$this->deaths['combo']}, gapple={$this->deaths['gapple']}, nodebuff={$this->deaths['nodebuff']}, trapping={$this->deaths['trapping']}, bridge={$this->deaths['bridge']}, classic={$this->deaths['classic']} WHERE xuid={$this->getPlayer()->getXuid()}"], [0 => []], [0 => SqlThread::MODE_CHANGE], function(array $rows): void {}, null);
   }
   
 }
