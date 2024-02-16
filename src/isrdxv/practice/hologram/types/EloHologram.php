@@ -1,8 +1,8 @@
 <?php
 
-namespace isrdxv\practice\entity\types;
+namespace isrdxv\practice\hologram\types;
 
-use isrdxv\practice\entity\Hologram;
+use isrdxv\practice\hologram\Hologram;
 
 class LeaderboardElo extends Hologram
 {
