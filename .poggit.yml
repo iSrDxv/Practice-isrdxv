@@ -1,0 +1,11 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/iSrDxv/Practice-isrdxv
+build-by-default: true
+branches:
+- main
+- pm5
+projects:
+  Practice-isrdxv:
+    path: ""
+    lint: false
+    libs: []
+...
