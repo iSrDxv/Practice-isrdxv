@@ -33,7 +33,7 @@ class Leaderboard extends Human
     }
   }
   
-  public function onUpdate(int $currentTick): void
+  public function onUpdate(int $currentTick): bool
   {
     $this->setNameTagVisible(true);
     return parent::onUpdate($currentTick);
