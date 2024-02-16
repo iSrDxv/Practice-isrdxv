@@ -5,7 +5,7 @@ namespace isrdxv\practice\form;
 use pocketmine\Server;
 use pocketmine\player\Player;
 
-use libs\formapi\{
+use dktapps\pmforms\{
   BaseForm,
   CustomForm,
   CustomFormResponse,

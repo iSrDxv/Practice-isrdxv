@@ -7,5 +7,9 @@ projects:
   Practice-isrdxv:
     path: ""
     lint: false
-    libs: []
+    libs:
+      - src: poggit/libasynql/libasynql
+        version: ^4.2.0
+      - src: dktapps/pmforms/pmforms
+        version: ^2.1.0
 ...
