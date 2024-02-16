@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace isrdxv\practice\entity;
+namespace isrdxv\practice\hologram;
 
 use pocketmine\{
   world\World,

@@ -5,7 +5,7 @@ namespace isrdxv\practice\hologram;
 
 use isrdxv\practice\Loader;
 use isrdv\practice\hologram\types\{
-  HologramElo,
+  EloHologram,
 };
 use isrdv\practice\hologram\task\{
   UpdateHologramTask,
